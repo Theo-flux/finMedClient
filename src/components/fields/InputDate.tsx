@@ -1,17 +1,17 @@
-'use client';
-import { forwardRef, type ReactNode } from 'react';
+"use client";
+import { forwardRef, type ReactNode } from "react";
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
+  FormMessage,
+} from "@/components/ui/form";
 import {
   DateTimePicker,
   DateTimePickerProps,
-  DateTimePickerRef
-} from '@/components/ui/DateTimePicker';
+  DateTimePickerRef,
+} from "@/components/ui/DateTimePicker";
 
 interface IInputProps extends DateTimePickerProps {
   label: string;
@@ -30,9 +30,9 @@ const InputDate = forwardRef<DateTimePickerRef, IInputProps>(
         <FormMessage />
       </FormItem>
     );
-  }
+  },
 );
 
-InputDate.displayName = 'InputDate';
+InputDate.displayName = "InputDate";
 
 export default InputDate;

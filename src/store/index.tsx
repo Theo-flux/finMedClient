@@ -1,13 +1,14 @@
-'use client';
-import { createContext, useContext } from 'react';
-import { configure } from 'mobx';
-import AppConfigStore from './AppConfig';
+"use client";
+import { createContext, useContext } from "react";
+import { configure } from "mobx";
+import AppConfigStore from "./AppConfig";
+import AuthStore from "./AuthStore";
 
 configure({
-  enforceActions: 'observed',
+  enforceActions: "observed",
   // observableRequiresReaction: true,
   // reactionRequiresObservable: true,
-  computedRequiresReaction: true
+  computedRequiresReaction: true,
 });
 
 interface StoreProviderProps {
@@ -17,9 +18,11 @@ interface StoreProviderProps {
 export class RootStore {
   // more Features store added here...
   AppConfigStore: AppConfigStore;
+  AuthStore: AuthStore;
 
   constructor() {
     this.AppConfigStore = new AppConfigStore(this);
+    this.AuthStore = new AuthStore(this);
   }
 }
 

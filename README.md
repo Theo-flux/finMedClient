@@ -91,16 +91,16 @@ The store is set up with a root store that contains all feature stores:
 
 ```tsx
 // src/stores/index.ts
-import { createContext, useContext } from 'react';
-import AppConfigStore from './AppConfig';
-import { configure } from 'mobx';
-import AuthStore from './AuthStore';
-import CatalogStore from './CatalogStore';
+import { createContext, useContext } from "react";
+import AppConfigStore from "./AppConfig";
+import { configure } from "mobx";
+import AuthStore from "./AuthStore";
+import CatalogStore from "./CatalogStore";
 // ... other store imports
 
 configure({
-  enforceActions: 'observed',
-  computedRequiresReaction: true
+  enforceActions: "observed",
+  computedRequiresReaction: true,
 });
 
 export class RootStore {
@@ -143,18 +143,20 @@ Example usage:
 
 ```tsx
 // In a component
-import { useStore } from '@/stores';
-import { observer } from 'mobx-react-lite';
+import { useStore } from "@/stores";
+import { observer } from "mobx-react-lite";
 
 const MyComponent = observer(() => {
   const {
-    AuthStore: { user, updateUserProfile }
+    AuthStore: { user, updateUserProfile },
   } = useStore();
 
   return (
     <div>
       <h1>Hello, {user.name}</h1>
-      <button onClick={() => updateUserProfile({ name: 'New Name' })}>Update Name</button>
+      <button onClick={() => updateUserProfile({ name: "New Name" })}>
+        Update Name
+      </button>
     </div>
   );
 });
@@ -167,8 +169,8 @@ This template uses ShadcnUI components, which are built on top of Radix UI and s
 Example usage:
 
 ```tsx
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const MyForm = () => {
   return (

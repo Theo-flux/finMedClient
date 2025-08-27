@@ -1,13 +1,13 @@
-'use client';
-import { forwardRef, type ReactNode } from 'react';
+"use client";
+import { forwardRef, type ReactNode } from "react";
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
+  FormMessage,
+} from "@/components/ui/form";
+import { NumericFormat, NumericFormatProps } from "react-number-format";
 
 interface IInputProps extends NumericFormatProps {
   label: string;
@@ -30,9 +30,9 @@ const InputNumberField = forwardRef<HTMLInputElement, IInputProps>(
         <FormMessage />
       </FormItem>
     );
-  }
+  },
 );
 
-InputNumberField.displayName = 'InputNumberField';
+InputNumberField.displayName = "InputNumberField";
 
 export default InputNumberField;

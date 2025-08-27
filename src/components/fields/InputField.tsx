@@ -1,13 +1,13 @@
-'use client';
-import { forwardRef, InputHTMLAttributes, type ReactNode } from 'react';
+"use client";
+import { forwardRef, InputHTMLAttributes, type ReactNode } from "react";
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -26,9 +26,9 @@ const InputField = forwardRef<HTMLInputElement, IInputProps>(
         <FormMessage />
       </FormItem>
     );
-  }
+  },
 );
 
-InputField.displayName = 'InputField';
+InputField.displayName = "InputField";
 
 export default InputField;

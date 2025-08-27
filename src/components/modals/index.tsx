@@ -1,4 +1,4 @@
-import { Dialog } from '@/components/ui/dialog';
+import { Dialog } from "@/components/ui/dialog";
 
 interface IXModalProps {
   children: React.ReactNode;
