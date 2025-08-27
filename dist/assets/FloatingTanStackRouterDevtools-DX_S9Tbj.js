@@ -1036,7 +1036,7 @@ function Qt(e, t) {
   if (t < 1) return [];
   let n = 0;
   const i = [];
-  for (; n < e.length; ) i.push(e.slice(n, n + t)), (n = n + t);
+  for (; n < e.length; ) (i.push(e.slice(n, n + t)), (n = n + t));
   return i;
 }
 function Xt(e) {
@@ -1252,13 +1252,15 @@ function Fe({
                           (() => {
                             var h = Wt(),
                               T = h.firstChild;
-                            return g(h, () => p.label, T), h;
+                            return (g(h, () => p.label, T), h);
                           })(),
                           " ",
                           (() => {
                             var h = Zt();
                             return (
-                              g(h, () => Tt(e())), z(() => d(h, w().value)), h
+                              g(h, () => Tt(e())),
+                              z(() => d(h, w().value)),
+                              h
                             );
                           })(),
                         ];
@@ -1398,7 +1400,7 @@ function Ke({ to: e, params: t, search: n, router: i }) {
     var o = rr();
     return (
       (o.$$click = (a) => {
-        a.stopPropagation(), i().navigate({ to: e, params: t, search: n });
+        (a.stopPropagation(), i().navigate({ to: e, params: t, search: n }));
       }),
       s(o, "title", `Navigate to ${e}`),
       z(() => d(o, p().navigateButton)),
@@ -1448,7 +1450,11 @@ function gr(e) {
         (c) => {
           var u = i().tanstackLogo,
             l = i().routerLogo;
-          return u !== c.e && d(o, (c.e = u)), l !== c.t && d(a, (c.t = l)), c;
+          return (
+            u !== c.e && d(o, (c.e = u)),
+            l !== c.t && d(a, (c.t = l)),
+            c
+          );
         },
         { e: void 0, t: void 0 },
       ),
@@ -1562,7 +1568,7 @@ function Ct({
               })(),
               (() => {
                 var x = je();
-                return g(x, l), z(() => d(x, a().routeParamInfo)), x;
+                return (g(x, l), z(() => d(x, a().routeParamInfo)), x);
               })(),
             ];
           },
@@ -1731,21 +1737,23 @@ const pr = function ({ ...t }) {
           ? (() => {
               var f = He();
               return (
-                Ft(f, "mousedown", p, !0), z(() => d(f, r().dragHandle)), f
+                Ft(f, "mousedown", p, !0),
+                z(() => d(f, r().dragHandle)),
+                f
               );
             })()
           : null,
         K,
       ),
       (K.$$click = (f) => {
-        i && i(!1), l(f);
+        (i && i(!1), l(f));
       }),
       g(
         de,
         O(gr, {
           "aria-hidden": !0,
           onClick: (f) => {
-            i && i(!1), l(f);
+            (i && i(!1), l(f));
           },
         }),
       ),
@@ -2111,7 +2119,7 @@ const pr = function ({ ...t }) {
                             ? [
                                 (() => {
                                   var M = fr();
-                                  return z(() => d(M, r().detailsHeader)), M;
+                                  return (z(() => d(M, r().detailsHeader)), M);
                                 })(),
                                 (() => {
                                   var M = He();
@@ -2519,17 +2527,17 @@ function xr({
         N = (ee) => {
           const I = W.pageY - ee.pageY,
             te = W.originalHeight + I;
-          w(te), te < 70 ? b(!1) : b(!0);
+          (w(te), te < 70 ? b(!1) : b(!0));
         },
         Y = () => {
-          oe(!1),
+          (oe(!1),
             document.removeEventListener("mousemove", N),
-            document.removeEventListener("mouseUp", Y);
+            document.removeEventListener("mouseUp", Y));
         };
-      document.addEventListener("mousemove", N),
-        document.addEventListener("mouseup", Y);
+      (document.addEventListener("mousemove", N),
+        document.addEventListener("mouseup", Y));
     };
-  v(),
+  (v(),
     Te(() => {
       J(v() ?? !1);
     }),
@@ -2559,11 +2567,11 @@ function xr({
             window.addEventListener("resize", Y),
             () => {
               var ee;
-              window.removeEventListener("resize", Y),
+              (window.removeEventListener("resize", Y),
                 (ee = l()) != null &&
                   ee.parentElement &&
                   typeof N == "string" &&
-                  r((I) => ((I.parentElement.style.paddingBottom = N), I));
+                  r((I) => ((I.parentElement.style.paddingBottom = N), I)));
             }
           );
       } else
@@ -2584,7 +2592,7 @@ function xr({
           V = getComputedStyle(B).fontSize;
         B == null || B.style.setProperty("--tsrd-font-size", V);
       }
-    });
+    }));
   const { style: ie = {}, ...se } = t,
     { style: F = {}, onClick: K, ...ge } = n,
     { onClick: ce, class: de, ...H } = i;
@@ -2655,7 +2663,7 @@ function xr({
               Ge(H, {
                 "aria-label": "Open TanStack Router Devtools",
                 onClick: (I) => {
-                  b(!0), ce && ce(I);
+                  (b(!0), ce && ce(I));
                 },
                 get class() {
                   return pe();

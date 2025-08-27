@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { GalleryVerticalEnd } from "lucide-react";
+import { WalletCardsIcon } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   component: RouteComponent,
@@ -12,7 +12,7 @@ function RouteComponent() {
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-              <GalleryVerticalEnd className="size-4" />
+              <WalletCardsIcon className="size-4" />
             </div>
             finMed Inc.
           </a>

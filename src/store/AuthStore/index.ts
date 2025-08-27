@@ -44,6 +44,7 @@ function del(key: string) {
 class AuthStore {
   rootStore: RootStore;
   user = get<Partial<TProfileInfo>>(Mangle.USER, {});
+  userType: string = "";
   accessToken = get(Mangle.ACCESS_TOKEN, "");
   refreshToken = get(Mangle.REFRESH_TOKEN, "");
   isLoading = { ...INIT_IS_LOADING };
@@ -54,6 +55,7 @@ class AuthStore {
 
     makeObservable(this, {
       user: observable,
+      userType: observable,
       accessToken: observable,
       refreshToken: observable,
       isLoading: observable,
