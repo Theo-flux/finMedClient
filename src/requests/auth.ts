@@ -20,6 +20,8 @@ export const getLogout = () =>
   finMedServer.get<IFinMedServerRes<boolean>>(AUTH.LOGOUT);
 
 export const getProfile = () =>
-  finMedServer.get<IFinMedServerRes<TProfileInfo>>(AUTH.USER_INFO, {headers: {
-    "Authorization": "Bearer " + Stores.AuthStore.refreshToken
-  }});
+  finMedServer.get<IFinMedServerRes<TProfileInfo>>(AUTH.USER_INFO, {
+    headers: {
+      Authorization: "Bearer " + Stores.AuthStore.refreshToken,
+    },
+  });

@@ -93,10 +93,10 @@ class AuthStore {
   *logout(cb?: () => void) {
     this.isLoading.login = true;
     try {
-      yield getLogout()
+      yield getLogout();
       this.resetStores();
 
-      toast.success('You have been sucessfully logged out!');
+      toast.success("You have been sucessfully logged out!");
       if (cb) {
         cb();
       } else {
@@ -106,7 +106,7 @@ class AuthStore {
       toast.error(parseError(error));
       this.errors.logout = parseError(error);
       setTimeout(() => {
-        this.errors.logout = '';
+        this.errors.logout = "";
       }, 5000);
     } finally {
       this.isLoading.login = false;
@@ -157,14 +157,13 @@ class AuthStore {
 
   *resetPwd(_payload: TPwdResetSchema, cb?: () => void) {
     this.isLoading.reset = true;
-    this.errors.reset = '';
+    this.errors.reset = "";
     try {
       const { email, new_password } = _payload;
       yield postPwdReset({ email, new_password });
 
-      toast.success('Password has set!');
+      toast.success("Password has set!");
       cb?.();
-      
     } catch (error) {
       this.errors.reset = parseError(error);
     } finally {
