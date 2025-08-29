@@ -1,8 +1,8 @@
-import { sidebarData } from "@/components/layout/data/sidebar-data";
+import { sidebarData } from '@/components/layout/data/sidebar-data';
 
 export function getInitials(word: string) {
-  const charArr = word.split(" ").map((w) => w.charAt(0));
-  return charArr.join("");
+  const charArr = word.split(' ').map((w) => w.charAt(0));
+  return charArr.join('');
 }
 
 export function fmtNumber(num: number) {
@@ -23,10 +23,10 @@ export const numberRegex = /\d/;
 export const specialCharcterRegex = /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
 export const handleCharcterRegex = /[`@?&=]/;
 
-export const ISSERVER = typeof window === "undefined";
+export const ISSERVER = typeof window === 'undefined';
 
 export function toTitleCase(p: string) {
-  if (p.includes("_")) {
+  if (p.includes('_')) {
     return snakeCaseToSentenceCase(p);
   }
 
@@ -34,15 +34,13 @@ export function toTitleCase(p: string) {
 }
 
 export function snakeCaseToSentenceCase(input: string): string {
-  const words = input.split("_");
+  const words = input.split('_');
 
   const sentence = words
     .map((word, index) =>
-      index === 0
-        ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        : word.toLowerCase(),
+      index === 0 ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : word.toLowerCase()
     )
-    .join(" ");
+    .join(' ');
 
   return sentence;
 }
@@ -56,7 +54,7 @@ export function getLabel(
   arr: Array<{
     label: string;
     value: string;
-  }>,
+  }>
 ) {
   return arr.find((arg) => arg.value === value)?.value as string;
 }

@@ -1,28 +1,24 @@
-import { forwardRef, useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { forwardRef, useState } from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  CommandList
+} from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   FormItem,
   FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
-} from "@/components/ui/form";
+  FormMessage
+} from '@/components/ui/form';
 
 export type TComboInputData = {
   value: string;
@@ -53,14 +49,9 @@ const InputCombo = forwardRef<HTMLInputElement, IInputComboProps>(
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className={cn(
-                  "w-full justify-between",
-                  !value && "text-muted-foreground",
-                )}
+                className={cn('w-full justify-between', !value && 'text-muted-foreground')}
               >
-                {value
-                  ? data.find((datum) => datum.value === value)?.label
-                  : placeholder}
+                {value ? data.find((datum) => datum.value === value)?.label : placeholder}
                 <ChevronsUpDown className="opacity-50" />
               </Button>
             </FormControl>
@@ -83,8 +74,8 @@ const InputCombo = forwardRef<HTMLInputElement, IInputComboProps>(
                       {datum.label}
                       <Check
                         className={cn(
-                          "ml-auto",
-                          datum.value === value ? "opacity-100" : "opacity-0",
+                          'ml-auto',
+                          datum.value === value ? 'opacity-100' : 'opacity-0'
                         )}
                       />
                     </CommandItem>
@@ -98,8 +89,8 @@ const InputCombo = forwardRef<HTMLInputElement, IInputComboProps>(
         <FormMessage />
       </FormItem>
     );
-  },
+  }
 );
 
-InputCombo.displayName = "InputCombo";
+InputCombo.displayName = 'InputCombo';
 export default InputCombo;

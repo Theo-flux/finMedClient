@@ -1,7 +1,7 @@
-import { makeObservable, observable, action } from "mobx";
-import { RootStore } from "@/store";
-import initializer from "@/utils/initializer";
-import { AppModals, TAppModalsAction } from "./appModalTypes";
+import { makeObservable, observable, action } from 'mobx';
+import { RootStore } from '@/store';
+import initializer from '@/utils/initializer';
+import { AppModals, TAppModalsAction } from './appModalTypes';
 
 const INIT_IS_OPEN = initializer(AppModals, false);
 
@@ -16,10 +16,10 @@ class AppConfigStore {
   nonce = 0;
 
   doneModal = {
-    text: "",
-    subText: "",
-    ctaText: "",
-    showClose: true,
+    text: '',
+    subText: '',
+    ctaText: '',
+    showClose: true
   };
 
   isOpen = { ...INIT_IS_OPEN };
@@ -36,23 +36,21 @@ class AppConfigStore {
       openSideNav: action.bound,
       openActivityNav: action.bound,
       toggleModals: action.bound,
-      setModalOpenState: action.bound,
+      setModalOpenState: action.bound
     });
     this.rootStore = rootStore;
   }
 
   openSideNav(open?: boolean) {
-    this.isSideNavOpen =
-      typeof open === "undefined" ? !this.isSideNavOpen : open;
+    this.isSideNavOpen = typeof open === 'undefined' ? !this.isSideNavOpen : open;
   }
 
   openActivityNav(open?: boolean) {
-    this.isActivityOpen =
-      typeof open === "undefined" ? !this.isActivityOpen : open;
+    this.isActivityOpen = typeof open === 'undefined' ? !this.isActivityOpen : open;
   }
 
   setModalOpenState(name: AppModals, open?: boolean) {
-    this.isOpen[name] = typeof open === "undefined" ? !this.isOpen[name] : open;
+    this.isOpen[name] = typeof open === 'undefined' ? !this.isOpen[name] : open;
   }
 
   /**
@@ -61,15 +59,15 @@ class AppConfigStore {
    */
   toggleModals(modal: TAppModalsAction = {}) {
     switch (modal.name) {
-      case "":
+      case '':
         break;
       case AppModals.DONE:
         if (modal.open) {
           this.doneModal = {
             text: modal.text,
             subText: modal.subText,
-            ctaText: modal.ctaText ?? "Got it",
-            showClose: modal.showClose ?? true,
+            ctaText: modal.ctaText ?? 'Got it',
+            showClose: modal.showClose ?? true
           };
         }
         break;

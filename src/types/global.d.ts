@@ -1,6 +1,6 @@
 type Option = { value: string; label: string; disable?: boolean };
 
-interface SessionPayload extends Pick<TProfileInfo, "id" | "roles"> {
+interface SessionPayload extends Pick<TProfileInfo, 'id' | 'roles'> {
   token: string;
   exp?: number;
 }

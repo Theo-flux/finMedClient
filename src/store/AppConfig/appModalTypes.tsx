@@ -1,16 +1,17 @@
 export enum AppModals {
-  DONE = "DONE",
-  LOG_OUT_MODAL = "LOG_OUT_MODAL",
+  DONE = 'DONE',
+  LOG_OUT_MODAL = 'LOG_OUT_MODAL',
+  SET_PWD_MODAL = 'SET_PWD_MODAL'
 }
 
 export type TAppModalsAction =
   | { name?: undefined }
   | {
-      name: "";
+      name: '';
       open?: boolean;
     }
   | ({
-      name: AppModals.LOG_OUT_MODAL;
+      name: AppModals.LOG_OUT_MODAL | AppModals.SET_PWD_MODAL;
     } & {
       open: boolean;
     })

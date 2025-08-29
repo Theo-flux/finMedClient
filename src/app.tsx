@@ -1,6 +1,6 @@
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { RouterProvider, createRouter } from '@tanstack/react-router';
 // Import the auto generated route tree
-import { routeTree } from "./routeTree.gen";
+import { routeTree } from './routeTree.gen';
 
 const router = createRouter({ routeTree });
 

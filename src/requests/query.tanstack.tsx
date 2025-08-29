@@ -1,39 +1,30 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  QueryFunction,
-  QueryKey,
-} from "@tanstack/react-query";
-import { PropsWithChildren, useState } from "react";
-import finMedServer from "@/servers/finMed";
+import { QueryClient, QueryClientProvider, QueryFunction, QueryKey } from '@tanstack/react-query';
+import { PropsWithChildren, useState } from 'react';
+import finMedServer from '@/servers/finMed';
 
 export const staleTime = 1000 * 60 * 5; // 5 minutes
 export const refetchInterval = 1000 * 60 * 8; // 8 minutes
 export const gcTime = 1000 * 60 * 60; // 1 hour
 
 const call = {
-  finMedServer,
+  finMedServer
 };
 
 export type TRequestClient = keyof typeof call;
 
-function getReqClient(client: TRequestClient = "finMedServer") {
+function getReqClient(client: TRequestClient = 'finMedServer') {
   return call[client] ?? client;
 }
 
-const queryFn: QueryFunction<unknown, QueryKey, number> = async ({
-  signal,
-  pageParam,
-  meta,
-}) => {
+const queryFn: QueryFunction<unknown, QueryKey, number> = async ({ signal, pageParam, meta }) => {
   const server = getReqClient(meta?.requestServer as TRequestClient);
 
   const { data } = await server.get(meta?.path as string, {
     signal,
     params: {
       ...(meta?.params ?? {}),
-      ...(pageParam ? { cursor: pageParam } : {}),
-    },
+      ...(pageParam ? { cursor: pageParam } : {})
+    }
   });
 
   return data;
@@ -49,15 +40,13 @@ function ReactQueryProvider({ children }: PropsWithChildren<object>) {
             staleTime,
             refetchInterval,
             retryOnMount: false,
-            queryFn,
-          },
-        },
-      }),
+            queryFn
+          }
+        }
+      })
   );
 
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }
 
 export default ReactQueryProvider;

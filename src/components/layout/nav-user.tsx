@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router";
-import { Bell, ChevronsUpDown, LogOut } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Link } from '@tanstack/react-router';
+import { Bell, ChevronsUpDown, LogOut } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,24 +8,24 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar";
-import { observer } from "mobx-react-lite";
-import { useStore } from "@/store";
-import { getInitials } from "@/utils";
-import { AppModals } from "@/store/AppConfig/appModalTypes";
+  useSidebar
+} from '@/components/ui/sidebar';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '@/store';
+import { getInitials } from '@/utils';
+import { AppModals } from '@/store/AppConfig/appModalTypes';
 
 const NavUser = () => {
   const { isMobile } = useSidebar();
   const {
     AuthStore: { user },
-    AppConfigStore: { toggleModals },
+    AppConfigStore: { toggleModals }
   } = useStore();
 
   return (
@@ -38,10 +38,8 @@ const NavUser = () => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={"/"} alt={"Daniel Ibanga"} />
-                <AvatarFallback>
-                  {getInitials(`${user.firstName} ${user.lastName}`)}
-                </AvatarFallback>
+                <AvatarImage src={'/'} alt={'Daniel Ibanga'} />
+                <AvatarFallback>{getInitials(`${user.firstName} ${user.lastName}`)}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <p className="text-sm leading-none font-medium">
@@ -54,7 +52,7 @@ const NavUser = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            side={isMobile ? 'bottom' : 'right'}
             align="end"
             sideOffset={4}
           >
@@ -85,9 +83,7 @@ const NavUser = () => {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() =>
-                toggleModals({ name: AppModals.LOG_OUT_MODAL, open: true })
-              }
+              onClick={() => toggleModals({ name: AppModals.LOG_OUT_MODAL, open: true })}
             >
               <LogOut />
               Log out

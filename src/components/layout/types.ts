@@ -1,4 +1,4 @@
-import { LinkProps } from "@tanstack/react-router";
+import { LinkProps } from '@tanstack/react-router';
 
 interface BaseNavItem {
   title: string;
@@ -8,21 +8,17 @@ interface BaseNavItem {
 }
 
 type NavLink = BaseNavItem & {
-  url: LinkProps["to"];
+  url: LinkProps['to'];
   rba: Array<number>;
   items?: never;
 };
 
 type NavCollapsible = BaseNavItem & {
-  items: (BaseNavItem & { url: LinkProps["to"] })[];
+  items: (BaseNavItem & { url: LinkProps['to'] })[];
   url?: never;
 };
 
 type NavItem = NavCollapsible | NavLink;
-type RoleSwitcher = {
-  name: string;
-  value: number;
-};
 
 interface NavGroup {
   title: string;
@@ -30,7 +26,6 @@ interface NavGroup {
 }
 
 interface SidebarData {
-  roleSwitcher: Array<RoleSwitcher>;
   navGroups: Array<NavGroup>;
 }
 

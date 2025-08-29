@@ -1,8 +1,8 @@
 export enum LogLevel {
-  DEBUG = "DEBUG",
-  INFO = "INFO",
-  WARN = "WARN",
-  ERROR = "ERROR",
+  DEBUG = 'DEBUG',
+  INFO = 'INFO',
+  WARN = 'WARN',
+  ERROR = 'ERROR'
 }
 
 export class Logger {
@@ -16,17 +16,13 @@ export class Logger {
     const levels = Object.values(LogLevel);
     return levels.indexOf(level) >= levels.indexOf(this.logLevel);
   }
-  private loggerTitle(level: LogLevel, message = "") {
+  private loggerTitle(level: LogLevel, message = '') {
     return `[${new Date().toISOString()}] [${level.toUpperCase()}]::${message}`;
   }
 
   debug(message: string, ...optionalParams: unknown[]) {
     if (this.canLog(LogLevel.DEBUG)) {
-      console.debug(
-        this.loggerTitle(LogLevel.DEBUG),
-        message,
-        ...optionalParams,
-      );
+      console.debug(this.loggerTitle(LogLevel.DEBUG), message, ...optionalParams);
     }
   }
 
@@ -44,11 +40,7 @@ export class Logger {
 
   error(message: string, error: unknown, ...optionalParams: unknown[]) {
     if (this.canLog(LogLevel.ERROR)) {
-      console.error(
-        this.loggerTitle(LogLevel.ERROR),
-        message,
-        ...optionalParams,
-      );
+      console.error(this.loggerTitle(LogLevel.ERROR), message, ...optionalParams);
     }
     const err = new Error(this.loggerTitle(LogLevel.ERROR, message));
     err.cause = error;
@@ -56,7 +48,5 @@ export class Logger {
 }
 
 // Export a logger instance, defaulting to INFO level in production and DEBUG in development
-const logger = new Logger(
-  process.env.NODE_ENV === "production" ? LogLevel.INFO : LogLevel.DEBUG,
-);
+const logger = new Logger(process.env.NODE_ENV === 'production' ? LogLevel.INFO : LogLevel.DEBUG);
 export default logger;

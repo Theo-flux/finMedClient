@@ -1,19 +1,14 @@
-import axios, {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
-import { Stores } from "@/store";
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { Stores } from '@/store';
 
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const resourceReqInterceptor = (config: InternalAxiosRequestConfig) => {
   const modifiedConfig = { ...config };
-  const _token = "";
+  const _token = '';
   // const _token = Stores.AuthStore.accessToken;
 
-  if (_token && modifiedConfig.headers)
-    modifiedConfig.headers.Authorization = `Bearer ${_token}`;
+  if (_token && modifiedConfig.headers) modifiedConfig.headers.Authorization = `Bearer ${_token}`;
 
   return modifiedConfig;
 };
@@ -30,7 +25,7 @@ const resourceResErrorInterceptor = (error: AxiosError) => {
       originalRequest._retry = true;
 
       const refresh_token = Stores.AuthStore.refreshToken;
-      let tokenObj = { token: "", refreshToken: "" };
+      let tokenObj = { token: '', refreshToken: '' };
 
       if (refresh_token) {
         const gen = Stores.AuthStore.fetchNewToken();
@@ -38,7 +33,7 @@ const resourceResErrorInterceptor = (error: AxiosError) => {
       }
 
       const { token } = tokenObj;
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
       return finMedServer(originalRequest);
     }
@@ -50,29 +45,26 @@ const resourceResErrorInterceptor = (error: AxiosError) => {
 const finMedServer = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "content-type": "application/json",
-  },
+    'content-type': 'application/json'
+  }
 });
 
 export const finMedServerwithoutInterceptor = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "content-type": "application/json",
-  },
+    'content-type': 'application/json'
+  }
 });
 
 export const uninterceptedServer = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "content-type": "application/json",
-  },
+    'content-type': 'application/json'
+  }
 });
 
 export default finMedServer;
 
 finMedServer.interceptors.request.use(resourceReqInterceptor);
 
-finMedServer.interceptors.response.use(
-  resourceResInterceptor,
-  resourceResErrorInterceptor,
-);
+finMedServer.interceptors.response.use(resourceResInterceptor, resourceResErrorInterceptor);

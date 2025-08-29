@@ -3,18 +3,18 @@ import {
   FormDescription,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  FormMessage
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { forwardRef } from "react";
-import { ReactNode } from "@tanstack/react-router";
-import { SelectProps } from "@radix-ui/react-select";
+  SelectValue
+} from '@/components/ui/select';
+import { forwardRef } from 'react';
+import { ReactNode } from '@tanstack/react-router';
+import { SelectProps } from '@radix-ui/react-select';
 
 interface ISelectFormProps extends SelectProps {
   name: string;
@@ -32,7 +32,7 @@ const InputSelect = forwardRef<HTMLInputElement, ISelectFormProps>(
         <Select {...{ ref }} {...props}>
           <FormControl className="w-full">
             <SelectTrigger>
-              <SelectValue placeholder={placeholder ?? ""} />
+              <SelectValue placeholder={placeholder ?? ''} />
             </SelectTrigger>
           </FormControl>
           <SelectContent className="w-full">
@@ -47,8 +47,8 @@ const InputSelect = forwardRef<HTMLInputElement, ISelectFormProps>(
         <FormMessage />
       </FormItem>
     );
-  },
+  }
 );
 
-InputSelect.displayName = "InputSelect";
+InputSelect.displayName = 'InputSelect';
 export default InputSelect;

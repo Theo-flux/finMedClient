@@ -1,13 +1,8 @@
-import React from "react";
-import { useNavigate } from "@tanstack/react-router";
-import {
-  IconArrowRightDashed,
-  IconDeviceLaptop,
-  IconMoon,
-  IconSun,
-} from "@tabler/icons-react";
-import { useSearch } from "@/context/searchContext";
-import { useTheme } from "@/context/themeContext";
+import React from 'react';
+import { useNavigate } from '@tanstack/react-router';
+import { IconArrowRightDashed, IconDeviceLaptop, IconMoon, IconSun } from '@tabler/icons-react';
+import { useSearch } from '@/context/searchContext';
+import { useTheme } from '@/context/themeContext';
 import {
   CommandDialog,
   CommandEmpty,
@@ -15,20 +10,20 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
-import { sidebarData } from "../layout/data/sidebar-data";
-import { ScrollArea } from "./scroll-area";
-import { useStore } from "@/store";
-import { observer } from "mobx-react-lite";
-import { hasCommonRole } from "@/utils";
+  CommandSeparator
+} from '@/components/ui/command';
+import { sidebarData } from '../layout/data/sidebar-data';
+import { ScrollArea } from './scroll-area';
+import { useStore } from '@/store';
+import { observer } from 'mobx-react-lite';
+import { hasCommonRole } from '@/utils';
 
 function CommandMenu() {
   const navigate = useNavigate();
   const { setTheme } = useTheme();
   const { open, setOpen } = useSearch();
   const {
-    AuthStore: { userRole },
+    AuthStore: { userRole }
   } = useStore();
 
   const runCommand = React.useCallback(
@@ -36,7 +31,7 @@ function CommandMenu() {
       setOpen(false);
       command();
     },
-    [setOpen],
+    [setOpen]
   );
 
   return (
@@ -85,14 +80,14 @@ function CommandMenu() {
           ))}
           <CommandSeparator />
           <CommandGroup heading="Theme">
-            <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
+            <CommandItem onSelect={() => runCommand(() => setTheme('light'))}>
               <IconSun /> <span>Light</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
+            <CommandItem onSelect={() => runCommand(() => setTheme('dark'))}>
               <IconMoon className="scale-90" />
               <span>Dark</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
+            <CommandItem onSelect={() => runCommand(() => setTheme('system'))}>
               <IconDeviceLaptop />
               <span>System</span>
             </CommandItem>

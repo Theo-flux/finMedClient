@@ -1,15 +1,15 @@
-"use client";
-import { forwardRef, type ReactNode } from "react";
+'use client';
+import { forwardRef, type ReactNode } from 'react';
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+  FormMessage
+} from '@/components/ui/form';
+import { Textarea } from '@/components/ui/textarea';
 
-interface IInputProps extends React.ComponentProps<"textarea"> {
+interface IInputProps extends React.ComponentProps<'textarea'> {
   label: string;
   description?: ReactNode;
 }
@@ -26,9 +26,9 @@ const TextareaField = forwardRef<HTMLTextAreaElement, IInputProps>(
         <FormMessage />
       </FormItem>
     );
-  },
+  }
 );
 
-TextareaField.displayName = "TextareaField";
+TextareaField.displayName = 'TextareaField';
 
 export default TextareaField;

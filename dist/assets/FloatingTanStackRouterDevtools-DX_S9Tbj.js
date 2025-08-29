@@ -22,36 +22,34 @@ import {
   q as zt,
   S as Mt,
   v as Ut,
-  D as Bt,
-} from "./index-NEy1fhzK.js";
+  D as Bt
+} from './index-NEy1fhzK.js';
 const bt = mt(void 0),
   yt = mt(void 0),
   Et = () => {
     const e = Ze(yt);
     if (!e)
-      throw new Error(
-        "useDevtoolsOnClose must be used within a TanStackRouterDevtools component",
-      );
+      throw new Error('useDevtoolsOnClose must be used within a TanStackRouterDevtools component');
     return e;
   },
-  Dt = typeof window > "u";
+  Dt = typeof window > 'u';
 function qe(e) {
   const t = {
-    pending: "yellow",
-    success: "green",
-    error: "red",
-    notFound: "purple",
-    redirected: "gray",
+    pending: 'yellow',
+    success: 'green',
+    error: 'red',
+    notFound: 'purple',
+    redirected: 'gray'
   };
-  return e.isFetching && e.status === "success"
-    ? e.isFetching === "beforeLoad"
-      ? "purple"
-      : "blue"
+  return e.isFetching && e.status === 'success'
+    ? e.isFetching === 'beforeLoad'
+      ? 'purple'
+      : 'blue'
     : t[e.status];
 }
 function Ot(e, t) {
   const n = e.find((i) => i.routeId === t.id);
-  return n ? qe(n) : "gray";
+  return n ? qe(n) : 'gray';
 }
 function It() {
   const [e, t] = ue(!1);
@@ -64,11 +62,11 @@ function It() {
 }
 const Tt = (e) => {
   const t = Object.getOwnPropertyNames(Object(e)),
-    n = typeof e == "bigint" ? `${e.toString()}n` : e;
+    n = typeof e == 'bigint' ? `${e.toString()}n` : e;
   try {
     return JSON.stringify(n, t);
   } catch {
-    return "unable to stringify";
+    return 'unable to stringify';
   }
 };
 function Gt(e, t = [(n) => n]) {
@@ -78,8 +76,8 @@ function Gt(e, t = [(n) => n]) {
       for (const a of t) {
         const c = a(n),
           u = a(p);
-        if (typeof c > "u") {
-          if (typeof u > "u") continue;
+        if (typeof c > 'u') {
+          if (typeof u > 'u') continue;
           return 1;
         }
         if (c !== u) return c > u ? 1 : -1;
@@ -88,54 +86,51 @@ function Gt(e, t = [(n) => n]) {
     })
     .map(([n]) => n);
 }
-let Pt = { data: "" },
+let Pt = { data: '' },
   At = (e) =>
-    typeof window == "object"
+    typeof window == 'object'
       ? (
-          (e ? e.querySelector("#_goober") : window._goober) ||
-          Object.assign(
-            (e || document.head).appendChild(document.createElement("style")),
-            { innerHTML: " ", id: "_goober" },
-          )
+          (e ? e.querySelector('#_goober') : window._goober) ||
+          Object.assign((e || document.head).appendChild(document.createElement('style')), {
+            innerHTML: ' ',
+            id: '_goober'
+          })
         ).firstChild
       : e || Pt,
   Lt = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g,
   Rt = /\/\*[^]*?\*\/|  +/g,
   vt = /\n+/g,
   _e = (e, t) => {
-    let n = "",
-      i = "",
-      p = "";
+    let n = '',
+      i = '',
+      p = '';
     for (let o in e) {
       let a = e[o];
-      o[0] == "@"
-        ? o[1] == "i"
-          ? (n = o + " " + a + ";")
-          : (i +=
-              o[1] == "f"
-                ? _e(a, o)
-                : o + "{" + _e(a, o[1] == "k" ? "" : t) + "}")
-        : typeof a == "object"
+      o[0] == '@'
+        ? o[1] == 'i'
+          ? (n = o + ' ' + a + ';')
+          : (i += o[1] == 'f' ? _e(a, o) : o + '{' + _e(a, o[1] == 'k' ? '' : t) + '}')
+        : typeof a == 'object'
           ? (i += _e(
               a,
               t
                 ? t.replace(/([^,])+/g, (c) =>
                     o.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (u) =>
-                      /&/.test(u) ? u.replace(/&/g, c) : c ? c + " " + u : u,
-                    ),
+                      /&/.test(u) ? u.replace(/&/g, c) : c ? c + ' ' + u : u
+                    )
                   )
-                : o,
+                : o
             ))
           : a != null &&
-            ((o = /^--/.test(o) ? o : o.replace(/[A-Z]/g, "-$&").toLowerCase()),
-            (p += _e.p ? _e.p(o, a) : o + ":" + a + ";"));
+            ((o = /^--/.test(o) ? o : o.replace(/[A-Z]/g, '-$&').toLowerCase()),
+            (p += _e.p ? _e.p(o, a) : o + ':' + a + ';'));
     }
-    return n + (t && p ? t + "{" + p + "}" : p) + i;
+    return n + (t && p ? t + '{' + p + '}' : p) + i;
   },
   he = {},
   kt = (e) => {
-    if (typeof e == "object") {
-      let t = "";
+    if (typeof e == 'object') {
+      let t = '';
       for (let n in e) t += n + kt(e[n]);
       return t;
     }
@@ -149,7 +144,7 @@ let Pt = { data: "" },
           let l = 0,
             r = 11;
           for (; l < u.length; ) r = (101 * r + u.charCodeAt(l++)) >>> 0;
-          return "go" + r;
+          return 'go' + r;
         })(o));
     if (!he[a]) {
       let u =
@@ -159,16 +154,15 @@ let Pt = { data: "" },
               let r,
                 $,
                 v = [{}];
-              for (; (r = Lt.exec(l.replace(Rt, ""))); )
+              for (; (r = Lt.exec(l.replace(Rt, ''))); )
                 r[4]
                   ? v.shift()
                   : r[3]
-                    ? (($ = r[3].replace(vt, " ").trim()),
-                      v.unshift((v[0][$] = v[0][$] || {})))
-                    : (v[0][r[1]] = r[2].replace(vt, " ").trim());
+                    ? (($ = r[3].replace(vt, ' ').trim()), v.unshift((v[0][$] = v[0][$] || {})))
+                    : (v[0][r[1]] = r[2].replace(vt, ' ').trim());
               return v[0];
             })(e);
-      he[a] = _e(p ? { ["@keyframes " + a]: u } : u, n ? "" : "." + a);
+      he[a] = _e(p ? { ['@keyframes ' + a]: u } : u, n ? '' : '.' + a);
     }
     let c = n && he.g ? he.g : null;
     return (
@@ -188,17 +182,17 @@ let Pt = { data: "" },
         let c = a(n),
           u = (c && c.props && c.props.className) || (/^go/.test(c) && c);
         a = u
-          ? "." + u
-          : c && typeof c == "object"
+          ? '.' + u
+          : c && typeof c == 'object'
             ? c.props
-              ? ""
-              : _e(c, "")
+              ? ''
+              : _e(c, '')
             : c === !1
-              ? ""
+              ? ''
               : c;
       }
-      return i + p + (a ?? "");
-    }, "");
+      return i + p + (a ?? '');
+    }, '');
 function ze(e) {
   let t = this || {},
     n = e.call ? e(t.p) : e;
@@ -211,198 +205,198 @@ function ze(e) {
     At(t.target),
     t.g,
     t.o,
-    t.k,
+    t.k
   );
 }
 ze.bind({ g: 1 });
 ze.bind({ k: 1 });
 const D = {
     colors: {
-      inherit: "inherit",
-      current: "currentColor",
-      transparent: "transparent",
-      black: "#000000",
-      white: "#ffffff",
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
+      black: '#000000',
+      white: '#ffffff',
       neutral: {
-        50: "#f9fafb",
-        100: "#f2f4f7",
-        200: "#eaecf0",
-        300: "#d0d5dd",
-        400: "#98a2b3",
-        500: "#667085",
-        600: "#475467",
-        700: "#344054",
-        800: "#1d2939",
-        900: "#101828",
+        50: '#f9fafb',
+        100: '#f2f4f7',
+        200: '#eaecf0',
+        300: '#d0d5dd',
+        400: '#98a2b3',
+        500: '#667085',
+        600: '#475467',
+        700: '#344054',
+        800: '#1d2939',
+        900: '#101828'
       },
       darkGray: {
-        50: "#525c7a",
-        100: "#49536e",
-        200: "#414962",
-        300: "#394056",
-        400: "#313749",
-        500: "#292e3d",
-        600: "#212530",
-        700: "#191c24",
-        800: "#111318",
-        900: "#0b0d10",
+        50: '#525c7a',
+        100: '#49536e',
+        200: '#414962',
+        300: '#394056',
+        400: '#313749',
+        500: '#292e3d',
+        600: '#212530',
+        700: '#191c24',
+        800: '#111318',
+        900: '#0b0d10'
       },
       gray: {
-        50: "#f9fafb",
-        100: "#f2f4f7",
-        200: "#eaecf0",
-        300: "#d0d5dd",
-        400: "#98a2b3",
-        500: "#667085",
-        600: "#475467",
-        700: "#344054",
-        800: "#1d2939",
-        900: "#101828",
+        50: '#f9fafb',
+        100: '#f2f4f7',
+        200: '#eaecf0',
+        300: '#d0d5dd',
+        400: '#98a2b3',
+        500: '#667085',
+        600: '#475467',
+        700: '#344054',
+        800: '#1d2939',
+        900: '#101828'
       },
       blue: {
-        25: "#F5FAFF",
-        50: "#EFF8FF",
-        100: "#D1E9FF",
-        200: "#B2DDFF",
-        300: "#84CAFF",
-        400: "#53B1FD",
-        500: "#2E90FA",
-        600: "#1570EF",
-        700: "#175CD3",
-        800: "#1849A9",
-        900: "#194185",
+        25: '#F5FAFF',
+        50: '#EFF8FF',
+        100: '#D1E9FF',
+        200: '#B2DDFF',
+        300: '#84CAFF',
+        400: '#53B1FD',
+        500: '#2E90FA',
+        600: '#1570EF',
+        700: '#175CD3',
+        800: '#1849A9',
+        900: '#194185'
       },
       green: {
-        25: "#F6FEF9",
-        50: "#ECFDF3",
-        100: "#D1FADF",
-        200: "#A6F4C5",
-        300: "#6CE9A6",
-        400: "#32D583",
-        500: "#12B76A",
-        600: "#039855",
-        700: "#027A48",
-        800: "#05603A",
-        900: "#054F31",
+        25: '#F6FEF9',
+        50: '#ECFDF3',
+        100: '#D1FADF',
+        200: '#A6F4C5',
+        300: '#6CE9A6',
+        400: '#32D583',
+        500: '#12B76A',
+        600: '#039855',
+        700: '#027A48',
+        800: '#05603A',
+        900: '#054F31'
       },
       red: {
-        50: "#fef2f2",
-        100: "#fee2e2",
-        200: "#fecaca",
-        300: "#fca5a5",
-        400: "#f87171",
-        500: "#ef4444",
-        600: "#dc2626",
-        700: "#b91c1c",
-        800: "#991b1b",
-        900: "#7f1d1d",
-        950: "#450a0a",
+        50: '#fef2f2',
+        100: '#fee2e2',
+        200: '#fecaca',
+        300: '#fca5a5',
+        400: '#f87171',
+        500: '#ef4444',
+        600: '#dc2626',
+        700: '#b91c1c',
+        800: '#991b1b',
+        900: '#7f1d1d',
+        950: '#450a0a'
       },
       yellow: {
-        25: "#FFFCF5",
-        50: "#FFFAEB",
-        100: "#FEF0C7",
-        200: "#FEDF89",
-        300: "#FEC84B",
-        400: "#FDB022",
-        500: "#F79009",
-        600: "#DC6803",
-        700: "#B54708",
-        800: "#93370D",
-        900: "#7A2E0E",
+        25: '#FFFCF5',
+        50: '#FFFAEB',
+        100: '#FEF0C7',
+        200: '#FEDF89',
+        300: '#FEC84B',
+        400: '#FDB022',
+        500: '#F79009',
+        600: '#DC6803',
+        700: '#B54708',
+        800: '#93370D',
+        900: '#7A2E0E'
       },
       purple: {
-        25: "#FAFAFF",
-        50: "#F4F3FF",
-        100: "#EBE9FE",
-        200: "#D9D6FE",
-        300: "#BDB4FE",
-        400: "#9B8AFB",
-        500: "#7A5AF8",
-        600: "#6938EF",
-        700: "#5925DC",
-        800: "#4A1FB8",
-        900: "#3E1C96",
+        25: '#FAFAFF',
+        50: '#F4F3FF',
+        100: '#EBE9FE',
+        200: '#D9D6FE',
+        300: '#BDB4FE',
+        400: '#9B8AFB',
+        500: '#7A5AF8',
+        600: '#6938EF',
+        700: '#5925DC',
+        800: '#4A1FB8',
+        900: '#3E1C96'
       },
       teal: {
-        25: "#F6FEFC",
-        50: "#F0FDF9",
-        100: "#CCFBEF",
-        200: "#99F6E0",
-        300: "#5FE9D0",
-        400: "#2ED3B7",
-        500: "#15B79E",
-        600: "#0E9384",
-        700: "#107569",
-        800: "#125D56",
-        900: "#134E48",
+        25: '#F6FEFC',
+        50: '#F0FDF9',
+        100: '#CCFBEF',
+        200: '#99F6E0',
+        300: '#5FE9D0',
+        400: '#2ED3B7',
+        500: '#15B79E',
+        600: '#0E9384',
+        700: '#107569',
+        800: '#125D56',
+        900: '#134E48'
       },
       pink: {
-        25: "#fdf2f8",
-        50: "#fce7f3",
-        100: "#fbcfe8",
-        200: "#f9a8d4",
-        300: "#f472b6",
-        400: "#ec4899",
-        500: "#db2777",
-        600: "#be185d",
-        700: "#9d174d",
-        800: "#831843",
-        900: "#500724",
+        25: '#fdf2f8',
+        50: '#fce7f3',
+        100: '#fbcfe8',
+        200: '#f9a8d4',
+        300: '#f472b6',
+        400: '#ec4899',
+        500: '#db2777',
+        600: '#be185d',
+        700: '#9d174d',
+        800: '#831843',
+        900: '#500724'
       },
       cyan: {
-        25: "#ecfeff",
-        50: "#cffafe",
-        100: "#a5f3fc",
-        200: "#67e8f9",
-        300: "#22d3ee",
-        400: "#06b6d4",
-        500: "#0891b2",
-        600: "#0e7490",
-        700: "#155e75",
-        800: "#164e63",
-        900: "#083344",
-      },
+        25: '#ecfeff',
+        50: '#cffafe',
+        100: '#a5f3fc',
+        200: '#67e8f9',
+        300: '#22d3ee',
+        400: '#06b6d4',
+        500: '#0891b2',
+        600: '#0e7490',
+        700: '#155e75',
+        800: '#164e63',
+        900: '#083344'
+      }
     },
-    alpha: { 90: "e5", 70: "b3", 20: "33" },
+    alpha: { 90: 'e5', 70: 'b3', 20: '33' },
     font: {
       size: {
-        "2xs": "calc(var(--tsrd-font-size) * 0.625)",
-        xs: "calc(var(--tsrd-font-size) * 0.75)",
-        sm: "calc(var(--tsrd-font-size) * 0.875)",
-        md: "var(--tsrd-font-size)",
+        '2xs': 'calc(var(--tsrd-font-size) * 0.625)',
+        xs: 'calc(var(--tsrd-font-size) * 0.75)',
+        sm: 'calc(var(--tsrd-font-size) * 0.875)',
+        md: 'var(--tsrd-font-size)'
       },
       lineHeight: {
-        xs: "calc(var(--tsrd-font-size) * 1)",
-        sm: "calc(var(--tsrd-font-size) * 1.25)",
+        xs: 'calc(var(--tsrd-font-size) * 1)',
+        sm: 'calc(var(--tsrd-font-size) * 1.25)'
       },
-      weight: { normal: "400", medium: "500", semibold: "600", bold: "700" },
+      weight: { normal: '400', medium: '500', semibold: '600', bold: '700' },
       fontFamily: {
-        sans: "ui-sans-serif, Inter, system-ui, sans-serif, sans-serif",
-        mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-      },
+        sans: 'ui-sans-serif, Inter, system-ui, sans-serif, sans-serif',
+        mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+      }
     },
     border: {
       radius: {
-        xs: "calc(var(--tsrd-font-size) * 0.125)",
-        sm: "calc(var(--tsrd-font-size) * 0.25)",
-        md: "calc(var(--tsrd-font-size) * 0.375)",
-        full: "9999px",
-      },
+        xs: 'calc(var(--tsrd-font-size) * 0.125)',
+        sm: 'calc(var(--tsrd-font-size) * 0.25)',
+        md: 'calc(var(--tsrd-font-size) * 0.375)',
+        full: '9999px'
+      }
     },
     size: {
-      0: "0px",
-      0.5: "calc(var(--tsrd-font-size) * 0.125)",
-      1: "calc(var(--tsrd-font-size) * 0.25)",
-      1.5: "calc(var(--tsrd-font-size) * 0.375)",
-      2: "calc(var(--tsrd-font-size) * 0.5)",
-      2.5: "calc(var(--tsrd-font-size) * 0.625)",
-      3: "calc(var(--tsrd-font-size) * 0.75)",
-      3.5: "calc(var(--tsrd-font-size) * 0.875)",
-      4: "calc(var(--tsrd-font-size) * 1)",
-      5: "calc(var(--tsrd-font-size) * 1.25)",
-      8: "calc(var(--tsrd-font-size) * 2)",
-    },
+      0: '0px',
+      0.5: 'calc(var(--tsrd-font-size) * 0.125)',
+      1: 'calc(var(--tsrd-font-size) * 0.25)',
+      1.5: 'calc(var(--tsrd-font-size) * 0.375)',
+      2: 'calc(var(--tsrd-font-size) * 0.5)',
+      2.5: 'calc(var(--tsrd-font-size) * 0.625)',
+      3: 'calc(var(--tsrd-font-size) * 0.75)',
+      3.5: 'calc(var(--tsrd-font-size) * 0.875)',
+      4: 'calc(var(--tsrd-font-size) * 1)',
+      5: 'calc(var(--tsrd-font-size) * 1.25)',
+      8: 'calc(var(--tsrd-font-size) * 2)'
+    }
   },
   Nt = (e) => {
     const { colors: t, font: n, size: i, alpha: p, border: o } = D,
@@ -421,7 +415,7 @@ const D = {
       transform-origin: top;
     `,
       devtoolsPanelContainerVisibility: (r) => l`
-        visibility: ${r ? "visible" : "hidden"};
+        visibility: ${r ? 'visible' : 'hidden'};
       `,
       devtoolsPanelContainerResizing: (r) =>
         r()
@@ -579,7 +573,7 @@ const D = {
         cursor: pointer;
         font-family: ${a.sans};
         font-weight: ${n.weight.medium};
-      `,
+      `
         ];
         if (r) {
           const x = l`
@@ -621,7 +615,7 @@ const D = {
         gap: ${i[2]};
         font-size: ${u.xs};
         color: ${t.gray[300]};
-      `,
+      `
         ];
         if (r) {
           const b = l`
@@ -642,9 +636,9 @@ const D = {
         border-radius: ${o.radius.full};
         transition: all 0.25s ease-out;
         box-sizing: border-box;
-      `,
+      `
         ];
-        if (r === "gray") {
+        if (r === 'gray') {
           const b = l`
           background: ${t.gray[700]};
           border-color: ${t.gray[400]};
@@ -666,7 +660,7 @@ const D = {
         color: ${t.gray[400]};
         font-variant-numeric: tabular-nums;
         line-height: ${c.xs};
-      `,
+      `
         ];
         if (r) {
           const b = l`
@@ -719,9 +713,9 @@ const D = {
         gap: ${i[2]};
         font-size: ${u.xs};
         color: ${t.gray[300]};
-        cursor: ${$ ? "pointer" : "default"};
+        cursor: ${$ ? 'pointer' : 'default'};
         line-height: ${c.xs};
-      `,
+      `
         ];
         if (r) {
           const x = l`
@@ -740,7 +734,7 @@ const D = {
         align-items: center;
         font-size: ${u.xs};
         line-height: ${c.xs};
-      `,
+      `
         ];
         if (!r) {
           const b = l`
@@ -763,7 +757,7 @@ const D = {
     `,
       nestedRouteRow: (r) => l`
         margin-left: ${r ? 0 : i[3.5]};
-        border-left: ${r ? "" : `solid 1px ${t.gray[700]}`};
+        border-left: ${r ? '' : `solid 1px ${t.gray[700]}`};
       `,
       code: l`
       font-size: ${u.xs};
@@ -796,16 +790,16 @@ const D = {
     `,
       matchStatus: (r, $) => {
         const b =
-          $ && r === "success"
-            ? $ === "beforeLoad"
-              ? "purple"
-              : "blue"
+          $ && r === 'success'
+            ? $ === 'beforeLoad'
+              ? 'purple'
+              : 'blue'
             : {
-                pending: "yellow",
-                success: "green",
-                error: "red",
-                notFound: "purple",
-                redirected: "gray",
+                pending: 'yellow',
+                success: 'green',
+                error: 'red',
+                notFound: 'purple',
+                redirected: 'gray'
               }[r];
         return l`
         display: flex;
@@ -852,10 +846,10 @@ const D = {
       }
     `,
       mainCloseBtnPosition: (r) => l`
-        ${r === "top-left" ? `top: ${i[2]}; left: ${i[2]};` : ""}
-        ${r === "top-right" ? `top: ${i[2]}; right: ${i[2]};` : ""}
-        ${r === "bottom-left" ? `bottom: ${i[2]}; left: ${i[2]};` : ""}
-        ${r === "bottom-right" ? `bottom: ${i[2]}; right: ${i[2]};` : ""}
+        ${r === 'top-left' ? `top: ${i[2]}; left: ${i[2]};` : ''}
+        ${r === 'top-right' ? `top: ${i[2]}; right: ${i[2]};` : ''}
+        ${r === 'bottom-left' ? `bottom: ${i[2]}; left: ${i[2]};` : ''}
+        ${r === 'bottom-right' ? `bottom: ${i[2]}; right: ${i[2]};` : ''}
       `,
       mainCloseBtnAnimation: (r) =>
         r
@@ -963,7 +957,7 @@ const D = {
       &:hover {
         color: ${t.blue[300]};
       }
-    `,
+    `
     };
   };
 function Me() {
@@ -974,7 +968,7 @@ function Me() {
 const Vt = (e) => {
   try {
     const t = localStorage.getItem(e);
-    return typeof t == "string" ? JSON.parse(t) : void 0;
+    return typeof t == 'string' ? JSON.parse(t) : void 0;
   } catch {
     return;
   }
@@ -984,32 +978,32 @@ function Ne(e, t) {
   return (
     Te(() => {
       const o = Vt(e);
-      i(typeof o > "u" || o === null ? (typeof t == "function" ? t() : t) : o);
+      i(typeof o > 'u' || o === null ? (typeof t == 'function' ? t() : t) : o);
     }),
     [
       n,
       (o) => {
         i((a) => {
           let c = o;
-          typeof o == "function" && (c = o(a));
+          typeof o == 'function' && (c = o(a));
           try {
             localStorage.setItem(e, JSON.stringify(c));
           } catch {}
           return c;
         });
-      },
+      }
     ]
   );
 }
 var Yt = L(
-    '<span><svg xmlns=http://www.w3.org/2000/svg width=12 height=12 fill=none viewBox="0 0 24 24"><path stroke=currentColor stroke-linecap=round stroke-linejoin=round stroke-width=2 d="M9 18l6-6-6-6">',
+    '<span><svg xmlns=http://www.w3.org/2000/svg width=12 height=12 fill=none viewBox="0 0 24 24"><path stroke=currentColor stroke-linecap=round stroke-linejoin=round stroke-width=2 d="M9 18l6-6-6-6">'
   ),
-  Re = L("<div>"),
-  qt = L("<button><span> "),
-  Jt = L("<div><div><button> [<!> ... <!>]"),
-  Kt = L("<button><span></span> 🔄 "),
-  Wt = L("<span>:"),
-  Zt = L("<span>");
+  Re = L('<div>'),
+  qt = L('<button><span> '),
+  Jt = L('<div><div><button> [<!> ... <!>]'),
+  Kt = L('<button><span></span> 🔄 '),
+  Wt = L('<span>:'),
+  Zt = L('<span>');
 const ht = ({ expanded: e, style: t = {} }) => {
   const n = _t();
   return (() => {
@@ -1020,13 +1014,9 @@ const ht = ({ expanded: e, style: t = {} }) => {
         (o) => {
           var a = n().expander,
             c = Q(n().expanderIcon(e));
-          return (
-            a !== o.e && d(i, (o.e = a)),
-            c !== o.t && s(p, "class", (o.t = c)),
-            o
-          );
+          return (a !== o.e && d(i, (o.e = a)), c !== o.t && s(p, 'class', (o.t = c)), o);
         },
-        { e: void 0, t: void 0 },
+        { e: void 0, t: void 0 }
       ),
       i
     );
@@ -1042,38 +1032,27 @@ function Qt(e, t) {
 function Xt(e) {
   return Symbol.iterator in e;
 }
-function Fe({
-  value: e,
-  defaultExpanded: t,
-  pageSize: n = 100,
-  filterSubEntries: i,
-  ...p
-}) {
+function Fe({ value: e, defaultExpanded: t, pageSize: n = 100, filterSubEntries: i, ...p }) {
   const [o, a] = ue(!!t),
     c = () => a((S) => !S),
     u = q(() => typeof e()),
     l = q(() => {
       let S = [];
       const oe = (C) => {
-        const h =
-          t === !0 ? { [C.label]: !0 } : t == null ? void 0 : t[C.label];
+        const h = t === !0 ? { [C.label]: !0 } : t == null ? void 0 : t[C.label];
         return { ...C, value: () => C.value, defaultExpanded: h };
       };
       return (
         Array.isArray(e())
           ? (S = e().map((C, h) => oe({ label: h.toString(), value: C })))
           : e() !== null &&
-              typeof e() == "object" &&
+              typeof e() == 'object' &&
               Xt(e()) &&
-              typeof e()[Symbol.iterator] == "function"
-            ? (S = Array.from(e(), (C, h) =>
-                oe({ label: h.toString(), value: C }),
-              ))
-            : typeof e() == "object" &&
+              typeof e()[Symbol.iterator] == 'function'
+            ? (S = Array.from(e(), (C, h) => oe({ label: h.toString(), value: C })))
+            : typeof e() == 'object' &&
               e() !== null &&
-              (S = Object.entries(e()).map(([C, h]) =>
-                oe({ label: C, value: h }),
-              )),
+              (S = Object.entries(e()).map(([C, h]) => oe({ label: C, value: h }))),
         i ? i(S) : S
       );
     }),
@@ -1106,21 +1085,14 @@ function Fe({
                         O(ht, {
                           get expanded() {
                             return o() ?? !1;
-                          },
+                          }
                         }),
-                        h,
+                        h
                       ),
                       g(C, () => p.label, h),
-                      g(
-                        h,
-                        () =>
-                          String(u).toLowerCase() === "iterable"
-                            ? "(Iterable) "
-                            : "",
-                        T,
-                      ),
+                      g(h, () => (String(u).toLowerCase() === 'iterable' ? '(Iterable) ' : ''), T),
                       g(h, () => l().length, T),
-                      g(h, () => (l().length > 1 ? "items" : "item"), null),
+                      g(h, () => (l().length > 1 ? 'items' : 'item'), null),
                       z(
                         (ie) => {
                           var se = w().expandButton,
@@ -1131,7 +1103,7 @@ function Fe({
                             ie
                           );
                         },
-                        { e: void 0, t: void 0 },
+                        { e: void 0, t: void 0 }
                       ),
                       C
                     );
@@ -1164,18 +1136,16 @@ function Fe({
                                       de.nextSibling,
                                       (F.$$click = () =>
                                         v((H) =>
-                                          H.includes(T)
-                                            ? H.filter((X) => X !== T)
-                                            : [...H, T],
+                                          H.includes(T) ? H.filter((X) => X !== T) : [...H, T]
                                         )),
                                       g(
                                         F,
                                         O(ht, {
                                           get expanded() {
                                             return $().includes(T);
-                                          },
+                                          }
                                         }),
-                                        K,
+                                        K
                                       ),
                                       g(F, T * n, ge),
                                       g(F, T * n + n - 1, de),
@@ -1188,48 +1158,41 @@ function Fe({
                                               ? (() => {
                                                   var X = Re();
                                                   return (
-                                                    g(X, () =>
-                                                      h.map((ne) => J(ne)),
-                                                    ),
-                                                    z(() =>
-                                                      d(X, w().subEntries),
-                                                    ),
+                                                    g(X, () => h.map((ne) => J(ne))),
+                                                    z(() => d(X, w().subEntries)),
                                                     X
                                                   );
                                                 })()
                                               : null;
                                         })(),
-                                        null,
+                                        null
                                       ),
                                       z(
                                         (H) => {
                                           var X = w().entry,
-                                            ne = Q(
-                                              w().labelButton,
-                                              "labelButton",
-                                            );
+                                            ne = Q(w().labelButton, 'labelButton');
                                           return (
                                             X !== H.e && d(se, (H.e = X)),
                                             ne !== H.t && d(F, (H.t = ne)),
                                             H
                                           );
                                         },
-                                        { e: void 0, t: void 0 },
+                                        { e: void 0, t: void 0 }
                                       ),
                                       ie
                                     );
-                                  })(),
-                                ),
+                                  })()
+                                )
                               ),
                               z(() => d(C, w().subEntries)),
                               C
                             );
                           })()
-                      : null,
-                  ),
+                      : null
+                  )
                 ]
               : (() => {
-                  var C = Z(() => u() === "function");
+                  var C = Z(() => u() === 'function');
                   return () =>
                     C()
                       ? O(Fe, {
@@ -1246,7 +1209,7 @@ function Fe({
                             })();
                           },
                           value: b,
-                          defaultExpanded: {},
+                          defaultExpanded: {}
                         })
                       : [
                           (() => {
@@ -1254,18 +1217,14 @@ function Fe({
                               T = h.firstChild;
                             return (g(h, () => p.label, T), h);
                           })(),
-                          " ",
+                          ' ',
                           (() => {
                             var h = Zt();
-                            return (
-                              g(h, () => Tt(e())),
-                              z(() => d(h, w().value)),
-                              h
-                            );
-                          })(),
+                            return (g(h, () => Tt(e())), z(() => d(h, w().value)), h);
+                          })()
                         ];
                 })();
-        })(),
+        })()
       ),
       z(() => d(S, w().entry)),
       S
@@ -1334,7 +1293,7 @@ const er = (e) => {
     `,
     info: c`
       color: ${t.gray[500]};
-      font-size: ${a["2xs"]};
+      font-size: ${a['2xs']};
       padding-left: ${i[1]};
     `,
     refreshValueBtn: c`
@@ -1346,7 +1305,7 @@ const er = (e) => {
       padding: 0;
       font-family: ${p.mono};
       font-size: ${a.xs};
-    `,
+    `
   };
 };
 function _t() {
@@ -1354,18 +1313,18 @@ function _t() {
     [t] = ue(er(e));
   return t;
 }
-Qe(["click"]);
-var tr = L("<div><div></div><div>/</div><div></div><div>/</div><div>");
+Qe(['click']);
+var tr = L('<div><div></div><div>/</div><div></div><div>/</div><div>');
 function Ve(e) {
-  const t = ["s", "min", "h", "d"],
+  const t = ['s', 'min', 'h', 'd'],
     n = [e / 1e3, e / 6e4, e / 36e5, e / 864e5];
   let i = 0;
   for (let o = 1; o < n.length && !(n[o] < 1); o++) i = o;
   return (
     new Intl.NumberFormat(navigator.language, {
-      compactDisplay: "short",
-      notation: "compact",
-      maximumFractionDigits: 0,
+      compactDisplay: 'short',
+      notation: 'compact',
+      maximumFractionDigits: 0
     }).format(n[i]) + t[i]
   );
 }
@@ -1393,7 +1352,7 @@ function Je({ match: e, router: t }) {
     );
   })();
 }
-var rr = L("<button type=button>➔");
+var rr = L('<button type=button>➔');
 function Ke({ to: e, params: t, search: n, router: i }) {
   const p = Me();
   return (() => {
@@ -1402,32 +1361,30 @@ function Ke({ to: e, params: t, search: n, router: i }) {
       (o.$$click = (a) => {
         (a.stopPropagation(), i().navigate({ to: e, params: t, search: n }));
       }),
-      s(o, "title", `Navigate to ${e}`),
+      s(o, 'title', `Navigate to ${e}`),
       z(() => d(o, p().navigateButton)),
       o
     );
   })();
 }
-Qe(["click"]);
-var ir = L("<button><div>TANSTACK</div><div>TanStack Router v1"),
-  nr = L("<div><div>"),
-  lr = L("<code> "),
-  je = L("<code>"),
-  or = L("<div><div role=button><div>"),
-  He = L("<div>"),
+Qe(['click']);
+var ir = L('<button><div>TANSTACK</div><div>TanStack Router v1'),
+  nr = L('<div><div>'),
+  lr = L('<code> '),
+  je = L('<code>'),
+  or = L('<div><div role=button><div>'),
+  He = L('<div>'),
   sr = L(
-    '<div><button><svg xmlns=http://www.w3.org/2000/svg width=10 height=6 fill=none viewBox="0 0 10 6"><path stroke=currentColor stroke-linecap=round stroke-linejoin=round stroke-width=1.667 d="M1 1l4 4 4-4"></path></svg></button><div><div></div><div><div></div></div></div><div><div><div><span>Pathname</span></div><div><code></code></div><div><div><button type=button>Routes</button><button type=button>Matches</button></div><div><div>age / staleTime / gcTime</div></div></div><div>',
+    '<div><button><svg xmlns=http://www.w3.org/2000/svg width=10 height=6 fill=none viewBox="0 0 10 6"><path stroke=currentColor stroke-linecap=round stroke-linejoin=round stroke-width=1.667 d="M1 1l4 4 4-4"></path></svg></button><div><div></div><div><div></div></div></div><div><div><div><span>Pathname</span></div><div><code></code></div><div><div><button type=button>Routes</button><button type=button>Matches</button></div><div><div>age / staleTime / gcTime</div></div></div><div>'
   ),
-  ar = L("<div><span>masked"),
-  $t = L("<div role=button><div>"),
-  dr = L(
-    "<div><div><div>Cached Matches</div><div>age / staleTime / gcTime</div></div><div>",
-  ),
+  ar = L('<div><span>masked'),
+  $t = L('<div role=button><div>'),
+  dr = L('<div><div><div>Cached Matches</div><div>age / staleTime / gcTime</div></div><div>'),
   cr = L(
-    "<div><div>Match Details</div><div><div><div><div></div></div><div><div>ID:</div><div><code></code></div></div><div><div>State:</div><div></div></div><div><div>Last Updated:</div><div></div></div></div></div><div>Explorer</div><div>",
+    '<div><div>Match Details</div><div><div><div><div></div></div><div><div>ID:</div><div><code></code></div></div><div><div>State:</div><div></div></div><div><div>Last Updated:</div><div></div></div></div></div><div>Explorer</div><div>'
   ),
-  fr = L("<div>Loader Data"),
-  ur = L("<div><div>Search Params</div><div>");
+  fr = L('<div>Loader Data'),
+  ur = L('<div><div>Search Params</div><div>');
 function gr(e) {
   const { className: t, ...n } = e,
     i = Me();
@@ -1440,23 +1397,19 @@ function gr(e) {
         p,
         Ge(n, {
           get class() {
-            return Q(i().logo, t ? t() : "");
-          },
+            return Q(i().logo, t ? t() : '');
+          }
         }),
         !1,
-        !0,
+        !0
       ),
       z(
         (c) => {
           var u = i().tanstackLogo,
             l = i().routerLogo;
-          return (
-            u !== c.e && d(o, (c.e = u)),
-            l !== c.t && d(a, (c.t = l)),
-            c
-          );
+          return (u !== c.e && d(o, (c.e = u)), l !== c.t && d(a, (c.t = l)), c);
         },
-        { e: void 0, t: void 0 },
+        { e: void 0, t: void 0 }
       ),
       p
     );
@@ -1467,12 +1420,12 @@ function We(e) {
     var t = nr(),
       n = t.firstChild;
     return (
-      t.style.setProperty("display", "flex"),
-      t.style.setProperty("align-items", "center"),
-      t.style.setProperty("width", "100%"),
+      t.style.setProperty('display', 'flex'),
+      t.style.setProperty('align-items', 'center'),
+      t.style.setProperty('width', '100%'),
       g(t, () => e.left, n),
-      n.style.setProperty("flex-grow", "1"),
-      n.style.setProperty("min-width", "0"),
+      n.style.setProperty('flex-grow', '1'),
+      n.style.setProperty('min-width', '0'),
       g(n, () => e.children),
       g(t, () => e.right, null),
       z(() => d(t, e.class)),
@@ -1480,14 +1433,7 @@ function We(e) {
     );
   })();
 }
-function Ct({
-  routerState: e,
-  router: t,
-  route: n,
-  isRoot: i,
-  activeId: p,
-  setActiveId: o,
-}) {
+function Ct({ routerState: e, router: t, route: n, isRoot: i, activeId: p, setActiveId: o }) {
   const a = Me(),
     c = q(() => e().pendingMatches || e().matches),
     u = q(() => e().matches.find(($) => $.routeId === n.id)),
@@ -1497,14 +1443,14 @@ function Ct({
         if (($ = u()) != null && $.params) {
           const b = (v = u()) == null ? void 0 : v.params,
             x = n.path || pt(n.id);
-          if (x.startsWith("$")) {
+          if (x.startsWith('$')) {
             const w = x.slice(1);
             if (b[w]) return `(${b[w]})`;
           }
         }
-        return "";
+        return '';
       } catch {
-        return "";
+        return '';
       }
     }),
     r = q(() => {
@@ -1515,7 +1461,7 @@ function Ct({
           params: $,
           leaveWildcards: !1,
           leaveParams: !1,
-          decodeCharMap: t().pathParamsDecodeCharMap,
+          decodeCharMap: t().pathParamsDecodeCharMap
         });
       return v.isMissingParams ? void 0 : v.interpolatedPath;
     });
@@ -1525,7 +1471,7 @@ function Ct({
       b = v.firstChild;
     return (
       (v.$$click = () => {
-        u() && o(p() === n.id ? "" : n.id);
+        u() && o(p() === n.id ? '' : n.id);
       }),
       g(
         v,
@@ -1543,8 +1489,8 @@ function Ct({
                   get to() {
                     return x();
                   },
-                  router: t,
-                }),
+                  router: t
+                })
             });
           },
           get right() {
@@ -1552,7 +1498,7 @@ function Ct({
               get match() {
                 return u();
               },
-              router: t,
+              router: t
             });
           },
           get children() {
@@ -1560,20 +1506,16 @@ function Ct({
               (() => {
                 var x = lr(),
                   w = x.firstChild;
-                return (
-                  g(x, () => (i ? Ye : n.path || pt(n.id)), w),
-                  z(() => d(x, a().code)),
-                  x
-                );
+                return (g(x, () => (i ? Ye : n.path || pt(n.id)), w), z(() => d(x, a().code)), x);
               })(),
               (() => {
                 var x = je();
                 return (g(x, l), z(() => d(x, a().routeParamInfo)), x);
-              })(),
+              })()
             ];
-          },
+          }
         }),
-        null,
+        null
       ),
       g(
         $,
@@ -1596,9 +1538,9 @@ function Ct({
                             router: t,
                             route: R,
                             activeId: p,
-                            setActiveId: o,
-                          }),
-                        ),
+                            setActiveId: o
+                          })
+                        )
                     ),
                     z(() => d(w, a().nestedRouteRow(!!i))),
                     w
@@ -1606,7 +1548,7 @@ function Ct({
                 })()
               : null;
         })(),
-        null,
+        null
       ),
       z(
         (x) => {
@@ -1614,13 +1556,13 @@ function Ct({
             R = Q(a().routesRowContainer(n.id === p(), !!u())),
             J = Q(a().matchIndicator(Ot(c(), n)));
           return (
-            w !== x.e && s(v, "aria-label", (x.e = w)),
+            w !== x.e && s(v, 'aria-label', (x.e = w)),
             R !== x.t && d(v, (x.t = R)),
             J !== x.a && d(b, (x.a = J)),
             x
           );
         },
-        { e: void 0, t: void 0, a: void 0 },
+        { e: void 0, t: void 0, a: void 0 }
       ),
       $
     );
@@ -1640,14 +1582,12 @@ const pr = function ({ ...t }) {
     r = Me(),
     { className: $, style: v, ...b } = u;
   wt(o);
-  const [x, w] = Ne("tanstackRouterDevtoolsShowMatches", !0),
-    [R, J] = Ne("tanstackRouterDevtoolsActiveRouteId", ""),
+  const [x, w] = Ne('tanstackRouterDevtoolsShowMatches', !0),
+    [R, J] = Ne('tanstackRouterDevtoolsActiveRouteId', ''),
     S = q(() =>
-      [
-        ...(a().pendingMatches ?? []),
-        ...a().matches,
-        ...a().cachedMatches,
-      ].find((K) => K.routeId === R() || K.id === R()),
+      [...(a().pendingMatches ?? []), ...a().matches, ...a().cachedMatches].find(
+        (K) => K.routeId === R() || K.id === R()
+      )
     ),
     oe = q(() => Object.keys(a().location.search).length),
     C = q(() => ({ ...o(), state: a() })),
@@ -1655,34 +1595,29 @@ const pr = function ({ ...t }) {
       Object.fromEntries(
         Gt(
           Object.keys(C()),
-          [
-            "state",
-            "routesById",
-            "routesByPath",
-            "flatRoutes",
-            "options",
-            "manifest",
-          ].map((F) => (K) => K !== F),
+          ['state', 'routesById', 'routesByPath', 'flatRoutes', 'options', 'manifest'].map(
+            (F) => (K) => K !== F
+          )
         )
           .map((F) => [F, C()[F]])
           .filter(
             (F) =>
-              typeof F[1] != "function" &&
+              typeof F[1] != 'function' &&
               ![
-                "__store",
-                "basepath",
-                "injectedHtml",
-                "subscribers",
-                "latestLoadPromise",
-                "navigateTimeout",
-                "resetNextScroll",
-                "tempLocationKey",
-                "latestLocation",
-                "routeTree",
-                "history",
-              ].includes(F[0]),
-          ),
-      ),
+                '__store',
+                'basepath',
+                'injectedHtml',
+                'subscribers',
+                'latestLoadPromise',
+                'navigateTimeout',
+                'resetNextScroll',
+                'tempLocationKey',
+                'latestLocation',
+                'routeTree',
+                'history'
+              ].includes(F[0])
+          )
+      )
     ),
     T = q(() => {
       var F;
@@ -1716,34 +1651,26 @@ const pr = function ({ ...t }) {
         Ge(
           {
             get class() {
-              return Q(
-                r().devtoolsPanel,
-                "TanStackRouterDevtoolsPanel",
-                $ ? $() : "",
-              );
+              return Q(r().devtoolsPanel, 'TanStackRouterDevtoolsPanel', $ ? $() : '');
             },
             get style() {
-              return v ? v() : "";
-            },
+              return v ? v() : '';
+            }
           },
-          b,
+          b
         ),
         !1,
-        !0,
+        !0
       ),
       g(
         F,
         p
           ? (() => {
               var f = He();
-              return (
-                Ft(f, "mousedown", p, !0),
-                z(() => d(f, r().dragHandle)),
-                f
-              );
+              return (Ft(f, 'mousedown', p, !0), z(() => d(f, r().dragHandle)), f);
             })()
           : null,
-        K,
+        K
       ),
       (K.$$click = (f) => {
         (i && i(!1), l(f));
@@ -1751,21 +1678,20 @@ const pr = function ({ ...t }) {
       g(
         de,
         O(gr, {
-          "aria-hidden": !0,
+          'aria-hidden': !0,
           onClick: (f) => {
             (i && i(!1), l(f));
-          },
-        }),
+          }
+        })
       ),
       g(
         X,
         O(Fe, {
-          label: "Router",
+          label: 'Router',
           value: h,
           defaultExpanded: { state: {}, context: {}, options: {} },
-          filterSubEntries: (f) =>
-            f.filter((k) => typeof k.value() != "function"),
-        }),
+          filterSubEntries: (f) => f.filter((k) => typeof k.value() != 'function')
+        })
       ),
       g(
         pe,
@@ -1781,20 +1707,16 @@ const pr = function ({ ...t }) {
                       (G) => {
                         var y = r().maskedBadgeContainer,
                           j = r().maskedBadge;
-                        return (
-                          y !== G.e && d(k, (G.e = y)),
-                          j !== G.t && d(U, (G.t = j)),
-                          G
-                        );
+                        return (y !== G.e && d(k, (G.e = y)), j !== G.t && d(U, (G.t = j)), G);
                       },
-                      { e: void 0, t: void 0 },
+                      { e: void 0, t: void 0 }
                     ),
                     k
                   );
                 })()
               : null;
         })(),
-        null,
+        null
       ),
       g(V, () => a().location.pathname),
       g(
@@ -1808,9 +1730,7 @@ const pr = function ({ ...t }) {
                   return (
                     g(k, () => {
                       var U;
-                      return (U = a().location.maskedLocation) == null
-                        ? void 0
-                        : U.pathname;
+                      return (U = a().location.maskedLocation) == null ? void 0 : U.pathname;
                     }),
                     z(() => d(k, r().maskedLocation)),
                     k
@@ -1818,7 +1738,7 @@ const pr = function ({ ...t }) {
                 })()
               : null;
         })(),
-        null,
+        null
       ),
       (Y.$$click = () => {
         w(!1);
@@ -1840,7 +1760,7 @@ const pr = function ({ ...t }) {
                   },
                   isRoot: !0,
                   activeId: R,
-                  setActiveId: J,
+                  setActiveId: J
                 })
               : (() => {
                   var k = He();
@@ -1857,7 +1777,7 @@ const pr = function ({ ...t }) {
                               var _ = $t(),
                                 P = _.firstChild;
                               return (
-                                (_.$$click = () => J(R() === y.id ? "" : y.id)),
+                                (_.$$click = () => J(R() === y.id ? '' : y.id)),
                                 g(
                                   _,
                                   O(We, {
@@ -1872,7 +1792,7 @@ const pr = function ({ ...t }) {
                                         get search() {
                                           return y.search;
                                         },
-                                        router: o,
+                                        router: o
                                       });
                                     },
                                     get right() {
@@ -1881,17 +1801,13 @@ const pr = function ({ ...t }) {
                                     get children() {
                                       var A = je();
                                       return (
-                                        g(
-                                          A,
-                                          () =>
-                                            `${y.routeId === Ye ? Ye : y.pathname}`,
-                                        ),
+                                        g(A, () => `${y.routeId === Ye ? Ye : y.pathname}`),
                                         z(() => d(A, r().matchID)),
                                         A
                                       );
-                                    },
+                                    }
                                   }),
-                                  null,
+                                  null
                                 ),
                                 z(
                                   (A) => {
@@ -1899,24 +1815,23 @@ const pr = function ({ ...t }) {
                                       ae = Q(r().matchRow(y === S())),
                                       re = Q(r().matchIndicator(qe(y)));
                                     return (
-                                      E !== A.e &&
-                                        s(_, "aria-label", (A.e = E)),
+                                      E !== A.e && s(_, 'aria-label', (A.e = E)),
                                       ae !== A.t && d(_, (A.t = ae)),
                                       re !== A.a && d(P, (A.a = re)),
                                       A
                                     );
                                   },
-                                  { e: void 0, t: void 0, a: void 0 },
+                                  { e: void 0, t: void 0, a: void 0 }
                                 ),
                                 _
                               );
-                            })(),
+                            })()
                           );
                     }),
                     k
                   );
                 })();
-        })(),
+        })()
       ),
       g(
         ne,
@@ -1937,7 +1852,7 @@ const pr = function ({ ...t }) {
                           var P = $t(),
                             A = P.firstChild;
                           return (
-                            (P.$$click = () => J(R() === _.id ? "" : _.id)),
+                            (P.$$click = () => J(R() === _.id ? '' : _.id)),
                             g(
                               P,
                               O(We, {
@@ -1952,7 +1867,7 @@ const pr = function ({ ...t }) {
                                     get search() {
                                       return _.search;
                                     },
-                                    router: o,
+                                    router: o
                                   });
                                 },
                                 get right() {
@@ -1960,14 +1875,10 @@ const pr = function ({ ...t }) {
                                 },
                                 get children() {
                                   var E = je();
-                                  return (
-                                    g(E, () => `${_.id}`),
-                                    z(() => d(E, r().matchID)),
-                                    E
-                                  );
-                                },
+                                  return (g(E, () => `${_.id}`), z(() => d(E, r().matchID)), E);
+                                }
                               }),
-                              null,
+                              null
                             ),
                             z(
                               (E) => {
@@ -1975,18 +1886,18 @@ const pr = function ({ ...t }) {
                                   re = Q(r().matchRow(_ === S())),
                                   fe = Q(r().matchIndicator(qe(_)));
                                 return (
-                                  ae !== E.e && s(P, "aria-label", (E.e = ae)),
+                                  ae !== E.e && s(P, 'aria-label', (E.e = ae)),
                                   re !== E.t && d(P, (E.t = re)),
                                   fe !== E.a && d(A, (E.a = fe)),
                                   E
                                 );
                               },
-                              { e: void 0, t: void 0, a: void 0 },
+                              { e: void 0, t: void 0, a: void 0 }
                             ),
                             P
                           );
-                        })(),
-                      ),
+                        })()
+                      )
                     ),
                     z(
                       (_) => {
@@ -2000,14 +1911,14 @@ const pr = function ({ ...t }) {
                           _
                         );
                       },
-                      { e: void 0, t: void 0, a: void 0 },
+                      { e: void 0, t: void 0, a: void 0 }
                     ),
                     k
                   );
                 })()
               : null;
         })(),
-        null,
+        null
       ),
       g(
         F,
@@ -2044,21 +1955,16 @@ const pr = function ({ ...t }) {
                         var m = Z(() => {
                           var M, le;
                           return !!(
-                            ((M = S()) == null ? void 0 : M.status) ===
-                              "success" &&
+                            ((M = S()) == null ? void 0 : M.status) === 'success' &&
                             (le = S()) != null &&
                             le.isFetching
                           );
                         });
                         return () => {
                           var M;
-                          return m()
-                            ? "fetching"
-                            : (M = S()) == null
-                              ? void 0
-                              : M.status;
+                          return m() ? 'fetching' : (M = S()) == null ? void 0 : M.status;
                         };
-                      })(),
+                      })()
                     ),
                     g(ae, () => {
                       var m;
@@ -2073,25 +1979,20 @@ const pr = function ({ ...t }) {
                             (M = a().pendingMatches) != null &&
                             M.find((le) => {
                               var ke;
-                              return (
-                                le.id === ((ke = S()) == null ? void 0 : ke.id)
-                              );
+                              return le.id === ((ke = S()) == null ? void 0 : ke.id);
                             })
                           );
                         });
                         return () =>
                           m()
-                            ? "Pending"
+                            ? 'Pending'
                             : a().matches.find((M) => {
                                   var le;
-                                  return (
-                                    M.id ===
-                                    ((le = S()) == null ? void 0 : le.id)
-                                  );
+                                  return M.id === ((le = S()) == null ? void 0 : le.id);
                                 })
-                              ? "Active"
-                              : "Cached";
-                      })(),
+                              ? 'Active'
+                              : 'Cached';
+                      })()
                     ),
                     g(
                       me,
@@ -2104,11 +2005,11 @@ const pr = function ({ ...t }) {
                           var M;
                           return m()
                             ? new Date(
-                                (M = S()) == null ? void 0 : M.updatedAt,
+                                (M = S()) == null ? void 0 : M.updatedAt
                               ).toLocaleTimeString()
-                            : "N/A";
+                            : 'N/A';
                         };
-                      })(),
+                      })()
                     ),
                     g(
                       k,
@@ -2127,24 +2028,21 @@ const pr = function ({ ...t }) {
                                     g(
                                       M,
                                       O(Fe, {
-                                        label: "loaderData",
+                                        label: 'loaderData',
                                         value: T,
-                                        defaultExpanded: {},
-                                      }),
+                                        defaultExpanded: {}
+                                      })
                                     ),
                                     z(() => d(M, r().detailsContent)),
                                     M
                                   );
-                                })(),
+                                })()
                               ]
                             : null;
                       })(),
-                      ve,
+                      ve
                     ),
-                    g(
-                      ye,
-                      O(Fe, { label: "Match", value: ie, defaultExpanded: {} }),
-                    ),
+                    g(ye, O(Fe, { label: 'Match', value: ie, defaultExpanded: {} })),
                     z(
                       (m) => {
                         var M,
@@ -2154,7 +2052,7 @@ const pr = function ({ ...t }) {
                           Se = r().matchDetails,
                           Be = r().matchStatus(
                             (M = S()) == null ? void 0 : M.status,
-                            (le = S()) == null ? void 0 : le.isFetching,
+                            (le = S()) == null ? void 0 : le.isFetching
                           ),
                           Pe = r().matchDetailsInfoLabel,
                           we = r().matchDetailsInfo,
@@ -2192,15 +2090,15 @@ const pr = function ({ ...t }) {
                         r: void 0,
                         d: void 0,
                         l: void 0,
-                        u: void 0,
-                      },
+                        u: void 0
+                      }
                     ),
                     k
                   );
                 })()
               : null;
         })(),
-        null,
+        null
       ),
       g(
         F,
@@ -2220,10 +2118,10 @@ const pr = function ({ ...t }) {
                         get defaultExpanded() {
                           return Object.keys(a().location.search).reduce(
                             (y, j) => ((y[j] = {}), y),
-                            {},
+                            {}
                           );
-                        },
-                      }),
+                        }
+                      })
                     ),
                     z(
                       (y) => {
@@ -2237,14 +2135,14 @@ const pr = function ({ ...t }) {
                           y
                         );
                       },
-                      { e: void 0, t: void 0, a: void 0 },
+                      { e: void 0, t: void 0, a: void 0 }
                     ),
                     k
                   );
                 })()
               : null;
         })(),
-        null,
+        null
       ),
       z(
         (f) => {
@@ -2268,7 +2166,7 @@ const pr = function ({ ...t }) {
             ye = Q(r().routesContainer);
           return (
             k !== f.e && d(K, (f.e = k)),
-            U !== f.t && s(ge, "class", (f.t = U)),
+            U !== f.t && s(ge, 'class', (f.t = U)),
             G !== f.a && d(ce, (f.a = G)),
             y !== f.o && d(de, (f.o = y)),
             j !== f.i && d(H, (f.i = j)),
@@ -2306,16 +2204,16 @@ const pr = function ({ ...t }) {
           m: void 0,
           f: void 0,
           y: void 0,
-          g: void 0,
-        },
+          g: void 0
+        }
       ),
       F
     );
   })();
 };
-Qe(["click", "mousedown"]);
+Qe(['click', 'mousedown']);
 var vr = L(
-  '<svg xmlns=http://www.w3.org/2000/svg enable-background="new 0 0 634 633"viewBox="0 0 634 633"><g transform=translate(1)><linearGradient x1=-641.486 x2=-641.486 y1=856.648 y2=855.931 gradientTransform="matrix(633 0 0 -633 406377 542258)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#6bdaff></stop><stop offset=0.319 stop-color=#f9ffb5></stop><stop offset=0.706 stop-color=#ffa770></stop><stop offset=1 stop-color=#ff7373></stop></linearGradient><circle cx=316.5 cy=316.5 r=316.5 fill-rule=evenodd clip-rule=evenodd></circle><defs><filter width=454 height=396.9 x=-137.5 y=412 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=-137.5 y=412 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=89.5 cy=610.5 fill=#015064 fill-rule=evenodd stroke=#00CFE2 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=316.5 y=412 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=316.5 y=412 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=543.5 cy=610.5 fill=#015064 fill-rule=evenodd stroke=#00CFE2 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=-137.5 y=450 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=-137.5 y=450 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=89.5 cy=648.5 fill=#015064 fill-rule=evenodd stroke=#00A8B8 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=316.5 y=450 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=316.5 y=450 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=543.5 cy=648.5 fill=#015064 fill-rule=evenodd stroke=#00A8B8 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=-137.5 y=486 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=-137.5 y=486 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=89.5 cy=684.5 fill=#015064 fill-rule=evenodd stroke=#007782 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=316.5 y=486 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=316.5 y=486 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=543.5 cy=684.5 fill=#015064 fill-rule=evenodd stroke=#007782 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=176.9 height=129.3 x=272.2 y=308 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=176.9 height=129.3 x=272.2 y=308 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><g><path fill=none stroke=#000 stroke-linecap=round stroke-linejoin=bevel stroke-width=11 d="M436 403.2l-5 28.6m-140-90.3l-10.9 62m52.8-19.4l-4.3 27.1"></path><linearGradient x1=-645.656 x2=-646.499 y1=854.878 y2=854.788 gradientTransform="matrix(-184.159 -32.4722 11.4608 -64.9973 -128419.844 34938.836)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ee2700></stop><stop offset=1 stop-color=#ff008e></stop></linearGradient><path fill-rule=evenodd d="M344.1 363l97.7 17.2c5.8 2.1 8.2 6.2 7.1 12.1-1 5.9-4.7 9.2-11 9.9l-106-18.7-57.5-59.2c-3.2-4.8-2.9-9.1.8-12.8 3.7-3.7 8.3-4.4 13.7-2.1l55.2 53.6z"clip-rule=evenodd></path><path fill=#D8D8D8 fill-rule=evenodd stroke=#FFF stroke-linecap=round stroke-linejoin=bevel stroke-width=7 d="M428.3 384.5l.9-6.5m-33.9 1.5l.9-6.5m-34 .5l.9-6.1m-38.9-16.1l4.2-3.9m-25.2-16.1l4.2-3.9"clip-rule=evenodd></path></g><defs><filter width=280.6 height=317.4 x=73.2 y=113.9 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=280.6 height=317.4 x=73.2 y=113.9 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><g><linearGradient x1=-646.8 x2=-646.8 y1=854.844 y2=853.844 gradientTransform="matrix(-100.1751 48.8587 -97.9753 -200.879 19124.773 203538.61)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#a17500></stop><stop offset=1 stop-color=#5d2100></stop></linearGradient><path fill-rule=evenodd d="M192.3 203c8.1 37.3 14 73.6 17.8 109.1 3.8 35.4 2.8 75.2-2.9 119.2l61.2-16.7c-15.6-59-25.2-97.9-28.6-116.6-3.4-18.7-10.8-51.8-22.2-99.6l-25.3 4.6"clip-rule=evenodd></path><linearGradient x1=-635.467 x2=-635.467 y1=852.115 y2=851.115 gradientTransform="matrix(92.6873 4.8575 2.0257 -38.6535 57323.695 36176.047)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M195 183.9s-12.6-22.1-36.5-29.9c-15.9-5.2-34.4-1.5-55.5 11.1 15.9 14.3 29.5 22.6 40.7 24.9 16.8 3.6 51.3-6.1 51.3-6.1z"clip-rule=evenodd></path><linearGradient x1=-636.573 x2=-636.573 y1=855.444 y2=854.444 gradientTransform="matrix(109.9945 5.7646 6.3597 -121.3507 64719.133 107659.336)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5s-47.5-8.5-83.2 15.7c-23.8 16.2-34.3 49.3-31.6 99.3 30.3-27.8 52.1-48.5 65.2-61.9 19.8-20 49.6-53.1 49.6-53.1z"clip-rule=evenodd></path><linearGradient x1=-632.145 x2=-632.145 y1=854.174 y2=853.174 gradientTransform="matrix(62.9558 3.2994 3.5021 -66.8246 37035.367 59284.227)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M195 183.9c-.8-21.9 6-38 20.6-48.2 14.6-10.2 29.8-15.3 45.5-15.3-6.1 21.4-14.5 35.8-25.2 43.4-10.7 7.5-24.4 14.2-40.9 20.1z"clip-rule=evenodd></path><linearGradient x1=-638.224 x2=-638.224 y1=853.801 y2=852.801 gradientTransform="matrix(152.4666 7.9904 3.0934 -59.0251 94939.86 55646.855)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5c31.9-30 64.1-39.7 96.7-29 32.6 10.7 50.8 30.4 54.6 59.1-35.2-5.5-60.4-9.6-75.8-12.1-15.3-2.6-40.5-8.6-75.5-18z"clip-rule=evenodd></path><linearGradient x1=-637.723 x2=-637.723 y1=855.103 y2=854.103 gradientTransform="matrix(136.467 7.1519 5.2165 -99.5377 82830.875 89859.578)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5c35.8-7.6 65.6-.2 89.2 22 23.6 22.2 37.7 49 42.3 80.3-39.8-9.7-68.3-23.8-85.5-42.4-17.2-18.5-32.5-38.5-46-59.9z"clip-rule=evenodd></path><linearGradient x1=-631.79 x2=-631.79 y1=855.872 y2=854.872 gradientTransform="matrix(60.8683 3.19 8.7771 -167.4773 31110.818 145537.61)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5c-33.6 13.8-53.6 35.7-60.1 65.6-6.5 29.9-3.6 63.1 8.7 99.6 27.4-40.3 43.2-69.6 47.4-88 4.2-18.3 5.5-44.1 4-77.2z"clip-rule=evenodd></path><path fill=none stroke=#2F8A00 stroke-linecap=round stroke-width=8 d="M196.5 182.3c-14.8 21.6-25.1 41.4-30.8 59.4-5.7 18-9.4 33-11.1 45.1"></path><path fill=none stroke=#2F8A00 stroke-linecap=round stroke-width=8 d="M194.8 185.7c-24.4 1.7-43.8 9-58.1 21.8-14.3 12.8-24.7 25.4-31.3 37.8m99.1-68.9c29.7-6.7 52-8.4 67-5 15 3.4 26.9 8.7 35.8 15.9m-110.8-5.9c20.3 9.9 38.2 20.5 53.9 31.9 15.7 11.4 27.4 22.1 35.1 32"></path></g><defs><filter width=532 height=633 x=50.5 y=399 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=532 height=633 x=50.5 y=399 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><linearGradient x1=-641.104 x2=-641.278 y1=856.577 y2=856.183 gradientTransform="matrix(532 0 0 -633 341484.5 542657)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#fff400></stop><stop offset=1 stop-color=#3c8700></stop></linearGradient><ellipse cx=316.5 cy=715.5 fill-rule=evenodd clip-rule=evenodd rx=266 ry=316.5></ellipse><defs><filter width=288 height=283 x=391 y=-24 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=288 height=283 x=391 y=-24 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><g><g transform="translate(397 -24)"><linearGradient x1=-1036.672 x2=-1036.672 y1=880.018 y2=879.018 gradientTransform="matrix(227 0 0 -227 235493 199764)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffdf00></stop><stop offset=1 stop-color=#ff9d00></stop></linearGradient><circle cx=168.5 cy=113.5 r=113.5 fill-rule=evenodd clip-rule=evenodd></circle><linearGradient x1=-1017.329 x2=-1018.602 y1=658.003 y2=657.998 gradientTransform="matrix(30 0 0 -1 30558 771)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M30 113H0"></path><linearGradient x1=-1014.501 x2=-1015.774 y1=839.985 y2=839.935 gradientTransform="matrix(26.5 0 0 -5.5 26925 4696.5)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M33.5 79.5L7 74"></path><linearGradient x1=-1016.59 x2=-1017.862 y1=852.671 y2=852.595 gradientTransform="matrix(29 0 0 -8 29523 6971)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M34 146l-29 8"></path><linearGradient x1=-1011.984 x2=-1013.257 y1=863.523 y2=863.229 gradientTransform="matrix(24 0 0 -13 24339 11407)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M45 177l-24 13"></path><linearGradient x1=-1006.673 x2=-1007.946 y1=869.279 y2=868.376 gradientTransform="matrix(20 0 0 -19 20205 16720)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M67 204l-20 19"></path><linearGradient x1=-992.85 x2=-993.317 y1=871.258 y2=870.258 gradientTransform="matrix(13.8339 0 0 -22.8467 13825.796 20131.938)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M94.4 227l-13.8 22.8"></path><linearGradient x1=-953.835 x2=-953.965 y1=871.9 y2=870.9 gradientTransform="matrix(7.5 0 0 -24.5 7278 21605)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M127.5 243.5L120 268"></path><linearGradient x1=244.504 x2=244.496 y1=871.898 y2=870.898 gradientTransform="matrix(.5 0 0 -24.5 45.5 21614)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M167.5 252.5l.5 24.5">',
+  '<svg xmlns=http://www.w3.org/2000/svg enable-background="new 0 0 634 633"viewBox="0 0 634 633"><g transform=translate(1)><linearGradient x1=-641.486 x2=-641.486 y1=856.648 y2=855.931 gradientTransform="matrix(633 0 0 -633 406377 542258)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#6bdaff></stop><stop offset=0.319 stop-color=#f9ffb5></stop><stop offset=0.706 stop-color=#ffa770></stop><stop offset=1 stop-color=#ff7373></stop></linearGradient><circle cx=316.5 cy=316.5 r=316.5 fill-rule=evenodd clip-rule=evenodd></circle><defs><filter width=454 height=396.9 x=-137.5 y=412 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=-137.5 y=412 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=89.5 cy=610.5 fill=#015064 fill-rule=evenodd stroke=#00CFE2 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=316.5 y=412 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=316.5 y=412 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=543.5 cy=610.5 fill=#015064 fill-rule=evenodd stroke=#00CFE2 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=-137.5 y=450 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=-137.5 y=450 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=89.5 cy=648.5 fill=#015064 fill-rule=evenodd stroke=#00A8B8 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=316.5 y=450 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=316.5 y=450 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=543.5 cy=648.5 fill=#015064 fill-rule=evenodd stroke=#00A8B8 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=-137.5 y=486 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=-137.5 y=486 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=89.5 cy=684.5 fill=#015064 fill-rule=evenodd stroke=#007782 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=454 height=396.9 x=316.5 y=486 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=454 height=396.9 x=316.5 y=486 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><ellipse cx=543.5 cy=684.5 fill=#015064 fill-rule=evenodd stroke=#007782 stroke-width=25 clip-rule=evenodd rx=214.5 ry=186></ellipse><defs><filter width=176.9 height=129.3 x=272.2 y=308 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=176.9 height=129.3 x=272.2 y=308 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><g><path fill=none stroke=#000 stroke-linecap=round stroke-linejoin=bevel stroke-width=11 d="M436 403.2l-5 28.6m-140-90.3l-10.9 62m52.8-19.4l-4.3 27.1"></path><linearGradient x1=-645.656 x2=-646.499 y1=854.878 y2=854.788 gradientTransform="matrix(-184.159 -32.4722 11.4608 -64.9973 -128419.844 34938.836)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ee2700></stop><stop offset=1 stop-color=#ff008e></stop></linearGradient><path fill-rule=evenodd d="M344.1 363l97.7 17.2c5.8 2.1 8.2 6.2 7.1 12.1-1 5.9-4.7 9.2-11 9.9l-106-18.7-57.5-59.2c-3.2-4.8-2.9-9.1.8-12.8 3.7-3.7 8.3-4.4 13.7-2.1l55.2 53.6z"clip-rule=evenodd></path><path fill=#D8D8D8 fill-rule=evenodd stroke=#FFF stroke-linecap=round stroke-linejoin=bevel stroke-width=7 d="M428.3 384.5l.9-6.5m-33.9 1.5l.9-6.5m-34 .5l.9-6.1m-38.9-16.1l4.2-3.9m-25.2-16.1l4.2-3.9"clip-rule=evenodd></path></g><defs><filter width=280.6 height=317.4 x=73.2 y=113.9 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=280.6 height=317.4 x=73.2 y=113.9 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><g><linearGradient x1=-646.8 x2=-646.8 y1=854.844 y2=853.844 gradientTransform="matrix(-100.1751 48.8587 -97.9753 -200.879 19124.773 203538.61)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#a17500></stop><stop offset=1 stop-color=#5d2100></stop></linearGradient><path fill-rule=evenodd d="M192.3 203c8.1 37.3 14 73.6 17.8 109.1 3.8 35.4 2.8 75.2-2.9 119.2l61.2-16.7c-15.6-59-25.2-97.9-28.6-116.6-3.4-18.7-10.8-51.8-22.2-99.6l-25.3 4.6"clip-rule=evenodd></path><linearGradient x1=-635.467 x2=-635.467 y1=852.115 y2=851.115 gradientTransform="matrix(92.6873 4.8575 2.0257 -38.6535 57323.695 36176.047)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M195 183.9s-12.6-22.1-36.5-29.9c-15.9-5.2-34.4-1.5-55.5 11.1 15.9 14.3 29.5 22.6 40.7 24.9 16.8 3.6 51.3-6.1 51.3-6.1z"clip-rule=evenodd></path><linearGradient x1=-636.573 x2=-636.573 y1=855.444 y2=854.444 gradientTransform="matrix(109.9945 5.7646 6.3597 -121.3507 64719.133 107659.336)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5s-47.5-8.5-83.2 15.7c-23.8 16.2-34.3 49.3-31.6 99.3 30.3-27.8 52.1-48.5 65.2-61.9 19.8-20 49.6-53.1 49.6-53.1z"clip-rule=evenodd></path><linearGradient x1=-632.145 x2=-632.145 y1=854.174 y2=853.174 gradientTransform="matrix(62.9558 3.2994 3.5021 -66.8246 37035.367 59284.227)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M195 183.9c-.8-21.9 6-38 20.6-48.2 14.6-10.2 29.8-15.3 45.5-15.3-6.1 21.4-14.5 35.8-25.2 43.4-10.7 7.5-24.4 14.2-40.9 20.1z"clip-rule=evenodd></path><linearGradient x1=-638.224 x2=-638.224 y1=853.801 y2=852.801 gradientTransform="matrix(152.4666 7.9904 3.0934 -59.0251 94939.86 55646.855)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5c31.9-30 64.1-39.7 96.7-29 32.6 10.7 50.8 30.4 54.6 59.1-35.2-5.5-60.4-9.6-75.8-12.1-15.3-2.6-40.5-8.6-75.5-18z"clip-rule=evenodd></path><linearGradient x1=-637.723 x2=-637.723 y1=855.103 y2=854.103 gradientTransform="matrix(136.467 7.1519 5.2165 -99.5377 82830.875 89859.578)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5c35.8-7.6 65.6-.2 89.2 22 23.6 22.2 37.7 49 42.3 80.3-39.8-9.7-68.3-23.8-85.5-42.4-17.2-18.5-32.5-38.5-46-59.9z"clip-rule=evenodd></path><linearGradient x1=-631.79 x2=-631.79 y1=855.872 y2=854.872 gradientTransform="matrix(60.8683 3.19 8.7771 -167.4773 31110.818 145537.61)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#2f8a00></stop><stop offset=1 stop-color=#90ff57></stop></linearGradient><path fill-rule=evenodd stroke=#2F8A00 stroke-width=13 d="M194.9 184.5c-33.6 13.8-53.6 35.7-60.1 65.6-6.5 29.9-3.6 63.1 8.7 99.6 27.4-40.3 43.2-69.6 47.4-88 4.2-18.3 5.5-44.1 4-77.2z"clip-rule=evenodd></path><path fill=none stroke=#2F8A00 stroke-linecap=round stroke-width=8 d="M196.5 182.3c-14.8 21.6-25.1 41.4-30.8 59.4-5.7 18-9.4 33-11.1 45.1"></path><path fill=none stroke=#2F8A00 stroke-linecap=round stroke-width=8 d="M194.8 185.7c-24.4 1.7-43.8 9-58.1 21.8-14.3 12.8-24.7 25.4-31.3 37.8m99.1-68.9c29.7-6.7 52-8.4 67-5 15 3.4 26.9 8.7 35.8 15.9m-110.8-5.9c20.3 9.9 38.2 20.5 53.9 31.9 15.7 11.4 27.4 22.1 35.1 32"></path></g><defs><filter width=532 height=633 x=50.5 y=399 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=532 height=633 x=50.5 y=399 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><linearGradient x1=-641.104 x2=-641.278 y1=856.577 y2=856.183 gradientTransform="matrix(532 0 0 -633 341484.5 542657)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#fff400></stop><stop offset=1 stop-color=#3c8700></stop></linearGradient><ellipse cx=316.5 cy=715.5 fill-rule=evenodd clip-rule=evenodd rx=266 ry=316.5></ellipse><defs><filter width=288 height=283 x=391 y=-24 filterUnits=userSpaceOnUse><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"></feColorMatrix></filter></defs><mask width=288 height=283 x=391 y=-24 maskUnits=userSpaceOnUse><g><circle cx=316.5 cy=316.5 r=316.5 fill=#FFF fill-rule=evenodd clip-rule=evenodd></circle></g></mask><g><g transform="translate(397 -24)"><linearGradient x1=-1036.672 x2=-1036.672 y1=880.018 y2=879.018 gradientTransform="matrix(227 0 0 -227 235493 199764)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffdf00></stop><stop offset=1 stop-color=#ff9d00></stop></linearGradient><circle cx=168.5 cy=113.5 r=113.5 fill-rule=evenodd clip-rule=evenodd></circle><linearGradient x1=-1017.329 x2=-1018.602 y1=658.003 y2=657.998 gradientTransform="matrix(30 0 0 -1 30558 771)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M30 113H0"></path><linearGradient x1=-1014.501 x2=-1015.774 y1=839.985 y2=839.935 gradientTransform="matrix(26.5 0 0 -5.5 26925 4696.5)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M33.5 79.5L7 74"></path><linearGradient x1=-1016.59 x2=-1017.862 y1=852.671 y2=852.595 gradientTransform="matrix(29 0 0 -8 29523 6971)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M34 146l-29 8"></path><linearGradient x1=-1011.984 x2=-1013.257 y1=863.523 y2=863.229 gradientTransform="matrix(24 0 0 -13 24339 11407)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M45 177l-24 13"></path><linearGradient x1=-1006.673 x2=-1007.946 y1=869.279 y2=868.376 gradientTransform="matrix(20 0 0 -19 20205 16720)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M67 204l-20 19"></path><linearGradient x1=-992.85 x2=-993.317 y1=871.258 y2=870.258 gradientTransform="matrix(13.8339 0 0 -22.8467 13825.796 20131.938)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M94.4 227l-13.8 22.8"></path><linearGradient x1=-953.835 x2=-953.965 y1=871.9 y2=870.9 gradientTransform="matrix(7.5 0 0 -24.5 7278 21605)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M127.5 243.5L120 268"></path><linearGradient x1=244.504 x2=244.496 y1=871.898 y2=870.898 gradientTransform="matrix(.5 0 0 -24.5 45.5 21614)"gradientUnits=userSpaceOnUse><stop offset=0 stop-color=#ffa400></stop><stop offset=1 stop-color=#ff5e00></stop></linearGradient><path fill=none stroke-linecap=round stroke-linejoin=bevel stroke-width=12 d="M167.5 252.5l.5 24.5">'
 );
 function xt() {
   const e = Ut();
@@ -2412,106 +2310,104 @@ function xt() {
       gt = ut.nextSibling,
       St = gt.nextSibling;
     return (
-      s(i, "id", `a-${e}`),
-      s(p, "fill", `url(#a-${e})`),
-      s(a, "id", `b-${e}`),
-      s(c, "id", `c-${e}`),
-      s(u, "filter", `url(#b-${e})`),
-      s(l, "mask", `url(#c-${e})`),
-      s($, "id", `d-${e}`),
-      s(v, "id", `e-${e}`),
-      s(b, "filter", `url(#d-${e})`),
-      s(x, "mask", `url(#e-${e})`),
-      s(R, "id", `f-${e}`),
-      s(J, "id", `g-${e}`),
-      s(S, "filter", `url(#f-${e})`),
-      s(oe, "mask", `url(#g-${e})`),
-      s(h, "id", `h-${e}`),
-      s(T, "id", `i-${e}`),
-      s(ie, "filter", `url(#h-${e})`),
-      s(se, "mask", `url(#i-${e})`),
-      s(K, "id", `j-${e}`),
-      s(ge, "id", `k-${e}`),
-      s(ce, "filter", `url(#j-${e})`),
-      s(de, "mask", `url(#k-${e})`),
-      s(X, "id", `l-${e}`),
-      s(ne, "id", `m-${e}`),
-      s(Ce, "filter", `url(#l-${e})`),
-      s(pe, "mask", `url(#m-${e})`),
-      s(V, "id", `n-${e}`),
-      s(W, "id", `o-${e}`),
-      s(N, "filter", `url(#n-${e})`),
-      s(Y, "mask", `url(#o-${e})`),
-      s(I, "id", `p-${e}`),
-      s(te, "fill", `url(#p-${e})`),
-      s(k, "id", `q-${e}`),
-      s(U, "id", `r-${e}`),
-      s(G, "filter", `url(#q-${e})`),
-      s(y, "mask", `url(#r-${e})`),
-      s(j, "id", `s-${e}`),
-      s(_, "fill", `url(#s-${e})`),
-      s(P, "id", `t-${e}`),
-      s(A, "fill", `url(#t-${e})`),
-      s(E, "id", `u-${e}`),
-      s(ae, "fill", `url(#u-${e})`),
-      s(re, "id", `v-${e}`),
-      s(fe, "fill", `url(#v-${e})`),
-      s($e, "id", `w-${e}`),
-      s(xe, "fill", `url(#w-${e})`),
-      s(be, "id", `x-${e}`),
-      s(me, "fill", `url(#x-${e})`),
-      s(ve, "id", `y-${e}`),
-      s(ye, "fill", `url(#y-${e})`),
-      s(M, "id", `z-${e}`),
-      s(le, "id", `A-${e}`),
-      s(ke, "filter", `url(#z-${e})`),
-      s(Ue, "id", `B-${e}`),
-      s(Se, "fill", `url(#B-${e})`),
-      s(Se, "mask", `url(#A-${e})`),
-      s(Pe, "id", `C-${e}`),
-      s(we, "id", `D-${e}`),
-      s(Ae, "filter", `url(#C-${e})`),
-      s(Ee, "mask", `url(#D-${e})`),
-      s(De, "id", `E-${e}`),
-      s(Oe, "fill", `url(#E-${e})`),
-      s(Ie, "id", `F-${e}`),
-      s(et, "stroke", `url(#F-${e})`),
-      s(tt, "id", `G-${e}`),
-      s(rt, "stroke", `url(#G-${e})`),
-      s(it, "id", `H-${e}`),
-      s(nt, "stroke", `url(#H-${e})`),
-      s(lt, "id", `I-${e}`),
-      s(ot, "stroke", `url(#I-${e})`),
-      s(st, "id", `J-${e}`),
-      s(at, "stroke", `url(#J-${e})`),
-      s(dt, "id", `K-${e}`),
-      s(ct, "stroke", `url(#K-${e})`),
-      s(ft, "id", `L-${e}`),
-      s(ut, "stroke", `url(#L-${e})`),
-      s(gt, "id", `M-${e}`),
-      s(St, "stroke", `url(#M-${e})`),
+      s(i, 'id', `a-${e}`),
+      s(p, 'fill', `url(#a-${e})`),
+      s(a, 'id', `b-${e}`),
+      s(c, 'id', `c-${e}`),
+      s(u, 'filter', `url(#b-${e})`),
+      s(l, 'mask', `url(#c-${e})`),
+      s($, 'id', `d-${e}`),
+      s(v, 'id', `e-${e}`),
+      s(b, 'filter', `url(#d-${e})`),
+      s(x, 'mask', `url(#e-${e})`),
+      s(R, 'id', `f-${e}`),
+      s(J, 'id', `g-${e}`),
+      s(S, 'filter', `url(#f-${e})`),
+      s(oe, 'mask', `url(#g-${e})`),
+      s(h, 'id', `h-${e}`),
+      s(T, 'id', `i-${e}`),
+      s(ie, 'filter', `url(#h-${e})`),
+      s(se, 'mask', `url(#i-${e})`),
+      s(K, 'id', `j-${e}`),
+      s(ge, 'id', `k-${e}`),
+      s(ce, 'filter', `url(#j-${e})`),
+      s(de, 'mask', `url(#k-${e})`),
+      s(X, 'id', `l-${e}`),
+      s(ne, 'id', `m-${e}`),
+      s(Ce, 'filter', `url(#l-${e})`),
+      s(pe, 'mask', `url(#m-${e})`),
+      s(V, 'id', `n-${e}`),
+      s(W, 'id', `o-${e}`),
+      s(N, 'filter', `url(#n-${e})`),
+      s(Y, 'mask', `url(#o-${e})`),
+      s(I, 'id', `p-${e}`),
+      s(te, 'fill', `url(#p-${e})`),
+      s(k, 'id', `q-${e}`),
+      s(U, 'id', `r-${e}`),
+      s(G, 'filter', `url(#q-${e})`),
+      s(y, 'mask', `url(#r-${e})`),
+      s(j, 'id', `s-${e}`),
+      s(_, 'fill', `url(#s-${e})`),
+      s(P, 'id', `t-${e}`),
+      s(A, 'fill', `url(#t-${e})`),
+      s(E, 'id', `u-${e}`),
+      s(ae, 'fill', `url(#u-${e})`),
+      s(re, 'id', `v-${e}`),
+      s(fe, 'fill', `url(#v-${e})`),
+      s($e, 'id', `w-${e}`),
+      s(xe, 'fill', `url(#w-${e})`),
+      s(be, 'id', `x-${e}`),
+      s(me, 'fill', `url(#x-${e})`),
+      s(ve, 'id', `y-${e}`),
+      s(ye, 'fill', `url(#y-${e})`),
+      s(M, 'id', `z-${e}`),
+      s(le, 'id', `A-${e}`),
+      s(ke, 'filter', `url(#z-${e})`),
+      s(Ue, 'id', `B-${e}`),
+      s(Se, 'fill', `url(#B-${e})`),
+      s(Se, 'mask', `url(#A-${e})`),
+      s(Pe, 'id', `C-${e}`),
+      s(we, 'id', `D-${e}`),
+      s(Ae, 'filter', `url(#C-${e})`),
+      s(Ee, 'mask', `url(#D-${e})`),
+      s(De, 'id', `E-${e}`),
+      s(Oe, 'fill', `url(#E-${e})`),
+      s(Ie, 'id', `F-${e}`),
+      s(et, 'stroke', `url(#F-${e})`),
+      s(tt, 'id', `G-${e}`),
+      s(rt, 'stroke', `url(#G-${e})`),
+      s(it, 'id', `H-${e}`),
+      s(nt, 'stroke', `url(#H-${e})`),
+      s(lt, 'id', `I-${e}`),
+      s(ot, 'stroke', `url(#I-${e})`),
+      s(st, 'id', `J-${e}`),
+      s(at, 'stroke', `url(#J-${e})`),
+      s(dt, 'id', `K-${e}`),
+      s(ct, 'stroke', `url(#K-${e})`),
+      s(ft, 'id', `L-${e}`),
+      s(ut, 'stroke', `url(#L-${e})`),
+      s(gt, 'id', `M-${e}`),
+      s(St, 'stroke', `url(#M-${e})`),
       t
     );
   })();
 }
-var hr = L(
-  "<button type=button><div><div></div><div></div></div><div>-</div><div>TanStack Router",
-);
+var hr = L('<button type=button><div><div></div><div></div></div><div>-</div><div>TanStack Router');
 function xr({
   initialIsOpen: e,
   panelProps: t = {},
   closeButtonProps: n = {},
   toggleButtonProps: i = {},
-  position: p = "bottom-left",
-  containerElement: o = "footer",
+  position: p = 'bottom-left',
+  containerElement: o = 'footer',
   router: a,
   routerState: c,
-  shadowDOMTarget: u,
+  shadowDOMTarget: u
 }) {
   const [l, r] = ue();
   let $;
-  const [v, b] = Ne("tanstackRouterDevtoolsOpen", e),
-    [x, w] = Ne("tanstackRouterDevtoolsHeight", null),
+  const [v, b] = Ne('tanstackRouterDevtoolsOpen', e),
+    [x, w] = Ne('tanstackRouterDevtoolsHeight', null),
     [R, J] = ue(!1),
     [S, oe] = ue(!1),
     C = It(),
@@ -2520,9 +2416,8 @@ function xr({
       if (V.button !== 0) return;
       oe(!0);
       const W = {
-          originalHeight:
-            (B == null ? void 0 : B.getBoundingClientRect().height) ?? 0,
-          pageY: V.pageY,
+          originalHeight: (B == null ? void 0 : B.getBoundingClientRect().height) ?? 0,
+          pageY: V.pageY
         },
         N = (ee) => {
           const I = W.pageY - ee.pageY,
@@ -2531,11 +2426,10 @@ function xr({
         },
         Y = () => {
           (oe(!1),
-            document.removeEventListener("mousemove", N),
-            document.removeEventListener("mouseUp", Y));
+            document.removeEventListener('mousemove', N),
+            document.removeEventListener('mouseUp', Y));
         };
-      (document.addEventListener("mousemove", N),
-        document.addEventListener("mouseup", Y));
+      (document.addEventListener('mousemove', N), document.addEventListener('mouseup', Y));
     };
   (v(),
     Te(() => {
@@ -2559,38 +2453,31 @@ function xr({
                     te.parentElement &&
                     (te.parentElement.style.paddingBottom = `${I}px`),
                   te
-                ),
+                )
               );
           };
-        if ((Y(), typeof window < "u"))
+        if ((Y(), typeof window < 'u'))
           return (
-            window.addEventListener("resize", Y),
+            window.addEventListener('resize', Y),
             () => {
               var ee;
-              (window.removeEventListener("resize", Y),
+              (window.removeEventListener('resize', Y),
                 (ee = l()) != null &&
                   ee.parentElement &&
-                  typeof N == "string" &&
+                  typeof N == 'string' &&
                   r((I) => ((I.parentElement.style.paddingBottom = N), I)));
             }
           );
       } else
         (W = l()) != null &&
           W.parentElement &&
-          r(
-            (N) => (
-              N != null &&
-                N.parentElement &&
-                N.parentElement.removeAttribute("style"),
-              N
-            ),
-          );
+          r((N) => (N != null && N.parentElement && N.parentElement.removeAttribute('style'), N));
     }),
     Te(() => {
       if (l()) {
         const B = l(),
           V = getComputedStyle(B).fontSize;
-        B == null || B.style.setProperty("--tsrd-font-size", V);
+        B == null || B.style.setProperty('--tsrd-font-size', V);
       }
     }));
   const { style: ie = {}, ...se } = t,
@@ -2603,22 +2490,17 @@ function xr({
         h().devtoolsPanelContainer,
         h().devtoolsPanelContainerVisibility(!!v()),
         h().devtoolsPanelContainerResizing(S),
-        h().devtoolsPanelContainerAnimation(R(), X() + 16),
-      ),
+        h().devtoolsPanelContainerAnimation(R(), X() + 16)
+      )
     ),
     Ce = q(() => ({ height: `${X()}px`, ...(ie || {}) })),
     pe = q(() =>
-      Q(
-        h().mainCloseBtn,
-        h().mainCloseBtnPosition(p),
-        h().mainCloseBtnAnimation(!!v()),
-        de,
-      ),
+      Q(h().mainCloseBtn, h().mainCloseBtnPosition(p), h().mainCloseBtnAnimation(!!v()), de)
     );
   return O(Bt, {
     component: o,
     ref: r,
-    class: "TanStackRouterDevtools",
+    class: 'TanStackRouterDevtools',
     get children() {
       return [
         O(yt.Provider, {
@@ -2630,8 +2512,8 @@ function xr({
                 {
                   ref(B) {
                     var V = $;
-                    typeof V == "function" ? V(B) : ($ = B);
-                  },
+                    typeof V == 'function' ? V(B) : ($ = B);
+                  }
                 },
                 se,
                 {
@@ -2644,11 +2526,11 @@ function xr({
                   },
                   setIsOpen: b,
                   handleDragStart: (B) => T($, B),
-                  shadowDOMTarget: u,
-                },
-              ),
+                  shadowDOMTarget: u
+                }
+              )
             );
-          },
+          }
         }),
         (() => {
           var B = hr(),
@@ -2661,16 +2543,16 @@ function xr({
             Xe(
               B,
               Ge(H, {
-                "aria-label": "Open TanStack Router Devtools",
+                'aria-label': 'Open TanStack Router Devtools',
                 onClick: (I) => {
                   (b(!0), ce && ce(I));
                 },
                 get class() {
                   return pe();
-                },
+                }
               }),
               !1,
-              !0,
+              !0
             ),
             g(W, O(xt, {})),
             g(N, O(xt, {})),
@@ -2690,13 +2572,13 @@ function xr({
                   I
                 );
               },
-              { e: void 0, t: void 0, a: void 0, o: void 0, i: void 0 },
+              { e: void 0, t: void 0, a: void 0, o: void 0, i: void 0 }
             ),
             B
           );
-        })(),
+        })()
       ];
-    },
+    }
   });
 }
 export { xr as FloatingTanStackRouterDevtools, xr as default };

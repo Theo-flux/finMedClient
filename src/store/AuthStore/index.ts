@@ -1,19 +1,13 @@
-import initializer from "@/utils/initializer";
-import { RootStore } from "..";
-import store from "store2";
-import { action, flow, makeObservable, observable } from "mobx";
-import { TLogin } from "@/features/auth/login/validations";
-import { TPwdResetSchema } from "@/features/auth/forgot-password/validations";
-import {
-  postUserLogin,
-  getNewToken,
-  getProfile,
-  postPwdReset,
-  getLogout,
-} from "@/requests/auth";
-import { parseError } from "@/utils/errorHandler";
-import { useStyledToast } from "@/hooks/app/useStyledToast";
-import { Mangle } from "@/constants/mangle";
+import initializer from '@/utils/initializer';
+import { RootStore } from '..';
+import store from 'store2';
+import { action, flow, makeObservable, observable } from 'mobx';
+import { TLogin } from '@/features/auth/login/validations';
+import { TPwdResetSchema } from '@/features/auth/forgot-password/validations';
+import { postUserLogin, getNewToken, getProfile, postPwdReset, getLogout } from '@/requests/auth';
+import { parseError } from '@/utils/errorHandler';
+import { useStyledToast } from '@/hooks/app/useStyledToast';
+import { Mangle } from '@/constants/mangle';
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const toast = useStyledToast();
@@ -25,30 +19,30 @@ const INIT_IS_LOADING = {
   reset: false,
   forgotPwd: false,
   refresh: false,
-  verify: false,
+  verify: false
 };
 
 export function persist<T = string>(key: string, value: T) {
-  store.namespace("auth").local.set(key, value);
+  store.namespace('auth').local.set(key, value);
   return value;
 }
 
 function get<T = string>(key: string, fallback?: T) {
-  return store.namespace("auth").local.get(key, fallback) as T;
+  return store.namespace('auth').local.get(key, fallback) as T;
 }
 
 function del(key: string) {
-  return store.namespace("auth").local.remove(key);
+  return store.namespace('auth').local.remove(key);
 }
 
 class AuthStore {
   rootStore: RootStore;
   user = get<Partial<TProfileInfo>>(Mangle.USER, {});
-  userType: string = "";
-  accessToken = get(Mangle.ACCESS_TOKEN, "");
-  refreshToken = get(Mangle.REFRESH_TOKEN, "");
+  userType: string = '';
+  accessToken = get(Mangle.ACCESS_TOKEN, '');
+  refreshToken = get(Mangle.REFRESH_TOKEN, '');
   isLoading = { ...INIT_IS_LOADING };
-  errors = initializer(this.isLoading, "");
+  errors = initializer(this.isLoading, '');
 
   constructor(_rootStore: RootStore) {
     this.rootStore = _rootStore;
@@ -68,15 +62,15 @@ class AuthStore {
       logout: flow.bound,
       login: flow.bound,
       fetchNewToken: flow.bound,
-      resetPwd: flow.bound,
+      resetPwd: flow.bound
     });
   }
 
   reset() {
-    this.accessToken = "";
-    this.refreshToken = "";
+    this.accessToken = '';
+    this.refreshToken = '';
     this.isLoading = { ...INIT_IS_LOADING };
-    this.errors = initializer(this.isLoading, "");
+    this.errors = initializer(this.isLoading, '');
     del(Mangle.USER);
     this.user = {};
   }
@@ -98,17 +92,17 @@ class AuthStore {
       yield getLogout();
       this.resetStores();
 
-      toast.success("You have been sucessfully logged out!");
+      toast.success('You have been sucessfully logged out!');
       if (cb) {
         cb();
       } else {
-        window.location.href = "/auth/login";
+        window.location.href = '/auth/login';
       }
     } catch (error) {
       toast.error(parseError(error));
       this.errors.logout = parseError(error);
       setTimeout(() => {
-        this.errors.logout = "";
+        this.errors.logout = '';
       }, 5000);
     } finally {
       this.isLoading.login = false;
@@ -117,10 +111,10 @@ class AuthStore {
 
   *login(_payload: TLogin, cb?: () => void) {
     this.isLoading.login = true;
-    this.errors.login = "";
+    this.errors.login = '';
     try {
       const {
-        data: { data },
+        data: { data }
       } = (yield postUserLogin(_payload)) as {
         data: IFinMedServerRes<TLoginRes>;
       };
@@ -132,7 +126,7 @@ class AuthStore {
 
       this.user = persist(Mangle.USER, profileRes.data.data);
 
-      toast.info("Welcome back!");
+      toast.info('Welcome back!');
       cb?.();
     } catch (error) {
       this.errors.login = parseError(error);
@@ -159,12 +153,12 @@ class AuthStore {
 
   *resetPwd(_payload: TPwdResetSchema, cb?: () => void) {
     this.isLoading.reset = true;
-    this.errors.reset = "";
+    this.errors.reset = '';
     try {
       const { email, new_password } = _payload;
       yield postPwdReset({ email, new_password });
 
-      toast.success("Password has set!");
+      toast.success('Password has set!');
       cb?.();
     } catch (error) {
       this.errors.reset = parseError(error);

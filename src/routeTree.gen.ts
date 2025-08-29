@@ -8,140 +8,96 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as AuthRouteRouteImport } from './routes/auth/route';
+import { Route as IndexRouteImport } from './routes/index';
+import { Route as AuthLoginRouteImport } from './routes/auth/login';
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as AuthRouteImport } from "./routes/auth/route";
-import { Route as IndexImport } from "./routes/index";
-import { Route as AuthLoginImport } from "./routes/auth/login";
-
-// Create/Update Routes
-
-const AuthRouteRoute = AuthRouteImport.update({
-  id: "/auth",
-  path: "/auth",
-  getParentRoute: () => rootRoute,
+const AuthRouteRoute = AuthRouteRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport
+} as any);
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport
+} as any);
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRouteRoute
 } as any);
 
-const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => rootRoute,
-} as any);
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute;
+  '/auth': typeof AuthRouteRouteWithChildren;
+  '/auth/login': typeof AuthLoginRoute;
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute;
+  '/auth': typeof AuthRouteRouteWithChildren;
+  '/auth/login': typeof AuthLoginRoute;
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport;
+  '/': typeof IndexRoute;
+  '/auth': typeof AuthRouteRouteWithChildren;
+  '/auth/login': typeof AuthLoginRoute;
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: '/' | '/auth' | '/auth/login';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/' | '/auth' | '/auth/login';
+  id: '__root__' | '/' | '/auth' | '/auth/login';
+  fileRoutesById: FileRoutesById;
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute;
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
+}
 
-const AuthLoginRoute = AuthLoginImport.update({
-  id: "/login",
-  path: "/login",
-  getParentRoute: () => AuthRouteRoute,
-} as any);
-
-// Populate the FileRoutesByPath interface
-
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
+    '/auth': {
+      id: '/auth';
+      path: '/auth';
+      fullPath: '/auth';
+      preLoaderRoute: typeof AuthRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
-    "/auth": {
-      id: "/auth";
-      path: "/auth";
-      fullPath: "/auth";
-      preLoaderRoute: typeof AuthRouteImport;
-      parentRoute: typeof rootRoute;
+    '/': {
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
-    "/auth/login": {
-      id: "/auth/login";
-      path: "/login";
-      fullPath: "/auth/login";
-      preLoaderRoute: typeof AuthLoginImport;
-      parentRoute: typeof AuthRouteImport;
+    '/auth/login': {
+      id: '/auth/login';
+      path: '/login';
+      fullPath: '/auth/login';
+      preLoaderRoute: typeof AuthLoginRouteImport;
+      parentRoute: typeof AuthRouteRoute;
     };
   }
 }
-
-// Create and export the route tree
 
 interface AuthRouteRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute;
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthLoginRoute: AuthLoginRoute,
+  AuthLoginRoute: AuthLoginRoute
 };
 
-const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
-  AuthRouteRouteChildren,
-);
-
-export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/auth": typeof AuthRouteRouteWithChildren;
-  "/auth/login": typeof AuthLoginRoute;
-}
-
-export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/auth": typeof AuthRouteRouteWithChildren;
-  "/auth/login": typeof AuthLoginRoute;
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/auth": typeof AuthRouteRouteWithChildren;
-  "/auth/login": typeof AuthLoginRoute;
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/auth" | "/auth/login";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/auth" | "/auth/login";
-  id: "__root__" | "/" | "/auth" | "/auth/login";
-  fileRoutesById: FileRoutesById;
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
-}
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(AuthRouteRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRouteRoute: AuthRouteRouteWithChildren,
+  AuthRouteRoute: AuthRouteRouteWithChildren
 };
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>();
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/auth"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/auth": {
-      "filePath": "auth/route.tsx",
-      "children": [
-        "/auth/login"
-      ]
-    },
-    "/auth/login": {
-      "filePath": "auth/login.tsx",
-      "parent": "/auth"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
