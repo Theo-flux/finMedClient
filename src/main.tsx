@@ -6,15 +6,18 @@ import App from './app.tsx';
 import ModalBank from './components/modals/ModalBank.tsx';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/context/themeContext.tsx';
+import ReactQueryProvider from './requests/query.tanstack.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <StoreProvider>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <Toaster />
-        <App />
-        <ModalBank />
-      </ThemeProvider>
-    </StoreProvider>
+    <ReactQueryProvider>
+      <StoreProvider>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <Toaster position="top-right" />
+          <App />
+          <ModalBank />
+        </ThemeProvider>
+      </StoreProvider>
+    </ReactQueryProvider>
   </StrictMode>
 );

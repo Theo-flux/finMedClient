@@ -2,12 +2,13 @@ import initializer from '@/utils/initializer';
 import { RootStore } from '..';
 import store from 'store2';
 import { action, flow, makeObservable, observable } from 'mobx';
-import { TLogin } from '@/features/auth/login/validations';
+import { TLoginSchema } from '@/features/auth/login/validations';
 import { TPwdResetSchema } from '@/features/auth/forgot-password/validations';
-import { postUserLogin, getNewToken, getProfile, postPwdReset, getLogout } from '@/requests/auth';
+import { postUserLogin, getNewToken, postPwdReset, getLogout } from '@/requests/auth';
 import { parseError } from '@/utils/errorHandler';
 import { useStyledToast } from '@/hooks/app/useStyledToast';
-import { Mangle } from '@/constants/mangle';
+import { EnumUserType, Mangle } from '@/constants/mangle';
+import { AppModals } from '../AppConfig/appModalTypes';
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const toast = useStyledToast();
@@ -37,7 +38,7 @@ function del(key: string) {
 
 class AuthStore {
   rootStore: RootStore;
-  user = get<Partial<TProfileInfo>>(Mangle.USER, {});
+  user = get<Partial<TProfileInfo>>(Mangle.AUTH_USER, {});
   userType: string = '';
   accessToken = get(Mangle.ACCESS_TOKEN, '');
   refreshToken = get(Mangle.REFRESH_TOKEN, '');
@@ -58,6 +59,8 @@ class AuthStore {
       reset: action.bound,
       resetStores: action.bound,
       setTokens: action.bound,
+      setUser: action.bound,
+      grantAccess: action.bound,
 
       logout: flow.bound,
       login: flow.bound,
@@ -71,7 +74,7 @@ class AuthStore {
     this.refreshToken = '';
     this.isLoading = { ...INIT_IS_LOADING };
     this.errors = initializer(this.isLoading, '');
-    del(Mangle.USER);
+    del(Mangle.AUTH_USER);
     this.user = {};
   }
 
@@ -84,6 +87,16 @@ class AuthStore {
   setTokens(token: string, refreshToken: string) {
     this.accessToken = persist(Mangle.ACCESS_TOKEN, token);
     this.refreshToken = persist(Mangle.REFRESH_TOKEN, refreshToken);
+  }
+
+  setUser(data: TProfileInfo) {
+    this.user = persist(Mangle.AUTH_USER, data);
+  }
+
+  grantAccess(access_token: string, refresh_token: string, cb?: (url?: string) => void) {
+    this.setTokens(access_token, refresh_token);
+
+    cb?.();
   }
 
   *logout(cb?: () => void) {
@@ -109,7 +122,7 @@ class AuthStore {
     }
   }
 
-  *login(_payload: TLogin, cb?: () => void) {
+  *login(_payload: TLoginSchema, cb?: () => void) {
     this.isLoading.login = true;
     this.errors.login = '';
     try {
@@ -118,16 +131,19 @@ class AuthStore {
       } = (yield postUserLogin(_payload)) as {
         data: IFinMedServerRes<TLoginRes>;
       };
-      this.setTokens(data.access_token, data.refresh_token);
 
-      const profileRes = (yield getProfile()) as {
-        data: IFinMedServerRes<TProfileInfo>;
-      };
+      if (data.user_type === EnumUserType.OLD_USER) {
+        this.userType = EnumUserType.OLD_USER;
+        if (_payload.password && data.access_token && data.refresh_token) {
+          this.setTokens(data.access_token, data.refresh_token);
 
-      this.user = persist(Mangle.USER, profileRes.data.data);
-
-      toast.info('Welcome back!');
-      cb?.();
+          toast.info('Welcome back!');
+          cb?.();
+          window.location.replace('/');
+        }
+      } else {
+        this.rootStore.AppConfigStore.toggleModals({ name: AppModals.SET_PWD_MODAL, open: true });
+      }
     } catch (error) {
       this.errors.login = parseError(error);
       toast.error(this.errors.login);

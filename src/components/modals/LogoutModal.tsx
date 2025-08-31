@@ -6,7 +6,8 @@ import { useStore } from '@/store';
 
 export default function LogoutModal() {
   const {
-    AppConfigStore: { toggleModals, isOpen }
+    AppConfigStore: { toggleModals, isOpen },
+    AuthStore: { logout, isLoading }
   } = useStore();
   return (
     <XModal isOpen={isOpen.LOG_OUT_MODAL} closeModal={() => toggleModals({})}>
@@ -16,12 +17,18 @@ export default function LogoutModal() {
           <DialogDescription>No worries, we can get you back in easily.</DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-end">
-          <DialogClose asChild>
+          <DialogClose asChild disabled={isLoading.logout}>
             <Button type="button" variant="secondary">
               close
             </Button>
           </DialogClose>
-          <Button type="button" variant="destructive" onClick={() => {}}>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => logout()}
+            disabled={isLoading.logout}
+            isLoading={isLoading.logout}
+          >
             log out
           </Button>
         </DialogFooter>

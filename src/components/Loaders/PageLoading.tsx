@@ -5,7 +5,7 @@ const PageLoading = () => {
     <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center space-y-4">
         <Loader className="animate-spin" />
-        <p className="text-gray-500 dark:text-gray-400">FinMed</p>
+        <p className="text-gray-500 dark:text-gray-400">FinMed inc.</p>
       </div>
     </div>
   );

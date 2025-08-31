@@ -4,5 +4,8 @@ export const AUTH = {
   NEW_TOKEN: '/auth/new-access-token',
   RESET_PWD: '/auth/pwd-reset',
   USER_INFO: '/auth/profile',
-  LOGOUT: '/auth/logout'
+  LOGOUT: '/auth/logout',
+  PROFILE: '/auth/profile'
 } as const;
+
+export const USER = {};

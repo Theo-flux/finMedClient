@@ -39,11 +39,13 @@ const NavUser = () => {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={'/'} alt={'Daniel Ibanga'} />
-                <AvatarFallback>{getInitials(`${user.firstName} ${user.lastName}`)}</AvatarFallback>
+                <AvatarFallback>
+                  {getInitials(`${user.first_name} ${user.last_name}`)}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <p className="text-sm leading-none font-medium">
-                  {user.firstName} {user.lastName}
+                  {user.first_name} {user.last_name}
                 </p>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
@@ -61,12 +63,12 @@ const NavUser = () => {
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src="/" alt="Daniel Ibanga" />
                   <AvatarFallback className="rounded-lg">
-                    {getInitials(`${user.firstName} ${user.lastName}`)}
+                    {getInitials(`${user.first_name} ${user.last_name}`)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    {user.firstName} {user.lastName}
+                    {user.first_name} {user.last_name}
                   </span>
                   <span className="truncate text-xs">{user.email}</span>
                 </div>

@@ -1,58 +1,86 @@
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useStore } from '@/store';
-import { useEffect } from 'react';
 import { EnumUserType } from '@/constants/mangle';
-import { AppModals } from '@/store/AppConfig/appModalTypes';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginSchema, TLoginSchema } from './validations';
+import { Form, FormField } from '@/components/ui/form';
+import InputField from '@/components/fields/InputField';
+import { observer } from 'mobx-react-lite';
 
-export function LoginForm({ className, ...props }: React.ComponentProps<'form'>) {
+function LoginForm() {
   const {
-    AuthStore: { userType },
-    AppConfigStore: { toggleModals }
+    AuthStore: { userType, login, isLoading }
   } = useStore();
 
-  useEffect(() => {
-    if (userType === EnumUserType.NEW_USER) {
-      // TODO:
-      // Display new password modal
-    }
-  }, [userType]);
+  const form = useForm({
+    mode: 'onSubmit',
+    resolver: zodResolver(LoginSchema),
+    reValidateMode: 'onChange'
+  });
+
+  function onSubmit(data: TLoginSchema) {
+    login(data);
+  }
 
   return (
-    <form className={cn('flex flex-col gap-6', className)} {...props}>
+    <div className="flex flex-col gap-6">
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
           Enter your credentials below to login to your account
         </p>
       </div>
-      <div className="grid gap-6">
-        <div className="grid gap-3">
-          <Label htmlFor="email">Email / Staff id</Label>
-          <Input id="email" type="email" placeholder="email or staff id" required />
-        </div>
-        {userType === EnumUserType.OLD_USER && (
-          <div className="grid gap-3">
-            <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
-              <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
-                Forgot your password?
-              </a>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <fieldset disabled={isLoading.login} className="w-full space-y-6">
+            <div className="flex w-full flex-col gap-2">
+              <FormField
+                control={form.control}
+                name="email_or_staff_no"
+                render={({ field }) => (
+                  <InputField
+                    label="Email/Staff No."
+                    id="email"
+                    type="text"
+                    placeholder="email or staff no."
+                    required
+                    {...field}
+                  />
+                )}
+              />
+
+              {userType === EnumUserType.OLD_USER && (
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <InputField
+                      label="Password"
+                      id="password"
+                      type="password"
+                      required
+                      {...field}
+                    />
+                  )}
+                />
+              )}
+
+              <Button
+                size="lg"
+                type="submit"
+                className="w-full"
+                disabled={isLoading.login}
+                isLoading={isLoading.login}
+              >
+                Login
+              </Button>
             </div>
-            <Input id="password" type="password" required />
-          </div>
-        )}
-        <Button
-          size="lg"
-          type="submit"
-          className="w-full"
-          onClick={() => toggleModals({ name: AppModals.SET_PWD_MODAL, open: true })}
-        >
-          Login
-        </Button>
-      </div>
-    </form>
+          </fieldset>
+        </form>
+      </Form>
+    </div>
   );
 }
+
+export default observer(LoginForm);

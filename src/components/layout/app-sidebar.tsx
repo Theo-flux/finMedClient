@@ -5,7 +5,7 @@ import {
   SidebarHeader,
   SidebarRail
 } from '@/components/ui/sidebar';
-import NavGroup from '@/components/layout/nav-group';
+import { NavGroup } from '@/components/layout/nav-group';
 import NavUser from '@/components/layout/nav-user';
 import SidebarTop from '@/components/layout/sidebar-top';
 import { sidebarData } from './data/sidebar-data';

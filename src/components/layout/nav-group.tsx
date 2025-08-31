@@ -23,8 +23,28 @@ import {
   DropdownMenuTrigger
 } from '../ui/dropdown-menu';
 import { NavCollapsible, NavItem, NavLink, type NavGroup } from './types';
-import { useStore } from '@/store';
-import { observer } from 'mobx-react-lite';
+
+export function NavGroup({ title, items }: NavGroup) {
+  const { state } = useSidebar();
+  const href = useLocation({ select: (location) => location.href });
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>{title}</SidebarGroupLabel>
+      <SidebarMenu>
+        {items.map((item) => {
+          const key = `${item.title}-${item.url}`;
+
+          if (!item.items) return <SidebarMenuLink key={key} item={item} href={href} />;
+
+          if (state === 'collapsed')
+            return <SidebarMenuCollapsedDropdown key={key} item={item} href={href} />;
+
+          return <SidebarMenuCollapsible key={key} item={item} href={href} />;
+        })}
+      </SidebarMenu>
+    </SidebarGroup>
+  );
+}
 
 const NavBadge = ({ children }: { children: ReactNode }) => (
   <Badge className="rounded-full px-1 py-0 text-xs">{children}</Badge>
@@ -122,40 +142,3 @@ function checkIsActive(href: string, item: NavItem, mainNav = false) {
     (mainNav && href.split('/')[1] !== '' && href.split('/')[1] === item?.url?.split('/')[1])
   );
 }
-
-function NavGroup({ title, items }: NavGroup) {
-  const { state } = useSidebar();
-  const href = useLocation({ select: (location) => location.href });
-  const {
-    AuthStore: { activeRole }
-  } = useStore();
-
-  function hasCommonRole(array1: Array<number>, current: number) {
-    if (array1.length == 0) {
-      return true;
-    } else {
-      return array1.some((el) => current === el);
-    }
-  }
-
-  return (
-    <SidebarGroup>
-      <SidebarGroupLabel>{title}</SidebarGroupLabel>
-      <SidebarMenu>
-        {items.map((item) => {
-          const key = `${item.title}-${item.url}`;
-          if (hasCommonRole(item.rba, activeRole)) {
-            if (!item.items) return <SidebarMenuLink key={key} item={item} href={href} />;
-
-            if (state === 'collapsed')
-              return <SidebarMenuCollapsedDropdown key={key} item={item} href={href} />;
-
-            return <SidebarMenuCollapsible key={key} item={item} href={href} />;
-          }
-        })}
-      </SidebarMenu>
-    </SidebarGroup>
-  );
-}
-
-export default observer(NavGroup);

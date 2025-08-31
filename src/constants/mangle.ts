@@ -1,7 +1,7 @@
 export enum Mangle {
-  ACCESS_TOKEN = '_at',
-  REFRESH_TOKEN = '_rt',
-  USER = '_u'
+  ACCESS_TOKEN = '_fat',
+  REFRESH_TOKEN = '_frt',
+  AUTH_USER = '_fu'
 }
 
 export enum EnumUserType {

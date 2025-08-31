@@ -8,11 +8,19 @@ interface SessionPayload extends Pick<TProfileInfo, 'id' | 'roles'> {
 type TLoginRes = {
   access_token: string;
   refresh_token: string;
+  user_type: string;
 };
 
 interface IFinMedServerRes<T> {
   data: T;
   message: string;
+}
+
+interface IQueryHookResponse<D> {
+  data: D;
+  isLoading: boolean;
+  error: unknown;
+  status: 'error' | 'success' | 'pending';
 }
 
 type TPaginatedRes = {
@@ -40,10 +48,10 @@ type TResource = {
 };
 
 type TProfileInfo = {
+  id: number;
   uid: string;
   created_at: string;
   updated_at: string;
-  id: number;
   staff_no: string;
   first_name: string;
   last_name: string;
@@ -51,6 +59,8 @@ type TProfileInfo = {
   email: string;
   status: string;
   phone_number: string;
+  role_uid: string;
+  department_uid: string;
   role: TResource;
   department: TResource;
 };

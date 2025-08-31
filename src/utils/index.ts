@@ -1,5 +1,3 @@
-import { sidebarData } from '@/components/layout/data/sidebar-data';
-
 export function getInitials(word: string) {
   const charArr = word.split(' ').map((w) => w.charAt(0));
   return charArr.join('');
@@ -66,6 +64,3 @@ export function hasCommonRole(roles: Array<number>, array2: Array<number>) {
     return roles.some((element) => array2.includes(element));
   }
 }
-
-export const otherRoles = (roles: Array<number>) =>
-  sidebarData.roleSwitcher.filter((role) => !roles.includes(role.value));

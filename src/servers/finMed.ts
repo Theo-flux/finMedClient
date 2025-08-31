@@ -5,8 +5,7 @@ const BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const resourceReqInterceptor = (config: InternalAxiosRequestConfig) => {
   const modifiedConfig = { ...config };
-  const _token = '';
-  // const _token = Stores.AuthStore.accessToken;
+  const _token = Stores.AuthStore.accessToken;
 
   if (_token && modifiedConfig.headers) modifiedConfig.headers.Authorization = `Bearer ${_token}`;
 
@@ -33,6 +32,7 @@ const resourceResErrorInterceptor = (error: AxiosError) => {
       }
 
       const { token } = tokenObj;
+      Stores.AuthStore.setTokens(tokenObj.token, tokenObj.refreshToken);
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
       return finMedServer(originalRequest);

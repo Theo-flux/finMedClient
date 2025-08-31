@@ -1,3 +1,4 @@
+import { forwardRef, ReactNode } from 'react';
 import {
   FormControl,
   FormDescription,
@@ -12,8 +13,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { forwardRef } from 'react';
-import { ReactNode } from '@tanstack/react-router';
 import { SelectProps } from '@radix-ui/react-select';
 
 interface ISelectFormProps extends SelectProps {
