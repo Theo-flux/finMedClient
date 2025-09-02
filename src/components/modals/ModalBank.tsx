@@ -7,7 +7,10 @@ import { lazy, useMemo } from 'react';
 const ModalsMap = {
   [AppModals.DONE]: lazy(() => import('@/components/modals/DoneModal')),
   [AppModals.LOG_OUT_MODAL]: lazy(() => import('@/components/modals/LogoutModal')),
-  [AppModals.SET_PWD_MODAL]: lazy(() => import('@/features/auth/modals/set-pwd-modal'))
+  [AppModals.SET_PWD_MODAL]: lazy(() => import('@/features/auth/modals/set-pwd-modal')),
+  [AppModals.RESOURCE_MODAL]: lazy(
+    () => import('@/features/settings/misc/components/modals/ResourceModal')
+  )
 };
 
 const ModalsBank = () => {

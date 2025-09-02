@@ -13,7 +13,11 @@ import { Route as AuthRouteRouteImport } from './routes/auth/route';
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route';
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index';
 import { Route as AuthLoginRouteImport } from './routes/auth/login';
+import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route';
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated/staff/index';
+import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index';
+import { Route as AuthenticatedSettingsMiscRouteImport } from './routes/_authenticated/settings/misc';
+import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account';
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -34,43 +38,93 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRouteRoute
 } as any);
+const AuthenticatedSettingsRouteRoute = AuthenticatedSettingsRouteRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
 const AuthenticatedStaffIndexRoute = AuthenticatedStaffIndexRouteImport.update({
   id: '/staff/',
   path: '/staff/',
   getParentRoute: () => AuthenticatedRouteRoute
 } as any);
+const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedSettingsRouteRoute
+} as any);
+const AuthenticatedSettingsMiscRoute = AuthenticatedSettingsMiscRouteImport.update({
+  id: '/misc',
+  path: '/misc',
+  getParentRoute: () => AuthenticatedSettingsRouteRoute
+} as any);
+const AuthenticatedSettingsAccountRoute = AuthenticatedSettingsAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AuthenticatedSettingsRouteRoute
+} as any);
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthRouteRouteWithChildren;
+  '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
+  '/settings/account': typeof AuthenticatedSettingsAccountRoute;
+  '/settings/misc': typeof AuthenticatedSettingsMiscRoute;
+  '/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
+  '/settings/account': typeof AuthenticatedSettingsAccountRoute;
+  '/settings/misc': typeof AuthenticatedSettingsMiscRoute;
+  '/settings': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren;
   '/auth': typeof AuthRouteRouteWithChildren;
+  '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/_authenticated/': typeof AuthenticatedIndexRoute;
+  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute;
+  '/_authenticated/settings/misc': typeof AuthenticatedSettingsMiscRoute;
+  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/auth' | '/auth/login' | '/' | '/staff';
+  fullPaths:
+    | '/auth'
+    | '/settings'
+    | '/auth/login'
+    | '/'
+    | '/settings/account'
+    | '/settings/misc'
+    | '/settings/'
+    | '/staff';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/auth' | '/auth/login' | '/' | '/staff';
+  to:
+    | '/auth'
+    | '/auth/login'
+    | '/'
+    | '/settings/account'
+    | '/settings/misc'
+    | '/settings'
+    | '/staff';
   id:
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/settings'
     | '/auth/login'
     | '/_authenticated/'
+    | '/_authenticated/settings/account'
+    | '/_authenticated/settings/misc'
+    | '/_authenticated/settings/'
     | '/_authenticated/staff/';
   fileRoutesById: FileRoutesById;
 }
@@ -109,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport;
       parentRoute: typeof AuthRouteRoute;
     };
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings';
+      path: '/settings';
+      fullPath: '/settings';
+      preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
     '/_authenticated/staff/': {
       id: '/_authenticated/staff/';
       path: '/staff';
@@ -116,15 +177,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaffIndexRouteImport;
       parentRoute: typeof AuthenticatedRouteRoute;
     };
+    '/_authenticated/settings/': {
+      id: '/_authenticated/settings/';
+      path: '/';
+      fullPath: '/settings/';
+      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport;
+      parentRoute: typeof AuthenticatedSettingsRouteRoute;
+    };
+    '/_authenticated/settings/misc': {
+      id: '/_authenticated/settings/misc';
+      path: '/misc';
+      fullPath: '/settings/misc';
+      preLoaderRoute: typeof AuthenticatedSettingsMiscRouteImport;
+      parentRoute: typeof AuthenticatedSettingsRouteRoute;
+    };
+    '/_authenticated/settings/account': {
+      id: '/_authenticated/settings/account';
+      path: '/account';
+      fullPath: '/settings/account';
+      preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport;
+      parentRoute: typeof AuthenticatedSettingsRouteRoute;
+    };
   }
 }
 
+interface AuthenticatedSettingsRouteRouteChildren {
+  AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute;
+  AuthenticatedSettingsMiscRoute: typeof AuthenticatedSettingsMiscRoute;
+  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute;
+}
+
+const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteChildren = {
+  AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
+  AuthenticatedSettingsMiscRoute: AuthenticatedSettingsMiscRoute,
+  AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute
+};
+
+const AuthenticatedSettingsRouteRouteWithChildren =
+  AuthenticatedSettingsRouteRoute._addFileChildren(AuthenticatedSettingsRouteRouteChildren);
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren;
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute;
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute;
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute
 };

@@ -26,6 +26,13 @@ class AppConfigStore {
     email_or_staff_no: ''
   };
 
+  resourceModal = {
+    uid: '',
+    name: '',
+    status: '',
+    type: ''
+  };
+
   isOpen = { ...INIT_IS_OPEN };
 
   constructor(rootStore: RootStore) {
@@ -80,6 +87,16 @@ class AppConfigStore {
         if (modal.open) {
           this.setPwdModal = {
             email_or_staff_no: modal.email_or_staff_no
+          };
+        }
+        break;
+      case AppModals.RESOURCE_MODAL:
+        if (modal.open) {
+          this.resourceModal = {
+            uid: modal.uid,
+            type: modal.type,
+            status: modal.status,
+            name: modal.resource_name
           };
         }
         break;

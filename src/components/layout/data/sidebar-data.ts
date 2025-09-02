@@ -1,4 +1,4 @@
-import { IconLayoutDashboard } from '@tabler/icons-react';
+import { IconLayoutDashboard, IconSettings, IconTool, IconUserCog } from '@tabler/icons-react';
 import { type SidebarData } from '../types';
 import {
   BadgeDollarSign,
@@ -6,6 +6,7 @@ import {
   BanknoteArrowUpIcon,
   BanknoteIcon,
   IdCardIcon,
+  MonitorCogIcon,
   UsersIcon
 } from 'lucide-react';
 import { EnumRoles } from '@/constants/mangle';
@@ -61,6 +62,36 @@ export const sidebarData: SidebarData = {
           url: '/patients',
           icon: UsersIcon,
           rba: []
+        }
+      ]
+    },
+    {
+      title: 'Others',
+      items: [
+        {
+          title: 'Settings',
+          icon: IconSettings,
+          rba: [],
+          items: [
+            {
+              title: 'Profile',
+              url: '/settings',
+              icon: IconUserCog,
+              rba: []
+            },
+            {
+              title: 'Account',
+              url: '/settings/account',
+              icon: IconTool,
+              rba: []
+            },
+            {
+              title: 'Misc',
+              url: '/settings/misc',
+              icon: MonitorCogIcon,
+              rba: [EnumRoles.ADMIN, EnumRoles.IT]
+            }
+          ]
         }
       ]
     }

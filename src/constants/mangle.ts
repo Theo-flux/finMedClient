@@ -12,5 +12,18 @@ export enum EnumUserType {
 export enum EnumRoles {
   ADMIN = 'admin',
   SUB_ADMIN = 'subadmin',
-  MANAGER = 'manager'
+  MANAGER = 'manager',
+  IT = 'technician'
+}
+
+export enum EnumResourceStatus {
+  ACTIVE = 'ACTIVE',
+  IN_ACTIVE = 'IN_ACTIVE'
+}
+
+export enum EnumResourceType {
+  ROLE = 'role',
+  SERVICE = 'service',
+  CATEGORY = 'expense category',
+  DEPT = 'department'
 }

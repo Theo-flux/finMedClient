@@ -9,3 +9,11 @@ export const AUTH = {
 } as const;
 
 export const USER = {};
+
+export const MISC = {
+  ALL: '/misc/all',
+  ROLE: '/roles',
+  DEPT: '/depts',
+  SERVICE: '/services',
+  CATEGORY: '/categories'
+};
