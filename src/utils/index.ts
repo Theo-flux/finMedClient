@@ -1,5 +1,5 @@
 export function getInitials(word: string) {
-  const charArr = word.split(' ').map((w) => w.charAt(0));
+  const charArr = word.split(' ').map((w) => w.charAt(0).toUpperCase());
   return charArr.join('');
 }
 

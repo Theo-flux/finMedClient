@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { email, password } from '@/types/validation';
+import { password } from '@/types/validation';
 
 export const PwdResetSchema = z
   .object({
-    email,
+    email_or_staff_no: z.string({ required_error: 'Email or staff no is required.' }),
     new_password: password,
     confirm_password: password
   })

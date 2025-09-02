@@ -8,3 +8,9 @@ export enum EnumUserType {
   NEW_USER = 'new_user',
   OLD_USER = 'old_user'
 }
+
+export enum EnumRoles {
+  ADMIN = 'admin',
+  SUB_ADMIN = 'subadmin',
+  MANAGER = 'manager'
+}

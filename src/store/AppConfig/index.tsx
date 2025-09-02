@@ -6,7 +6,7 @@ import { AppModals, TAppModalsAction } from './appModalTypes';
 const INIT_IS_OPEN = initializer(AppModals, false);
 
 class AppConfigStore {
-  appQueryLimit = 1000;
+  appQueryLimit = 30;
   isSideNavOpen = false;
 
   isActivityOpen = false;
@@ -22,6 +22,10 @@ class AppConfigStore {
     showClose: true
   };
 
+  setPwdModal = {
+    email_or_staff_no: ''
+  };
+
   isOpen = { ...INIT_IS_OPEN };
 
   constructor(rootStore: RootStore) {
@@ -32,6 +36,7 @@ class AppConfigStore {
       isOpen: observable,
       nonce: observable,
       doneModal: observable,
+      setPwdModal: observable,
 
       openSideNav: action.bound,
       openActivityNav: action.bound,
@@ -68,6 +73,13 @@ class AppConfigStore {
             subText: modal.subText,
             ctaText: modal.ctaText ?? 'Got it',
             showClose: modal.showClose ?? true
+          };
+        }
+        break;
+      case AppModals.SET_PWD_MODAL:
+        if (modal.open) {
+          this.setPwdModal = {
+            email_or_staff_no: modal.email_or_staff_no
           };
         }
         break;

@@ -142,7 +142,11 @@ class AuthStore {
           window.location.replace('/');
         }
       } else {
-        this.rootStore.AppConfigStore.toggleModals({ name: AppModals.SET_PWD_MODAL, open: true });
+        this.rootStore.AppConfigStore.toggleModals({
+          name: AppModals.SET_PWD_MODAL,
+          open: true,
+          email_or_staff_no: _payload.email_or_staff_no
+        });
       }
     } catch (error) {
       this.errors.login = parseError(error);
@@ -171,10 +175,12 @@ class AuthStore {
     this.isLoading.reset = true;
     this.errors.reset = '';
     try {
-      const { email, new_password } = _payload;
-      yield postPwdReset({ email, new_password });
+      const { email_or_staff_no, new_password } = _payload;
+      yield postPwdReset({ email_or_staff_no, new_password });
 
-      toast.success('Password has set!');
+      toast.success('Password set!');
+      toast.info('Proceed to login!');
+      this.userType = EnumUserType.OLD_USER;
       cb?.();
     } catch (error) {
       this.errors.reset = parseError(error);

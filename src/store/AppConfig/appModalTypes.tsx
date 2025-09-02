@@ -11,7 +11,7 @@ export type TAppModalsAction =
       open?: boolean;
     }
   | ({
-      name: AppModals.LOG_OUT_MODAL | AppModals.SET_PWD_MODAL;
+      name: AppModals.LOG_OUT_MODAL;
     } & {
       open: boolean;
     })
@@ -22,6 +22,13 @@ export type TAppModalsAction =
           subText: string;
           ctaText?: string;
           showClose?: boolean;
+        }
+      | { open?: false }
+    ))
+  | ({ name: AppModals.SET_PWD_MODAL } & (
+      | {
+          open: true;
+          email_or_staff_no: string;
         }
       | { open?: false }
     ));

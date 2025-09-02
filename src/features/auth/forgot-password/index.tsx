@@ -8,19 +8,19 @@ import InputField from '@/components/fields/InputField';
 
 export function SetPwdForm() {
   const {
-    AuthStore: { isLoading },
-    AppConfigStore: { toggleModals }
+    AuthStore: { isLoading, resetPwd },
+    AppConfigStore: { toggleModals, setPwdModal }
   } = useStore();
 
   const form = useForm<TPwdResetSchema>({
-    defaultValues: { email: '' },
+    defaultValues: { email_or_staff_no: setPwdModal.email_or_staff_no },
     mode: 'onSubmit',
     resolver: zodResolver(PwdResetSchema),
     reValidateMode: 'onSubmit'
   });
 
   function onSubmit(data: TPwdResetSchema) {
-    console.log(data);
+    resetPwd(data);
     toggleModals({});
   }
 
@@ -33,7 +33,7 @@ export function SetPwdForm() {
             Enter your credentials below to set your account password.
           </p>
         </div>
-        <fieldset disabled={isLoading.login} className="w-full space-y-6">
+        <fieldset disabled={isLoading.reset} className="w-full space-y-6">
           <div className="flex w-full flex-col gap-2">
             <FormField
               control={form.control}
@@ -60,8 +60,8 @@ export function SetPwdForm() {
               type="submit"
               size="lg"
               className="w-full"
-              disabled={isLoading.login}
-              isLoading={isLoading.login}
+              disabled={isLoading.reset}
+              isLoading={isLoading.reset}
             >
               Set Password
             </Button>

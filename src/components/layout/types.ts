@@ -4,12 +4,12 @@ interface BaseNavItem {
   title: string;
   badge?: string;
   icon?: React.ElementType;
-  rba: Array<number>;
+  rba: Array<string>;
 }
 
 type NavLink = BaseNavItem & {
   url: LinkProps['to'];
-  rba: Array<number>;
+  rba: Array<string>;
   items?: never;
 };
 

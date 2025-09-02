@@ -13,6 +13,7 @@ import { Route as AuthRouteRouteImport } from './routes/auth/route';
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route';
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index';
 import { Route as AuthLoginRouteImport } from './routes/auth/login';
+import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated/staff/index';
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -33,16 +34,23 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRouteRoute
 } as any);
+const AuthenticatedStaffIndexRoute = AuthenticatedStaffIndexRouteImport.update({
+  id: '/staff/',
+  path: '/staff/',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
+  '/staff': typeof AuthenticatedStaffIndexRoute;
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
+  '/staff': typeof AuthenticatedStaffIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -50,13 +58,20 @@ export interface FileRoutesById {
   '/auth': typeof AuthRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/_authenticated/': typeof AuthenticatedIndexRoute;
+  '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/auth' | '/auth/login' | '/';
+  fullPaths: '/auth' | '/auth/login' | '/' | '/staff';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/auth' | '/auth/login' | '/';
-  id: '__root__' | '/_authenticated' | '/auth' | '/auth/login' | '/_authenticated/';
+  to: '/auth' | '/auth/login' | '/' | '/staff';
+  id:
+    | '__root__'
+    | '/_authenticated'
+    | '/auth'
+    | '/auth/login'
+    | '/_authenticated/'
+    | '/_authenticated/staff/';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -94,15 +109,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport;
       parentRoute: typeof AuthRouteRoute;
     };
+    '/_authenticated/staff/': {
+      id: '/_authenticated/staff/';
+      path: '/staff';
+      fullPath: '/staff';
+      preLoaderRoute: typeof AuthenticatedStaffIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute;
+  AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute;
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute
 };
 
 const AuthenticatedRouteRouteWithChildren = AuthenticatedRouteRoute._addFileChildren(

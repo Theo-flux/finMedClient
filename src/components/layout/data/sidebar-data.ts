@@ -1,6 +1,14 @@
 import { IconLayoutDashboard } from '@tabler/icons-react';
 import { type SidebarData } from '../types';
-import { MessageSquare, TableCellsMerge, Wallet2 } from 'lucide-react';
+import {
+  BadgeDollarSign,
+  BanknoteArrowDownIcon,
+  BanknoteArrowUpIcon,
+  BanknoteIcon,
+  IdCardIcon,
+  UsersIcon
+} from 'lucide-react';
+import { EnumRoles } from '@/constants/mangle';
 
 export const sidebarData: SidebarData = {
   navGroups: [
@@ -14,18 +22,27 @@ export const sidebarData: SidebarData = {
           rba: []
         },
         {
-          title: 'Messaging',
-          icon: MessageSquare,
-          rba: [],
-          items: [
-            { title: 'sms', url: '/', rba: [] },
-            { title: 'Phone book', url: '/', rba: [] }
-          ]
+          title: 'Budgets',
+          url: '/budgets',
+          icon: BadgeDollarSign,
+          rba: []
         },
         {
-          title: 'Wallet',
-          url: '/',
-          icon: Wallet2,
+          title: 'Expenses',
+          url: '/expenses',
+          icon: BanknoteArrowDownIcon,
+          rba: []
+        },
+        {
+          title: 'Invoices',
+          url: '/invoices',
+          icon: BanknoteIcon,
+          rba: []
+        },
+        {
+          title: 'Payments',
+          url: '/payments',
+          icon: BanknoteArrowUpIcon,
           rba: []
         }
       ]
@@ -34,21 +51,16 @@ export const sidebarData: SidebarData = {
       title: 'Management',
       items: [
         {
-          title: 'Manage cell',
-          icon: TableCellsMerge,
-          rba: [],
-          items: [
-            {
-              title: 'Members',
-              url: '/cell/members',
-              rba: []
-            },
-            {
-              title: 'Attendance',
-              url: '/cell/attendance',
-              rba: []
-            }
-          ]
+          title: 'Staff',
+          url: '/staff',
+          icon: IdCardIcon,
+          rba: [EnumRoles.ADMIN]
+        },
+        {
+          title: 'Patients',
+          url: '/patients',
+          icon: UsersIcon,
+          rba: []
         }
       ]
     }

@@ -23,23 +23,37 @@ import {
   DropdownMenuTrigger
 } from '../ui/dropdown-menu';
 import { NavCollapsible, NavItem, NavLink, type NavGroup } from './types';
+import { useStore } from '@/store';
 
 export function NavGroup({ title, items }: NavGroup) {
+  const {
+    AuthStore: { user }
+  } = useStore();
   const { state } = useSidebar();
   const href = useLocation({ select: (location) => location.href });
+
+  function hasCommonRole(array1: Array<string>, current: string) {
+    if (array1.length == 0) {
+      return true;
+    } else {
+      return array1.some((el) => current === el);
+    }
+  }
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>{title}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           const key = `${item.title}-${item.url}`;
+          if (hasCommonRole(item.rba, user.role?.name ?? '')) {
+            if (!item.items) return <SidebarMenuLink key={key} item={item} href={href} />;
 
-          if (!item.items) return <SidebarMenuLink key={key} item={item} href={href} />;
+            if (state === 'collapsed')
+              return <SidebarMenuCollapsedDropdown key={key} item={item} href={href} />;
 
-          if (state === 'collapsed')
-            return <SidebarMenuCollapsedDropdown key={key} item={item} href={href} />;
-
-          return <SidebarMenuCollapsible key={key} item={item} href={href} />;
+            return <SidebarMenuCollapsible key={key} item={item} href={href} />;
+          }
         })}
       </SidebarMenu>
     </SidebarGroup>
