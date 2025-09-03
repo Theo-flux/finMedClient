@@ -44,15 +44,15 @@ function UserModal() {
   const toast = useStyledToast();
 
   const {
-    AppConfigStore: { toggleModals, isOpen, userModal },
+    AppConfigStore: { toggleModals, isOpen, dataModal },
     AuthStore: { createUser, updateUser, isLoading: isAuthStoreLoading }
   } = useStore();
 
   const queryClient = useQueryClient();
 
-  const isEditMode = !!userModal.uid;
+  const isEditMode = !!dataModal.uid;
 
-  const { data, isLoading } = useFetchUser(userModal.uid);
+  const { data, isLoading } = useFetchUser(dataModal.uid);
 
   const defaultValues = useMemo(() => {
     if (isEditMode && !isLoading && data != undefined) {
@@ -113,7 +113,7 @@ function UserModal() {
       if (isEditMode) {
         const changedValue = getChangedFields(userData.current, formData);
         if (Object.keys(changedValue).length > 0) {
-          updateUser(userModal.uid, changedValue, cbFn);
+          updateUser(dataModal.uid, changedValue, cbFn);
         } else {
           toast.success('Nothing to update.');
         }

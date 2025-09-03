@@ -64,3 +64,9 @@ type TProfileInfo = {
   role: TResource;
   department: TResource;
 };
+
+type TFinMedServerQuery = {
+  limit: number;
+  offset: number;
+  q: string | null;
+};

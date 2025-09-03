@@ -8,7 +8,7 @@ interface IXModalProps {
 
 export const XModal = ({ children, isOpen, closeModal }: IXModalProps) => {
   return (
-    <Dialog modal={isOpen} open={isOpen} onOpenChange={() => closeModal()}>
+    <Dialog modal={true} open={isOpen} onOpenChange={closeModal}>
       {children}
     </Dialog>
   );

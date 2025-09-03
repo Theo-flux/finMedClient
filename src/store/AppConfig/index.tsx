@@ -7,6 +7,7 @@ const INIT_IS_OPEN = initializer(AppModals, false);
 
 class AppConfigStore {
   appQueryLimit = 30;
+  appQueryOffset = 0;
   isSideNavOpen = false;
 
   isActivityOpen = false;
@@ -33,7 +34,7 @@ class AppConfigStore {
     type: ''
   };
 
-  userModal = {
+  dataModal = {
     uid: ''
   };
 
@@ -49,7 +50,7 @@ class AppConfigStore {
       doneModal: observable,
       setPwdModal: observable,
       resourceModal: observable,
-      userModal: observable,
+      dataModal: observable,
 
       openSideNav: action.bound,
       openActivityNav: action.bound,
@@ -109,7 +110,14 @@ class AppConfigStore {
 
       case AppModals.USER_MODAL:
         if (modal.open) {
-          this.userModal = {
+          this.dataModal = {
+            uid: modal.uid
+          };
+        }
+        break;
+      case AppModals.BUDGET_MODAL:
+        if (modal.open) {
+          this.dataModal = {
             uid: modal.uid
           };
         }

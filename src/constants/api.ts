@@ -19,3 +19,12 @@ export const MISC = {
   SERVICE: '/services',
   CATEGORY: '/categories'
 };
+
+export const BUDGET = {
+  CREATE: '/budgets',
+  USER_BUDGETS: '/budgets/user_budgets',
+  ASSIGNED_BUDGETS: '/budgets/user_assigned_budgets'
+};
+
+export const DEFAULT_LIMIT = 30;
+export const DEFAULT_OFFSET = 0;

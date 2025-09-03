@@ -11,7 +11,8 @@ const ModalsMap = {
   [AppModals.RESOURCE_MODAL]: lazy(
     () => import('@/features/settings/misc/components/modals/ResourceModal')
   ),
-  [AppModals.USER_MODAL]: lazy(() => import('@/features/staff/components/modals/CreateStaff'))
+  [AppModals.USER_MODAL]: lazy(() => import('@/features/staff/components/modals/CreateStaff')),
+  [AppModals.BUDGET_MODAL]: lazy(() => import('@/features/budgets/components/modals/BudgetModal'))
 };
 
 const ModalsBank = () => {

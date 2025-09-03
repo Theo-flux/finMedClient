@@ -4,6 +4,7 @@ import { configure } from 'mobx';
 import AppConfigStore from './AppConfig';
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
+import BudgetStore from './BudgetStore';
 
 configure({
   enforceActions: 'observed',
@@ -21,11 +22,13 @@ export class RootStore {
   AppConfigStore: AppConfigStore;
   AuthStore: AuthStore;
   UserStore: UserStore;
+  BudgetStore: BudgetStore;
 
   constructor() {
     this.AppConfigStore = new AppConfigStore(this);
     this.AuthStore = new AuthStore(this);
     this.UserStore = new UserStore(this);
+    this.BudgetStore = new BudgetStore(this);
   }
 }
 

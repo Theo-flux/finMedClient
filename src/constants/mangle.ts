@@ -28,3 +28,16 @@ export enum EnumResourceType {
   CATEGORY = 'expense category',
   DEPT = 'department'
 }
+
+export enum EnumBudgetStatus {
+  APPROVED = 'APPROVED',
+  PENDING = 'PENDING',
+  REJECTED = 'REJECTED'
+}
+
+export enum EnumBudgetAvailability {
+  AVAILABLE = 'AVAILABLE',
+  FROZEN = 'FROZEN',
+  DEPLETED = 'DEPLETED',
+  RESERVED = 'RESERVED'
+}

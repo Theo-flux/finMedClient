@@ -3,7 +3,8 @@ export enum AppModals {
   LOG_OUT_MODAL = 'LOG_OUT_MODAL',
   SET_PWD_MODAL = 'SET_PWD_MODAL',
   RESOURCE_MODAL = 'RESOURCE_MODAL',
-  USER_MODAL = 'USER_MODAL'
+  USER_MODAL = 'USER_MODAL',
+  BUDGET_MODAL = 'BUDGET_MODAL'
 }
 
 export type TAppModalsAction =
@@ -45,6 +46,13 @@ export type TAppModalsAction =
       | { open?: false }
     ))
   | ({ name: AppModals.USER_MODAL } & (
+      | {
+          open: true;
+          uid: string;
+        }
+      | { open?: false }
+    ))
+  | ({ name: AppModals.BUDGET_MODAL } & (
       | {
           open: true;
           uid: string;

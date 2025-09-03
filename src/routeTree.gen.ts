@@ -16,8 +16,10 @@ import { Route as AuthLoginRouteImport } from './routes/auth/login';
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route';
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated/staff/index';
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index';
+import { Route as AuthenticatedBudgetsIndexRouteImport } from './routes/_authenticated/budgets/index';
 import { Route as AuthenticatedSettingsMiscRouteImport } from './routes/_authenticated/settings/misc';
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account';
+import { Route as AuthenticatedBudgetsBudgetIdRouteImport } from './routes/_authenticated/budgets/$budgetId';
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -53,6 +55,11 @@ const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexRouteImport.up
   path: '/',
   getParentRoute: () => AuthenticatedSettingsRouteRoute
 } as any);
+const AuthenticatedBudgetsIndexRoute = AuthenticatedBudgetsIndexRouteImport.update({
+  id: '/budgets/',
+  path: '/budgets/',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
 const AuthenticatedSettingsMiscRoute = AuthenticatedSettingsMiscRouteImport.update({
   id: '/misc',
   path: '/misc',
@@ -63,14 +70,21 @@ const AuthenticatedSettingsAccountRoute = AuthenticatedSettingsAccountRouteImpor
   path: '/account',
   getParentRoute: () => AuthenticatedSettingsRouteRoute
 } as any);
+const AuthenticatedBudgetsBudgetIdRoute = AuthenticatedBudgetsBudgetIdRouteImport.update({
+  id: '/budgets/$budgetId',
+  path: '/budgets/$budgetId',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthRouteRouteWithChildren;
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
+  '/budgets/$budgetId': typeof AuthenticatedBudgetsBudgetIdRoute;
   '/settings/account': typeof AuthenticatedSettingsAccountRoute;
   '/settings/misc': typeof AuthenticatedSettingsMiscRoute;
+  '/budgets': typeof AuthenticatedBudgetsIndexRoute;
   '/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
 }
@@ -78,8 +92,10 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
+  '/budgets/$budgetId': typeof AuthenticatedBudgetsBudgetIdRoute;
   '/settings/account': typeof AuthenticatedSettingsAccountRoute;
   '/settings/misc': typeof AuthenticatedSettingsMiscRoute;
+  '/budgets': typeof AuthenticatedBudgetsIndexRoute;
   '/settings': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
 }
@@ -90,8 +106,10 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren;
   '/auth/login': typeof AuthLoginRoute;
   '/_authenticated/': typeof AuthenticatedIndexRoute;
+  '/_authenticated/budgets/$budgetId': typeof AuthenticatedBudgetsBudgetIdRoute;
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute;
   '/_authenticated/settings/misc': typeof AuthenticatedSettingsMiscRoute;
+  '/_authenticated/budgets/': typeof AuthenticatedBudgetsIndexRoute;
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute;
 }
@@ -102,8 +120,10 @@ export interface FileRouteTypes {
     | '/settings'
     | '/auth/login'
     | '/'
+    | '/budgets/$budgetId'
     | '/settings/account'
     | '/settings/misc'
+    | '/budgets'
     | '/settings/'
     | '/staff';
   fileRoutesByTo: FileRoutesByTo;
@@ -111,8 +131,10 @@ export interface FileRouteTypes {
     | '/auth'
     | '/auth/login'
     | '/'
+    | '/budgets/$budgetId'
     | '/settings/account'
     | '/settings/misc'
+    | '/budgets'
     | '/settings'
     | '/staff';
   id:
@@ -122,8 +144,10 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/auth/login'
     | '/_authenticated/'
+    | '/_authenticated/budgets/$budgetId'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/misc'
+    | '/_authenticated/budgets/'
     | '/_authenticated/settings/'
     | '/_authenticated/staff/';
   fileRoutesById: FileRoutesById;
@@ -184,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport;
       parentRoute: typeof AuthenticatedSettingsRouteRoute;
     };
+    '/_authenticated/budgets/': {
+      id: '/_authenticated/budgets/';
+      path: '/budgets';
+      fullPath: '/budgets';
+      preLoaderRoute: typeof AuthenticatedBudgetsIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
     '/_authenticated/settings/misc': {
       id: '/_authenticated/settings/misc';
       path: '/misc';
@@ -197,6 +228,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/account';
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport;
       parentRoute: typeof AuthenticatedSettingsRouteRoute;
+    };
+    '/_authenticated/budgets/$budgetId': {
+      id: '/_authenticated/budgets/$budgetId';
+      path: '/budgets/$budgetId';
+      fullPath: '/budgets/$budgetId';
+      preLoaderRoute: typeof AuthenticatedBudgetsBudgetIdRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
     };
   }
 }
@@ -219,12 +257,16 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren;
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute;
+  AuthenticatedBudgetsBudgetIdRoute: typeof AuthenticatedBudgetsBudgetIdRoute;
+  AuthenticatedBudgetsIndexRoute: typeof AuthenticatedBudgetsIndexRoute;
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute;
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedBudgetsBudgetIdRoute: AuthenticatedBudgetsBudgetIdRoute,
+  AuthenticatedBudgetsIndexRoute: AuthenticatedBudgetsIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute
 };
 

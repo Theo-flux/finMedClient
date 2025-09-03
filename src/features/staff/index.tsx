@@ -3,8 +3,8 @@ import { Paragraph, Header } from '../components/typography';
 import { Button } from '@/components/ui/button';
 import { Funnel, UserPlusIcon } from 'lucide-react';
 import StaffTable from './components/StaffTable';
-import RolePieChart from './components/RolePieChart';
-import Activities from './components/Activities';
+// import RolePieChart from './components/RolePieChart';
+// import Activities from './components/Activities';
 import InputSearch from '@/components/fields/InputSearch';
 import { paginatedRes } from '@/constants/data';
 import { useFetchUsers } from '@/hooks/users/useFetchUsers';
@@ -70,10 +70,10 @@ const Staff = () => {
           <StaffTable {...{ isLoading, data: staff }} />
         </div>
 
-        <div className="flex w-full flex-col justify-between space-y-4 md:flex-row md:space-y-0">
+        {/* <div className="flex w-full flex-col justify-between space-y-4 md:flex-row md:space-y-0">
           <RolePieChart />
           <Activities />
-        </div>
+        </div> */}
       </div>
     </Main>
   );

@@ -3,7 +3,7 @@ import { RootStore } from '..';
 
 class UserStore {
   rootStore: RootStore;
-  userQuery: TUserQuery = { limit: 1, offset: 0, userStatus: null, staff_no: null, q: null };
+  userQuery: TUserQuery = { limit: 30, offset: 0, user_status: null, staff_no: null, q: null };
 
   constructor(_rootStore: RootStore) {
     makeObservable(this, {

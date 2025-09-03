@@ -1,3 +1,14 @@
+type TAbrigedUser = {
+  uid: string;
+  created_at: string;
+  updated_at: string;
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  staff_no: string;
+};
+
 type TUserInfoItem = {
   id: number;
   uid: string;
@@ -17,10 +28,7 @@ type TUserInfoItem = {
   department: TResource;
 };
 
-type TUserQuery = {
-  limit: number;
-  offset: number;
-  userStatus: string | null;
+type TUserQuery = TFinMedServerQuery & {
+  user_status: string | null;
   staff_no: string | null;
-  q: string | null;
 };
