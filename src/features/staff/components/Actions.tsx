@@ -9,12 +9,18 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { EnumStatus } from '@/constants/mangle';
+import { useStore } from '@/store';
+import { AppModals } from '@/store/AppConfig/appModalTypes';
 
 interface DataTableRowActionsProps {
   row: Row<TUserInfoItem>;
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
+  const {
+    AppConfigStore: { toggleModals }
+  } = useStore();
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
@@ -24,7 +30,17 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-fit">
-        <DropdownMenuItem>View</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() =>
+            toggleModals({
+              open: true,
+              name: AppModals.USER_MODAL,
+              uid: row.original.uid
+            })
+          }
+        >
+          Edit
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         {row.original.status === EnumStatus.ACTIVE ||
         row.original.status === EnumStatus.IN_ACTIVE ? (

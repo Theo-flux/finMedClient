@@ -33,7 +33,7 @@ const Budget = () => {
             onClick={() =>
               toggleModals({
                 open: true,
-                name: AppModals.USER_MODAL,
+                name: AppModals.BUDGET_MODAL,
                 uid: ''
               })
             }

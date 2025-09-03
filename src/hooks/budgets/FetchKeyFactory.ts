@@ -4,7 +4,7 @@ export const budget = {
   getUserBudgets(query: Partial<TBudgetQuery>) {
     return {
       path: BUDGET.USER_BUDGETS,
-      keys: () => [BUDGET.USER_BUDGETS, query] as const,
+      keys: () => [BUDGET.CREATE, BUDGET.USER_BUDGETS, query] as const,
       params: query
     };
   },
@@ -12,7 +12,14 @@ export const budget = {
   getAssignedBudgets(query: Partial<TBudgetQuery>) {
     return {
       path: BUDGET.ASSIGNED_BUDGETS,
-      keys: () => [BUDGET.ASSIGNED_BUDGETS, query] as const
+      keys: () => [BUDGET.CREATE, BUDGET.ASSIGNED_BUDGETS, query] as const
+    };
+  },
+
+  getSingleBudget(uid: string) {
+    return {
+      path: `${BUDGET.CREATE}/${uid}`,
+      keys: () => [BUDGET.CREATE, BUDGET.ASSIGNED_BUDGETS, uid] as const
     };
   }
 };

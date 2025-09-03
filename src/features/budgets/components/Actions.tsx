@@ -5,16 +5,23 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { Route } from '@/routes/_authenticated/budgets/$budgetId';
 import { EnumStatus } from '@/constants/mangle';
+import { useStore } from '@/store';
+import { AppModals } from '@/store/AppConfig/appModalTypes';
+import { Link } from '@tanstack/react-router';
 
 interface DataTableRowActionsProps {
   row: Row<TSingleBudgetResponse>;
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
+  const {
+    AppConfigStore: { toggleModals }
+  } = useStore();
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
@@ -24,8 +31,21 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-fit">
-        <DropdownMenuItem>View</DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link to={Route.fullPath.toString().replace('$budgetId', row.original.uid)}>View</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() =>
+            toggleModals({
+              open: true,
+              name: AppModals.BUDGET_MODAL,
+              uid: row.original.uid
+            })
+          }
+        >
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem>Quick expense</DropdownMenuItem>
         {row.original.status === EnumStatus.ACTIVE ||
         row.original.status === EnumStatus.IN_ACTIVE ? (
           <DropdownMenuItem className="text-red-500">Suspend</DropdownMenuItem>

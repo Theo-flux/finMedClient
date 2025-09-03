@@ -25,11 +25,10 @@ interface DepartmentSelectProps<T extends FieldValues> {
   name: FieldPath<T>;
   label?: string;
   placeholder?: string;
-  required?: boolean;
   disabled?: boolean;
   description?: string;
   filter?: (department: TResource) => boolean;
-  onSelectionChange?: (department: TResource | null) => void;
+  onSelectionChange?: (department: string | null) => void;
 }
 
 export function DepartmentSelect<T extends FieldValues>({
@@ -37,7 +36,6 @@ export function DepartmentSelect<T extends FieldValues>({
   name,
   label = 'Department',
   placeholder = 'Select a department',
-  required = false,
   disabled = false,
   description,
   filter,
@@ -60,30 +58,10 @@ export function DepartmentSelect<T extends FieldValues>({
     }));
   }, [departments, filter]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSelectionChange = (value: string, onChange: (value: any) => void) => {
-    const selectedOption = departmentOptions.find((opt) => opt.value === value);
-
-    const formValue = {
-      label: selectedOption?.label || '',
-      value: value,
-      disable: false
-    };
-
-    onChange(formValue);
-
-    if (onSelectionChange) {
-      onSelectionChange(selectedOption?.department || null);
-    }
-  };
-
   if (isLoading) {
     return (
       <div className="w-full">
-        <FormLabel>
-          {label}
-          {required && <span className="text-destructive ml-1">*</span>}
-        </FormLabel>
+        <FormLabel>{label}</FormLabel>
         <Skeleton className="mt-2 h-10 w-full" />
       </div>
     );
@@ -92,10 +70,7 @@ export function DepartmentSelect<T extends FieldValues>({
   if (error) {
     return (
       <div className="w-full">
-        <FormLabel>
-          {label}
-          {required && <span className="text-destructive ml-1">*</span>}
-        </FormLabel>
+        <FormLabel>{label}</FormLabel>
         <div className="text-destructive mt-2 flex items-center gap-2 text-sm">
           <AlertCircle className="h-4 w-4" />
           Failed to load departments
@@ -108,40 +83,48 @@ export function DepartmentSelect<T extends FieldValues>({
     <FormField
       control={control}
       name={name}
-      render={({ field: { value, onChange, ...field } }) => (
-        <FormItem className="w-full">
-          <FormLabel>{label}</FormLabel>
-          <FormControl className="w-full">
-            <Select
-              value={value?.value || ''}
-              onValueChange={(selectedValue) => handleSelectionChange(selectedValue, onChange)}
-              disabled={disabled || departmentOptions.length === 0}
-              {...field}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-              <SelectContent className="w-full">
-                {departmentOptions.length === 0 ? (
-                  <div>No departments available</div>
-                ) : (
-                  departmentOptions.map((option) => (
-                    <SelectItem
-                      key={option.value}
-                      value={option.value}
-                      disabled={option.department.status === EnumStatus.IN_ACTIVE}
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))
-                )}
-              </SelectContent>
-            </Select>
-          </FormControl>
-          <FormDescription className="w-full">{description}</FormDescription>
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field }) => {
+        return (
+          <FormItem className="w-full">
+            <FormLabel>{label}</FormLabel>
+            <FormControl className="w-full">
+              <Select
+                value={field.value || ''}
+                onValueChange={(selectedValue) => {
+                  field.onChange(selectedValue);
+                  if (onSelectionChange) {
+                    onSelectionChange(selectedValue || null);
+                  }
+                }}
+                disabled={disabled || departmentOptions.length === 0}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+                <SelectContent className="w-full">
+                  {departmentOptions.length === 0 ? (
+                    <div className="text-muted-foreground px-2 py-1.5 text-sm">
+                      No departments available
+                    </div>
+                  ) : (
+                    departmentOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        disabled={option.department.status === EnumStatus.IN_ACTIVE}
+                      >
+                        {option.label}
+                      </SelectItem>
+                    ))
+                  )}
+                </SelectContent>
+              </Select>
+            </FormControl>
+            {description && <FormDescription className="w-full">{description}</FormDescription>}
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
 }

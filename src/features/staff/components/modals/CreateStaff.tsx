@@ -25,16 +25,8 @@ export const UserSchema = z.object({
   first_name: z.string().min(1, 'Name is required'),
   last_name: z.string().min(1, 'Name is required'),
   email,
-  role_uid: z.object({
-    label: z.string(),
-    value: z.string().min(1, 'Kindly assign a role to this user.'),
-    disable: z.boolean().optional()
-  }),
-  department_uid: z.object({
-    label: z.string(),
-    value: z.string().min(1, 'Kindly place user in a Department.'),
-    disable: z.boolean().optional()
-  })
+  role_uid: z.string({ required_error: 'Kindly assign a role to this user.' }),
+  department_uid: z.string({ required_error: 'Kindly place user in a Department.' })
 });
 
 export type TUserSchema = z.infer<typeof UserSchema>;
@@ -60,16 +52,8 @@ function UserModal() {
         first_name: data.first_name,
         last_name: data.last_name,
         email: data.email,
-        role_uid: {
-          label: data.role.name,
-          value: data.role.uid,
-          disable: false
-        },
-        department_uid: {
-          label: data.department.name,
-          value: data.department.uid,
-          disable: false
-        }
+        role_uid: data.role.uid,
+        department_uid: data.department.uid
       };
     }
 
@@ -77,8 +61,8 @@ function UserModal() {
       first_name: '',
       last_name: '',
       email: '',
-      role_uid: { label: '', value: '', disable: false },
-      department_uid: { label: '', value: '', disable: false }
+      role_uid: '',
+      department_uid: ''
     };
   }, [isEditMode, isLoading, data]);
 
@@ -134,20 +118,12 @@ function UserModal() {
         first_name: '',
         last_name: '',
         email: '',
-        role_uid: { label: '', value: '', disable: false },
-        department_uid: { label: '', value: '', disable: false }
+        role_uid: '',
+        department_uid: ''
       });
       userData.current = {};
     }
   }, [isEditMode, defaultValues, reset]);
-
-  const handleRoleChange = (role: TResource | null) => {
-    console.log('Selected role:', role);
-  };
-
-  const handleDepartmentChange = (department: TResource | null) => {
-    console.log('Selected department:', department);
-  };
 
   return (
     <XModal isOpen={isOpen.USER_MODAL} closeModal={() => toggleModals({})}>
@@ -211,17 +187,14 @@ function UserModal() {
                 name="role_uid"
                 label="Role"
                 placeholder="Select a role"
-                required
-                onSelectionChange={handleRoleChange}
               />
 
               <DepartmentSelect
                 control={form.control}
+                disabled={isEditMode}
                 name="department_uid"
                 label="Department"
                 placeholder="Select a department"
-                required
-                onSelectionChange={handleDepartmentChange}
               />
             </fieldset>
 

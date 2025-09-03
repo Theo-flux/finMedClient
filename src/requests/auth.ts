@@ -10,11 +10,7 @@ export const postUserLogin = (payload: TLoginSchema) =>
   finMedServer.post<IFinMedServerRes<TLoginRes>>(AUTH.LOGIN, payload);
 
 export const postUserCreate = (payload: TUserSchema) => {
-  return finMedServer.post<IFinMedServerRes<boolean>>(AUTH.REGISTER_USER, {
-    ...payload,
-    role_uid: payload.role_uid.value,
-    department_uid: payload.department_uid.value
-  });
+  return finMedServer.post<IFinMedServerRes<boolean>>(AUTH.REGISTER_USER, payload);
 };
 
 // patch

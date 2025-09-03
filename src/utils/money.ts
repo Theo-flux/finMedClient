@@ -1,4 +1,4 @@
-export function ccyFormatter(p: string) {
+export function ccyFormatter(p: string | number) {
   return new Intl.NumberFormat('en-NG', {
     currencyDisplay: 'narrowSymbol',
     style: 'currency',
