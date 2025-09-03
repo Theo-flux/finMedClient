@@ -8,14 +8,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { EnumStatus } from '@/constants/mangle';
 
 interface DataTableRowActionsProps {
-  row: Row<TStaffInfoItem>;
+  row: Row<TUserInfoItem>;
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
-  console.log(row);
-
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
@@ -25,9 +24,14 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-fit">
-        <DropdownMenuItem>Suspend</DropdownMenuItem>
+        <DropdownMenuItem>View</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-red-500">Deactivate</DropdownMenuItem>
+        {row.original.status === EnumStatus.ACTIVE ||
+        row.original.status === EnumStatus.IN_ACTIVE ? (
+          <DropdownMenuItem className="text-red-500">Suspend</DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>Activate</DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

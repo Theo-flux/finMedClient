@@ -24,12 +24,14 @@ import { columns } from './columns';
 import { useStore } from '@/store';
 import { ServerPagination } from '@/components/ServerPagination';
 import { observer } from 'mobx-react-lite';
+import TableLoader from '@/components/Loaders/TableLoader';
 
 interface DataTableProps {
-  data: IFinMedServerPaginatedRes<TStaffInfoItem>;
+  isLoading: boolean;
+  data: IFinMedServerPaginatedRes<TUserInfoItem>['data'];
 }
 
-function StaffTable({ data }: DataTableProps) {
+function StaffTable({ isLoading, data }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -37,18 +39,18 @@ function StaffTable({ data }: DataTableProps) {
 
   const {
     AppConfigStore: { appQueryLimit },
-    StaffStore: { staffQuery, setLimit, setPage }
+    UserStore: { userQuery, setLimit, setOffset }
   } = useStore();
 
   const pagination: TPaginatedRes = {
-    current_page: data.data.pagination.current_page,
-    total: data.data.pagination.total,
-    total_pages: data.data.pagination.total_pages,
-    limit: data.data.pagination.limit
+    current_page: data.pagination.current_page,
+    total: data.pagination.total,
+    total_pages: data.pagination.total_pages,
+    limit: data.pagination.limit
   };
 
   const table = useReactTable({
-    data: data.data.items,
+    data: data.items,
     columns,
     state: {
       sorting,
@@ -93,28 +95,36 @@ function StaffTable({ data }: DataTableProps) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          {isLoading ? (
+            <TableLoader rows={6} columns={10} />
+          ) : (
+            data && (
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={columns.length} className="h-96 text-center">
+                      No results.
                     </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-96 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+                  </TableRow>
+                )}
+              </TableBody>
+            )
+          )}
         </Table>
       </div>
-      <ServerPagination {...{ pagination, setLimit, setPage, Limit: staffQuery.Limit }} />
+      <ServerPagination
+        {...{ pagination, setLimit, setOffset, limit: userQuery.limit, offset: userQuery.offset }}
+      />
     </>
   );
 }

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { UserPlusIcon } from 'lucide-react';
 import { SubHeader } from '@/features/components/typography';
 import { useFetchServices } from '@/hooks/misc/useFetchServices';
-import { EnumResourceStatus, EnumResourceType } from '@/constants/mangle';
+import { EnumStatus, EnumResourceType } from '@/constants/mangle';
 import { useStore } from '@/store';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
 
@@ -36,7 +36,7 @@ const Services = () => {
               name: AppModals.RESOURCE_MODAL,
               uid: '',
               resource_name: '',
-              status: EnumResourceStatus.ACTIVE,
+              status: EnumStatus.ACTIVE,
               type: EnumResourceType.SERVICE
             })
           }

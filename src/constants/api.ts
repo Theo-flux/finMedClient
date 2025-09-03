@@ -8,7 +8,9 @@ export const AUTH = {
   PROFILE: '/auth/profile'
 } as const;
 
-export const USER = {};
+export const USER = {
+  ALL: '/users'
+};
 
 export const MISC = {
   ALL: '/misc/all',

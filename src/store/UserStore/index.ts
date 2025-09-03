@@ -1,27 +1,27 @@
 import { action, makeObservable, observable } from 'mobx';
 import { RootStore } from '..';
 
-class StaffStore {
+class UserStore {
   rootStore: RootStore;
-  staffQuery = { Limit: 10, Page: 1 };
+  userQuery: TUserQuery = { limit: 1, offset: 0, userStatus: null, staff_no: null, q: null };
 
   constructor(_rootStore: RootStore) {
     makeObservable(this, {
-      staffQuery: observable,
+      userQuery: observable,
 
       setLimit: action.bound,
-      setPage: action.bound
+      setOffset: action.bound
     });
     this.rootStore = _rootStore;
   }
 
   setLimit(limit: number) {
-    this.staffQuery.Limit = limit;
+    this.userQuery.limit = limit;
   }
 
-  setPage(page: number) {
-    this.staffQuery.Page = page;
+  setOffset(offset: number) {
+    this.userQuery.offset = offset;
   }
 }
 
-export default StaffStore;
+export default UserStore;

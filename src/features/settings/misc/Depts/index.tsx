@@ -6,7 +6,7 @@ import { SubHeader } from '@/features/components/typography';
 import { useFetchDepts } from '@/hooks/misc/useFetchDepts';
 import { useStore } from '@/store';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
-import { EnumResourceStatus, EnumResourceType } from '@/constants/mangle';
+import { EnumStatus, EnumResourceType } from '@/constants/mangle';
 
 const Departments = () => {
   const {
@@ -36,7 +36,7 @@ const Departments = () => {
               name: AppModals.RESOURCE_MODAL,
               uid: '',
               resource_name: '',
-              status: EnumResourceStatus.ACTIVE,
+              status: EnumStatus.ACTIVE,
               type: EnumResourceType.DEPT
             })
           }

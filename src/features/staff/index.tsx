@@ -7,8 +7,29 @@ import RolePieChart from './components/RolePieChart';
 import Activities from './components/Activities';
 import InputSearch from '@/components/fields/InputSearch';
 import { paginatedRes } from '@/constants/data';
+import { useFetchUsers } from '@/hooks/users/useFetchUsers';
+import { useStore } from '@/store';
+import { useEffect, useState } from 'react';
+import { AppModals } from '@/store/AppConfig/appModalTypes';
+import { observer } from 'mobx-react-lite';
 
 const Staff = () => {
+  const {
+    UserStore: { userQuery },
+    AppConfigStore: { toggleModals }
+  } = useStore();
+  const [staff, setStaff] = useState<IFinMedServerPaginatedRes<TUserInfoItem>['data']>({
+    items: [],
+    pagination: paginatedRes
+  });
+  const { data, isLoading } = useFetchUsers(userQuery);
+
+  useEffect(() => {
+    if (!isLoading && data != undefined) {
+      setStaff(data);
+    }
+  }, [isLoading, data]);
+
   return (
     <Main>
       <div className="flex flex-col space-y-6">
@@ -24,7 +45,15 @@ const Staff = () => {
             <Funnel />
             Filter
           </Button>
-          <Button>
+          <Button
+            onClick={() =>
+              toggleModals({
+                open: true,
+                name: AppModals.USER_MODAL,
+                uid: ''
+              })
+            }
+          >
             <UserPlusIcon />
             Add staff
           </Button>
@@ -38,7 +67,7 @@ const Staff = () => {
             </div>
           </div>
 
-          <StaffTable data={{ data: { items: [], pagination: paginatedRes }, message: '' }} />
+          <StaffTable {...{ isLoading, data: staff }} />
         </div>
 
         <div className="flex w-full flex-col justify-between space-y-4 md:flex-row md:space-y-0">
@@ -50,4 +79,4 @@ const Staff = () => {
   );
 };
 
-export default Staff;
+export default observer(Staff);

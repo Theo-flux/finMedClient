@@ -6,7 +6,7 @@ import { UserPlusIcon } from 'lucide-react';
 import { SubHeader } from '@/features/components/typography';
 import { useStore } from '@/store';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
-import { EnumResourceStatus, EnumResourceType } from '@/constants/mangle';
+import { EnumStatus, EnumResourceType } from '@/constants/mangle';
 
 const Roles = () => {
   const {
@@ -36,7 +36,7 @@ const Roles = () => {
               name: AppModals.RESOURCE_MODAL,
               uid: '',
               resource_name: '',
-              status: EnumResourceStatus.ACTIVE,
+              status: EnumStatus.ACTIVE,
               type: EnumResourceType.ROLE
             })
           }

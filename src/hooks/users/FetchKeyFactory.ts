@@ -1,10 +1,18 @@
-import { AUTH } from '@/constants/api';
+import { USER } from '@/constants/api';
 
 export const user = {
-  getUsers() {
+  getUsers(query: TUserQuery) {
     return {
-      path: AUTH.PROFILE,
-      keys: () => [AUTH.PROFILE] as const
+      path: USER.ALL,
+      keys: () => [USER.ALL, query] as const,
+      params: query
+    };
+  },
+
+  getUser(uid: string) {
+    return {
+      path: `${USER.ALL}/${uid}`,
+      keys: () => [USER.ALL, uid] as const
     };
   }
 };

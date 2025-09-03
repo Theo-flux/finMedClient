@@ -1,6 +1,12 @@
 import { upperCaseRegex, lowerCaseRegex, numberRegex, specialCharcterRegex } from '@/utils';
 import { z } from 'zod';
 
+export const optionSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+  disable: z.boolean().optional()
+});
+
 export const email = z
   .string({ required_error: 'Email is required.' })
   .email('Invalid email address.');

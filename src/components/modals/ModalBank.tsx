@@ -10,7 +10,8 @@ const ModalsMap = {
   [AppModals.SET_PWD_MODAL]: lazy(() => import('@/features/auth/modals/set-pwd-modal')),
   [AppModals.RESOURCE_MODAL]: lazy(
     () => import('@/features/settings/misc/components/modals/ResourceModal')
-  )
+  ),
+  [AppModals.USER_MODAL]: lazy(() => import('@/features/staff/components/modals/CreateStaff'))
 };
 
 const ModalsBank = () => {

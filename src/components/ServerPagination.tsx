@@ -10,12 +10,19 @@ import {
 
 interface ServerPaginationProps {
   pagination: TPaginatedRes;
-  Limit: number;
+  limit: number;
   setLimit: (arg: number) => void;
-  setPage: (arg: number) => void;
+  setOffset: (arg: number) => void;
+  offset: number;
 }
 
-export function ServerPagination({ pagination, Limit, setLimit, setPage }: ServerPaginationProps) {
+export function ServerPagination({
+  pagination,
+  limit,
+  setLimit,
+  setOffset,
+  offset
+}: ServerPaginationProps) {
   return (
     <div
       className="flex items-center justify-between overflow-clip px-2"
@@ -26,13 +33,13 @@ export function ServerPagination({ pagination, Limit, setLimit, setPage }: Serve
         <div className="flex items-center space-x-2">
           <p className="hidden text-sm font-medium sm:block">Rows per page</p>
           <Select
-            value={`${Limit}`}
+            value={`${limit}`}
             onValueChange={(value) => {
               setLimit(Number(value));
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={Limit} />
+              <SelectValue placeholder={limit} />
             </SelectTrigger>
             <SelectContent side="top">
               {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -52,7 +59,7 @@ export function ServerPagination({ pagination, Limit, setLimit, setPage }: Serve
             className="h-8 w-8 p-0"
             onClick={() => {
               if (pagination.current_page > 1) {
-                setPage(Number(pagination.current_page - 1));
+                setOffset(offset - 1);
               }
             }}
             disabled={pagination.current_page == 1}
@@ -65,7 +72,8 @@ export function ServerPagination({ pagination, Limit, setLimit, setPage }: Serve
             className="h-8 w-8 p-0"
             onClick={() => {
               if (pagination.current_page < pagination.total_pages) {
-                setPage(Number(pagination.current_page + 1));
+                console.log(pagination.current_page);
+                setOffset(pagination.current_page);
               }
             }}
             disabled={pagination.current_page == pagination.total_pages}

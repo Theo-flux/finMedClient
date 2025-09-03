@@ -1,8 +1,15 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import { DataTableRowActions } from './Actions';
+import { format } from 'date-fns';
+import { statusTypes } from '@/constants/data';
+import { EnumStatus } from '@/constants/mangle';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
+import { getInitials, toTitleCase } from '@/utils';
 
-export const columns: Array<ColumnDef<TStaffInfoItem>> = [
+export const columns: Array<ColumnDef<TUserInfoItem>> = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -32,10 +39,16 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     header: () => 'Name',
     cell: ({ row }) => {
       return (
-        <div className="text-muted-foreground">
-          <div>
-            <small className="text-muted-foreground">{row.original.first_name}</small>
-            <small className="text-muted-foreground">{row.original.last_name}</small>
+        <div className="flex items-center justify-start space-x-2">
+          <Avatar className="rounded-lg border">
+            <AvatarImage src={row.original.avatar} />
+            <AvatarFallback>
+              {getInitials(`${row.original.first_name} ${row.original.last_name}`)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex items-center justify-start space-x-1">
+            <p className="text-muted-foreground">{row.original.first_name}</p>
+            <p className="text-muted-foreground">{row.original.last_name}</p>
           </div>
         </div>
       );
@@ -46,7 +59,7 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     accessorKey: 'staff_no',
     header: () => 'Staff No',
     cell: ({ row }) => {
-      return <small className="text-muted-foreground">{row.original.staff_no}</small>;
+      return <p className="text-muted-foreground">{row.original.staff_no}</p>;
     }
   },
 
@@ -54,7 +67,7 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     accessorKey: 'email',
     header: () => 'Email',
     cell: ({ row }) => {
-      return <small className="text-muted-foreground">{row.original.email}</small>;
+      return <p className="text-muted-foreground">{row.original.email}</p>;
     }
   },
 
@@ -62,7 +75,7 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     accessorKey: 'role',
     header: () => 'Role',
     cell: ({ row }) => {
-      return <div className="flex space-x-2">{row.original.role.name}</div>;
+      return <div className="text-muted-foreground">{row.original.role.name}</div>;
     }
   },
 
@@ -70,7 +83,7 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     accessorKey: 'department',
     header: () => 'Dept.',
     cell: ({ row }) => {
-      return <div className="flex space-x-2">{row.original.department.name}</div>;
+      return <div className="text-muted-foreground">{row.original.department.name}</div>;
     }
   },
 
@@ -78,7 +91,8 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     accessorKey: 'status',
     header: () => 'Status',
     cell: ({ row }) => {
-      return <div className="flex space-x-2">{row.original.status}</div>;
+      const badgeColor = statusTypes.get(row.original.status as EnumStatus);
+      return <Badge className={cn(badgeColor)}>{toTitleCase(row.original.status)}</Badge>;
     }
   },
 
@@ -86,7 +100,12 @@ export const columns: Array<ColumnDef<TStaffInfoItem>> = [
     accessorKey: 'last_login',
     header: () => 'Last login',
     cell: ({ row }) => {
-      return <small className="text-muted-foreground">{row.original.last_login}</small>;
+      return (
+        <p className="text-muted-foreground">
+          {row.original.last_login &&
+            format(new Date(row.original.last_login), "dd MMM yyyy 'at' h:mmaaa")}
+        </p>
+      );
     }
   },
 

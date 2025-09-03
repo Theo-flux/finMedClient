@@ -1,4 +1,4 @@
-type TStaffInfoItem = {
+type TUserInfoItem = {
   id: number;
   uid: string;
   created_at: string;
@@ -15,4 +15,12 @@ type TStaffInfoItem = {
   last_login?: string;
   role: TResource;
   department: TResource;
+};
+
+type TUserQuery = {
+  limit: number;
+  offset: number;
+  userStatus: string | null;
+  staff_no: string | null;
+  q: string | null;
 };

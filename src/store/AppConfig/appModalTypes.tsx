@@ -2,7 +2,8 @@ export enum AppModals {
   DONE = 'DONE',
   LOG_OUT_MODAL = 'LOG_OUT_MODAL',
   SET_PWD_MODAL = 'SET_PWD_MODAL',
-  RESOURCE_MODAL = 'RESOURCE_MODAL'
+  RESOURCE_MODAL = 'RESOURCE_MODAL',
+  USER_MODAL = 'USER_MODAL'
 }
 
 export type TAppModalsAction =
@@ -40,6 +41,13 @@ export type TAppModalsAction =
           resource_name: string;
           status: string;
           type: string;
+        }
+      | { open?: false }
+    ))
+  | ({ name: AppModals.USER_MODAL } & (
+      | {
+          open: true;
+          uid: string;
         }
       | { open?: false }
     ));

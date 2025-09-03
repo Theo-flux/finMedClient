@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { toTitleCase } from '@/utils';
 import { statusTypes } from '@/constants/data';
-import { EnumResourceStatus, EnumResourceType } from '@/constants/mangle';
+import { EnumStatus, EnumResourceType } from '@/constants/mangle';
 import { cn } from '@/lib/utils';
 
 export function getColumns(resourceType: EnumResourceType): Array<ColumnDef<TResource>> {
@@ -66,7 +66,7 @@ export function getColumns(resourceType: EnumResourceType): Array<ColumnDef<TRes
       accessorKey: 'status',
       header: () => 'Status',
       cell: ({ row }) => {
-        const badgeColor = statusTypes.get(row.original.status as EnumResourceStatus);
+        const badgeColor = statusTypes.get(row.original.status as EnumStatus);
         return (
           <Badge className={cn('capitalize', badgeColor)}>{toTitleCase(row.original.status)}</Badge>
         );

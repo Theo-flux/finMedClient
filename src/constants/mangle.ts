@@ -16,9 +16,10 @@ export enum EnumRoles {
   IT = 'technician'
 }
 
-export enum EnumResourceStatus {
+export enum EnumStatus {
   ACTIVE = 'ACTIVE',
-  IN_ACTIVE = 'IN_ACTIVE'
+  IN_ACTIVE = 'IN_ACTIVE',
+  SUSPENDED = 'SUSPENDED'
 }
 
 export enum EnumResourceType {

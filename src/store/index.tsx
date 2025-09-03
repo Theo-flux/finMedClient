@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 import { configure } from 'mobx';
 import AppConfigStore from './AppConfig';
 import AuthStore from './AuthStore';
-import StaffStore from './StaffStore';
+import UserStore from './UserStore';
 
 configure({
   enforceActions: 'observed',
@@ -20,12 +20,12 @@ export class RootStore {
   // more Features store added here...
   AppConfigStore: AppConfigStore;
   AuthStore: AuthStore;
-  StaffStore: StaffStore;
+  UserStore: UserStore;
 
   constructor() {
     this.AppConfigStore = new AppConfigStore(this);
     this.AuthStore = new AuthStore(this);
-    this.StaffStore = new StaffStore(this);
+    this.UserStore = new UserStore(this);
   }
 }
 

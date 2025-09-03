@@ -1,12 +1,25 @@
 import { TLoginSchema } from '@/features/auth/login/validations';
 import { TPwdResetSchema } from '@/features/auth/forgot-password/validations';
-import { AUTH } from '@/constants/api';
+import { AUTH, USER } from '@/constants/api';
 import finMedServer from '@/servers/finMed';
 import { Stores } from '@/store';
+import { TUserSchema } from '@/features/staff/components/modals/CreateStaff';
 
 // post
 export const postUserLogin = (payload: TLoginSchema) =>
   finMedServer.post<IFinMedServerRes<TLoginRes>>(AUTH.LOGIN, payload);
+
+export const postUserCreate = (payload: TUserSchema) => {
+  return finMedServer.post<IFinMedServerRes<boolean>>(AUTH.REGISTER_USER, {
+    ...payload,
+    role_uid: payload.role_uid.value,
+    department_uid: payload.department_uid.value
+  });
+};
+
+// patch
+export const patchUserUpdate = ({ uid, payload }: { uid: string; payload: Partial<TUserSchema> }) =>
+  finMedServer.patch<IFinMedServerRes<boolean>>(`${USER.ALL}/${uid}`, payload);
 
 export const getNewToken = () =>
   finMedServer.get<IFinMedServerRes<TLoginRes>>(AUTH.NEW_TOKEN, {

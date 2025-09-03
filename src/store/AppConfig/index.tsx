@@ -33,6 +33,10 @@ class AppConfigStore {
     type: ''
   };
 
+  userModal = {
+    uid: ''
+  };
+
   isOpen = { ...INIT_IS_OPEN };
 
   constructor(rootStore: RootStore) {
@@ -44,6 +48,8 @@ class AppConfigStore {
       nonce: observable,
       doneModal: observable,
       setPwdModal: observable,
+      resourceModal: observable,
+      userModal: observable,
 
       openSideNav: action.bound,
       openActivityNav: action.bound,
@@ -97,6 +103,14 @@ class AppConfigStore {
             type: modal.type,
             status: modal.status,
             name: modal.resource_name
+          };
+        }
+        break;
+
+      case AppModals.USER_MODAL:
+        if (modal.open) {
+          this.userModal = {
+            uid: modal.uid
           };
         }
         break;

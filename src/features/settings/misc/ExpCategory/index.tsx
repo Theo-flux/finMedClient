@@ -5,7 +5,7 @@ import { UserPlusIcon } from 'lucide-react';
 import { SubHeader } from '@/features/components/typography';
 import { useFetchExpCat } from '@/hooks/misc/useFetchExpCat';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
-import { EnumResourceStatus, EnumResourceType } from '@/constants/mangle';
+import { EnumStatus, EnumResourceType } from '@/constants/mangle';
 import { useStore } from '@/store';
 
 const Categories = () => {
@@ -36,7 +36,7 @@ const Categories = () => {
               name: AppModals.RESOURCE_MODAL,
               uid: '',
               resource_name: '',
-              status: EnumResourceStatus.ACTIVE,
+              status: EnumStatus.ACTIVE,
               type: EnumResourceType.CATEGORY
             })
           }

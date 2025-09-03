@@ -4,11 +4,19 @@ import store from 'store2';
 import { action, flow, makeObservable, observable } from 'mobx';
 import { TLoginSchema } from '@/features/auth/login/validations';
 import { TPwdResetSchema } from '@/features/auth/forgot-password/validations';
-import { postUserLogin, getNewToken, postPwdReset, getLogout } from '@/requests/auth';
+import {
+  postUserLogin,
+  postUserCreate,
+  getNewToken,
+  postPwdReset,
+  getLogout,
+  patchUserUpdate
+} from '@/requests/auth';
 import { parseError } from '@/utils/errorHandler';
 import { useStyledToast } from '@/hooks/app/useStyledToast';
 import { EnumUserType, Mangle } from '@/constants/mangle';
 import { AppModals } from '../AppConfig/appModalTypes';
+import { TUserSchema } from '@/features/staff/components/modals/CreateStaff';
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const toast = useStyledToast();
@@ -16,6 +24,7 @@ const toast = useStyledToast();
 const INIT_IS_LOADING = {
   logout: false,
   login: false,
+  createUser: false,
   request: false,
   reset: false,
   forgotPwd: false,
@@ -64,6 +73,7 @@ class AuthStore {
 
       logout: flow.bound,
       login: flow.bound,
+      createUser: flow.bound,
       fetchNewToken: flow.bound,
       resetPwd: flow.bound
     });
@@ -153,6 +163,38 @@ class AuthStore {
       toast.error(this.errors.login);
     } finally {
       this.isLoading.login = false;
+    }
+  }
+
+  *createUser(_payload: TUserSchema, cb?: () => void) {
+    this.isLoading.createUser = true;
+    this.errors.createUser = '';
+
+    try {
+      yield postUserCreate(_payload);
+      toast.success('user Created');
+      cb?.();
+    } catch (error) {
+      this.errors.createUser = parseError(error);
+      toast.error(this.errors.createUser);
+    } finally {
+      this.isLoading.createUser = false;
+    }
+  }
+
+  *updateUser(uid: string, _payload: Partial<TUserSchema>, cb?: () => void) {
+    this.isLoading.createUser = true;
+    this.errors.createUser = '';
+
+    try {
+      yield patchUserUpdate({ uid, payload: _payload });
+      toast.success('user Updated');
+      cb?.();
+    } catch (error) {
+      this.errors.createUser = parseError(error);
+      toast.error(this.errors.createUser);
+    } finally {
+      this.isLoading.createUser = false;
     }
   }
 
