@@ -13,9 +13,28 @@ export const patchBudget = ({ uid, payload }: { uid: string; payload: Partial<TB
   const newPayload = { ...payload };
 
   if (newPayload.gross_amount) {
-    newPayload.gross_amount = Number(payload.gross_amount) as unknown as string;
+    newPayload.gross_amount = Number(payload.gross_amount);
   }
   return finMedServer.patch<IFinMedServerRes<TLoginRes>>(`${BUDGET.CREATE}/${uid}`, {
     ...newPayload
   });
 };
+
+export const patchBudgetAvailability = ({
+  uid,
+  availability
+}: {
+  uid: string;
+  availability: string;
+}) =>
+  finMedServer.patch<IFinMedServerRes<boolean>>(BUDGET.AVAILABILITY.replace(':uid', uid), {
+    availability
+  });
+
+export const patchBudgetStatus = ({ uid, budget_status }: { uid: string; budget_status: string }) =>
+  finMedServer.patch<IFinMedServerRes<boolean>>(BUDGET.STATUS.replace(':uid', uid), {
+    budget_status
+  });
+
+export const deleteBudget = (uid: string) =>
+  finMedServer.delete<IFinMedServerRes<boolean>>(`${BUDGET.CREATE}/${uid}`);

@@ -21,5 +21,13 @@ export const budget = {
       path: `${BUDGET.CREATE}/${uid}`,
       keys: () => [BUDGET.CREATE, BUDGET.ASSIGNED_BUDGETS, uid] as const
     };
+  },
+
+  getBudgetExpenses(uid: string, query: Partial<TExpensesQuery>) {
+    return {
+      path: BUDGET.EXPENSES.replace(':uid', uid),
+      keys: () => [BUDGET.CREATE, BUDGET.EXPENSES, uid, query] as const,
+      params: query
+    };
   }
 };

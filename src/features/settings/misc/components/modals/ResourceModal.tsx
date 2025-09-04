@@ -22,8 +22,8 @@ import _ from 'lodash';
 import { Form } from '@/components/ui/form';
 
 export const ResourceSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  status: z.string().min(1, 'Status is required')
+  name: z.string({ required_error: 'Name is required' }).min(1, 'Name is required'),
+  status: z.string({ required_error: 'Select resource status' })
 });
 
 export type TResourceModalSchema = z.infer<typeof ResourceSchema>;

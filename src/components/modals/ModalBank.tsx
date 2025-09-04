@@ -12,7 +12,22 @@ const ModalsMap = {
     () => import('@/features/settings/misc/components/modals/ResourceModal')
   ),
   [AppModals.USER_MODAL]: lazy(() => import('@/features/staff/components/modals/CreateStaff')),
-  [AppModals.BUDGET_MODAL]: lazy(() => import('@/features/budgets/components/modals/BudgetModal'))
+  [AppModals.BUDGET_MODAL]: lazy(() => import('@/features/budgets/components/modals/BudgetModal')),
+  [AppModals.EXPENSE_MODAL]: lazy(
+    () => import('@/features/budgets/budgetId/components/modals/ExpenseModal')
+  ),
+  [AppModals.DELETE_EXPENSE_MODAL]: lazy(
+    () => import('@/features/budgets/budgetId/components/modals/DeleteModal')
+  ),
+  [AppModals.DELETE_BUDGET_MODAL]: lazy(
+    () => import('@/features/budgets/components/modals/DeleteModal')
+  ),
+  [AppModals.BUDGET_AVAILABILITY_MODAL]: lazy(
+    () => import('@/features/budgets/components/modals/FreezeBudgetModal')
+  ),
+  [AppModals.BUDGET_STATUS_MODAL]: lazy(
+    () => import('@/features/budgets/components/modals/BudgetStatusModal')
+  )
 };
 
 const ModalsBank = () => {

@@ -51,7 +51,7 @@ export function ServerPagination({
           </Select>
         </div>
         <div className="flex w-fit items-center justify-center text-sm font-medium">
-          Page {pagination.current_page} of {pagination.total_pages}
+          Page {pagination.current_page} of {pagination.total_pages || 1}
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -72,11 +72,12 @@ export function ServerPagination({
             className="h-8 w-8 p-0"
             onClick={() => {
               if (pagination.current_page < pagination.total_pages) {
-                console.log(pagination.current_page);
                 setOffset(pagination.current_page);
               }
             }}
-            disabled={pagination.current_page == pagination.total_pages}
+            disabled={
+              pagination.current_page == pagination.total_pages || pagination.total_pages == 0
+            }
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRightIcon className="h-4 w-4" />

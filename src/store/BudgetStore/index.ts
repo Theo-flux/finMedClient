@@ -39,6 +39,8 @@ class BudgetStore {
   constructor(_rootStore: RootStore) {
     makeObservable(this, {
       queries: observable,
+      isLoading: observable,
+      errors: observable,
 
       setLimit: action.bound,
       setOffset: action.bound,

@@ -29,3 +29,7 @@ type TBudgetQuery = TFinMedServerQuery & {
   budget_status: string | null;
   budget_availability: string | null;
 };
+
+type TExpensesQuery = TFinMedServerQuery & {
+  expenses_category_uid: string | null;
+};

@@ -4,7 +4,12 @@ export enum AppModals {
   SET_PWD_MODAL = 'SET_PWD_MODAL',
   RESOURCE_MODAL = 'RESOURCE_MODAL',
   USER_MODAL = 'USER_MODAL',
-  BUDGET_MODAL = 'BUDGET_MODAL'
+  BUDGET_MODAL = 'BUDGET_MODAL',
+  EXPENSE_MODAL = 'EXPENSE_MODAL',
+  DELETE_BUDGET_MODAL = 'DELETE_BUDGET_MODAL',
+  BUDGET_AVAILABILITY_MODAL = 'BUDGET_AVAILABILITY_MODAL',
+  BUDGET_STATUS_MODAL = 'BUDGET_STATUS_MODAL',
+  DELETE_EXPENSE_MODAL = 'DELETE_EXPENSE_MODAL'
 }
 
 export type TAppModalsAction =
@@ -45,17 +50,40 @@ export type TAppModalsAction =
         }
       | { open?: false }
     ))
-  | ({ name: AppModals.USER_MODAL } & (
+  | ({
+      name:
+        | AppModals.USER_MODAL
+        | AppModals.BUDGET_MODAL
+        | AppModals.DELETE_BUDGET_MODAL
+        | AppModals.DELETE_EXPENSE_MODAL;
+    } & (
       | {
           open: true;
           uid: string;
         }
       | { open?: false }
     ))
-  | ({ name: AppModals.BUDGET_MODAL } & (
+  | ({ name: AppModals.EXPENSE_MODAL } & (
       | {
           open: true;
           uid: string;
+          budget_uid: string;
+        }
+      | { open?: false }
+    ))
+  | ({ name: AppModals.BUDGET_AVAILABILITY_MODAL } & (
+      | {
+          open: true;
+          uid: string;
+          availability: string;
+        }
+      | { open?: false }
+    ))
+  | ({ name: AppModals.BUDGET_STATUS_MODAL } & (
+      | {
+          open: true;
+          uid: string;
+          budget_status: string;
         }
       | { open?: false }
     ));

@@ -23,7 +23,14 @@ export const MISC = {
 export const BUDGET = {
   CREATE: '/budgets',
   USER_BUDGETS: '/budgets/user_budgets',
-  ASSIGNED_BUDGETS: '/budgets/user_assigned_budgets'
+  ASSIGNED_BUDGETS: '/budgets/user_assigned_budgets',
+  EXPENSES: '/budgets/:uid/expenses',
+  AVAILABILITY: '/budgets/:uid/availability',
+  STATUS: '/budgets/:uid/status'
+};
+
+export const EXPENSE = {
+  CREATE: '/expenses'
 };
 
 export const DEFAULT_LIMIT = 30;

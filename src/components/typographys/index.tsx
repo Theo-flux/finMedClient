@@ -33,7 +33,7 @@ export const Paragraph = ({
   ...rest
 }: ITypographyProps<HTMLParagraphElement>) => {
   return (
-    <p className={`font-grotesk text-xs font-thin md:text-sm ${className}`} {...rest}>
+    <p className={`font-grotesk text-muted-foreground text-xs md:text-sm ${className}`} {...rest}>
       {children}
     </p>
   );

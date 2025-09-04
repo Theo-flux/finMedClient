@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toTitleCase } from '@/utils';
 import { ccyFormatter } from '@/utils/money';
-import { Progress } from '@/components/ui/progress';
+import { BudgetProgressBar } from '../BudgetProgressBar';
 
 export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
   {
@@ -71,33 +71,13 @@ export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
     accessorKey: 'amount_remaining',
     header: () => 'Consumption',
     cell: ({ row }) => {
-      const grossAmount = Number(row.original.gross_amount) || 0;
-      const amountRemaining = Number(row.original.amount_remaining) || 0;
-      const amountSpent = grossAmount - amountRemaining;
-
-      if (grossAmount === 0) {
-        return <span className="text-sm text-gray-500">N/A</span>;
-      }
-
-      const progress = Math.min((amountSpent / grossAmount) * 100, 100);
-      const isOverBudget = amountSpent > grossAmount;
-      const isNearLimit = progress >= 80 && !isOverBudget;
-
-      const getProgressColor = () => {
-        if (isOverBudget) return '[&>div]:bg-red-500';
-        if (isNearLimit) return '[&>div]:bg-yellow-500';
-        return '[&>div]:bg-green-500';
-      };
-
       return (
-        <div className="flex w-full items-center gap-2">
-          <Progress value={progress} className={`w-[80%] ${getProgressColor()}`} />
-          <div className="flex flex-col items-center text-xs">
-            <span className={isOverBudget ? 'text-red-600' : 'text-gray-700'}>
-              {progress.toFixed(1)}%
-            </span>
-          </div>
-        </div>
+        <BudgetProgressBar
+          {...{
+            grossAmount: Number(row.original.gross_amount),
+            amountRemaining: Number(row.original.amount_remaining)
+          }}
+        />
       );
     }
   },

@@ -5,6 +5,7 @@ import AppConfigStore from './AppConfig';
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 import BudgetStore from './BudgetStore';
+import ExpenseStore from './ExpenseStore';
 
 configure({
   enforceActions: 'observed',
@@ -23,12 +24,14 @@ export class RootStore {
   AuthStore: AuthStore;
   UserStore: UserStore;
   BudgetStore: BudgetStore;
+  ExpenseStore: ExpenseStore;
 
   constructor() {
     this.AppConfigStore = new AppConfigStore(this);
     this.AuthStore = new AuthStore(this);
     this.UserStore = new UserStore(this);
     this.BudgetStore = new BudgetStore(this);
+    this.ExpenseStore = new ExpenseStore(this);
   }
 }
 

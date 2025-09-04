@@ -35,7 +35,10 @@ class AppConfigStore {
   };
 
   dataModal = {
-    uid: ''
+    uid: '',
+    budget_uid: '',
+    availability: '',
+    budget_status: ''
   };
 
   isOpen = { ...INIT_IS_OPEN };
@@ -110,16 +113,40 @@ class AppConfigStore {
 
       case AppModals.USER_MODAL:
         if (modal.open) {
-          this.dataModal = {
-            uid: modal.uid
-          };
+          this.dataModal.uid = modal.uid;
         }
         break;
       case AppModals.BUDGET_MODAL:
         if (modal.open) {
-          this.dataModal = {
-            uid: modal.uid
-          };
+          this.dataModal.uid = modal.uid;
+        }
+        break;
+      case AppModals.EXPENSE_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+          this.dataModal.budget_uid = modal.budget_uid;
+        }
+        break;
+      case AppModals.DELETE_BUDGET_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+        }
+        break;
+      case AppModals.DELETE_EXPENSE_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+        }
+        break;
+      case AppModals.BUDGET_AVAILABILITY_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+          this.dataModal.availability = modal.availability;
+        }
+        break;
+      case AppModals.BUDGET_STATUS_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+          this.dataModal.budget_status = modal.budget_status;
         }
         break;
       default:
