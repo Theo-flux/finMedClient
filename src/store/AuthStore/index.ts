@@ -70,11 +70,12 @@ class AuthStore {
       setTokens: action.bound,
       setUser: action.bound,
       grantAccess: action.bound,
+      clearStore: action.bound,
+      fetchNewToken: action.bound,
 
       logout: flow.bound,
       login: flow.bound,
       createUser: flow.bound,
-      fetchNewToken: flow.bound,
       resetPwd: flow.bound
     });
   }
@@ -96,7 +97,7 @@ class AuthStore {
 
   setTokens(token: string, refreshToken: string) {
     this.accessToken = persist(Mangle.ACCESS_TOKEN, token);
-    this.refreshToken = persist(Mangle.REFRESH_TOKEN, refreshToken);
+    if (refreshToken) this.refreshToken = persist(Mangle.REFRESH_TOKEN, refreshToken);
   }
 
   setUser(data: TProfileInfo) {
@@ -107,6 +108,12 @@ class AuthStore {
     this.setTokens(access_token, refresh_token);
 
     cb?.();
+  }
+
+  clearStore() {
+    this.resetStores();
+    store.clearAll();
+    window.location.replace('/auth/login');
   }
 
   *logout(cb?: () => void) {
@@ -198,16 +205,19 @@ class AuthStore {
     }
   }
 
-  *fetchNewToken() {
+  async fetchNewToken() {
     this.isLoading.refresh = true;
+
     try {
-      const { data } = (yield getNewToken()) as { data: TLoginRes };
-
-      this.setTokens(data.access_token, data.refresh_token);
-
-      return { token: this.accessToken, refreshToken: this.refreshToken };
+      const res = await getNewToken();
+      const { data } = res.data;
+      if (data.access_token) {
+        this.setTokens(data.access_token, data.refresh_token || '');
+        return data.access_token;
+      }
     } catch (error) {
-      this.errors.refresh = parseError(error);
+      this.clearStore();
+      toast.error(parseError(error) || 'Session expired, please login again');
     } finally {
       this.isLoading.refresh = false;
     }

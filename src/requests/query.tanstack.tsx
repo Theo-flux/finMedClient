@@ -40,6 +40,7 @@ function ReactQueryProvider({ children }: PropsWithChildren<object>) {
             staleTime,
             refetchInterval,
             retryOnMount: false,
+            retry: 2,
             queryFn
           }
         }

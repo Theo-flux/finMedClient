@@ -14,7 +14,7 @@ const resourceReqInterceptor = (config: InternalAxiosRequestConfig) => {
 
 const resourceResInterceptor = (response: AxiosResponse) => response;
 
-const resourceResErrorInterceptor = (error: AxiosError) => {
+const resourceResErrorInterceptor = async (error: AxiosError) => {
   if (error.response && error.config) {
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
@@ -24,18 +24,18 @@ const resourceResErrorInterceptor = (error: AxiosError) => {
       originalRequest._retry = true;
 
       const refresh_token = Stores.AuthStore.refreshToken;
-      let tokenObj = { token: '', refreshToken: '' };
+      let token = '';
 
       if (refresh_token) {
-        const gen = Stores.AuthStore.fetchNewToken();
-        tokenObj = gen.next().value as { token: string; refreshToken: string };
+        const res = await Stores.AuthStore.fetchNewToken();
+        token = res || '';
       }
 
-      const { token } = tokenObj;
-      Stores.AuthStore.setTokens(tokenObj.token, tokenObj.refreshToken);
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-
-      return finMedServer(originalRequest);
+      if (token) {
+        originalRequest.headers.Authorization = 'Bearer ' + Stores.AuthStore.accessToken;
+        return finMedServer(originalRequest);
+      }
+      Stores.AuthStore.clearStore();
     }
   }
 
