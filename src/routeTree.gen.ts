@@ -16,9 +16,15 @@ import { Route as AuthLoginRouteImport } from './routes/auth/login';
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route';
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated/staff/index';
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index';
+import { Route as AuthenticatedPaymentsIndexRouteImport } from './routes/_authenticated/payments/index';
+import { Route as AuthenticatedInvoicesIndexRouteImport } from './routes/_authenticated/invoices/index';
+import { Route as AuthenticatedExpensesIndexRouteImport } from './routes/_authenticated/expenses/index';
 import { Route as AuthenticatedBudgetsIndexRouteImport } from './routes/_authenticated/budgets/index';
 import { Route as AuthenticatedSettingsMiscRouteImport } from './routes/_authenticated/settings/misc';
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account';
+import { Route as AuthenticatedPaymentsPaymentIdRouteImport } from './routes/_authenticated/payments/$paymentId';
+import { Route as AuthenticatedInvoicesInvoiceIdRouteImport } from './routes/_authenticated/invoices/$invoiceId';
+import { Route as AuthenticatedExpensesExpenseIdRouteImport } from './routes/_authenticated/expenses/$expenseId';
 import { Route as AuthenticatedBudgetsBudgetIdRouteImport } from './routes/_authenticated/budgets/$budgetId';
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -55,6 +61,21 @@ const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexRouteImport.up
   path: '/',
   getParentRoute: () => AuthenticatedSettingsRouteRoute
 } as any);
+const AuthenticatedPaymentsIndexRoute = AuthenticatedPaymentsIndexRouteImport.update({
+  id: '/payments/',
+  path: '/payments/',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
+const AuthenticatedInvoicesIndexRoute = AuthenticatedInvoicesIndexRouteImport.update({
+  id: '/invoices/',
+  path: '/invoices/',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
+const AuthenticatedExpensesIndexRoute = AuthenticatedExpensesIndexRouteImport.update({
+  id: '/expenses/',
+  path: '/expenses/',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
 const AuthenticatedBudgetsIndexRoute = AuthenticatedBudgetsIndexRouteImport.update({
   id: '/budgets/',
   path: '/budgets/',
@@ -70,6 +91,21 @@ const AuthenticatedSettingsAccountRoute = AuthenticatedSettingsAccountRouteImpor
   path: '/account',
   getParentRoute: () => AuthenticatedSettingsRouteRoute
 } as any);
+const AuthenticatedPaymentsPaymentIdRoute = AuthenticatedPaymentsPaymentIdRouteImport.update({
+  id: '/payments/$paymentId',
+  path: '/payments/$paymentId',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
+const AuthenticatedInvoicesInvoiceIdRoute = AuthenticatedInvoicesInvoiceIdRouteImport.update({
+  id: '/invoices/$invoiceId',
+  path: '/invoices/$invoiceId',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
+const AuthenticatedExpensesExpenseIdRoute = AuthenticatedExpensesExpenseIdRouteImport.update({
+  id: '/expenses/$expenseId',
+  path: '/expenses/$expenseId',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
 const AuthenticatedBudgetsBudgetIdRoute = AuthenticatedBudgetsBudgetIdRouteImport.update({
   id: '/budgets/$budgetId',
   path: '/budgets/$budgetId',
@@ -82,9 +118,15 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
   '/budgets/$budgetId': typeof AuthenticatedBudgetsBudgetIdRoute;
+  '/expenses/$expenseId': typeof AuthenticatedExpensesExpenseIdRoute;
+  '/invoices/$invoiceId': typeof AuthenticatedInvoicesInvoiceIdRoute;
+  '/payments/$paymentId': typeof AuthenticatedPaymentsPaymentIdRoute;
   '/settings/account': typeof AuthenticatedSettingsAccountRoute;
   '/settings/misc': typeof AuthenticatedSettingsMiscRoute;
   '/budgets': typeof AuthenticatedBudgetsIndexRoute;
+  '/expenses': typeof AuthenticatedExpensesIndexRoute;
+  '/invoices': typeof AuthenticatedInvoicesIndexRoute;
+  '/payments': typeof AuthenticatedPaymentsIndexRoute;
   '/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
 }
@@ -93,9 +135,15 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute;
   '/': typeof AuthenticatedIndexRoute;
   '/budgets/$budgetId': typeof AuthenticatedBudgetsBudgetIdRoute;
+  '/expenses/$expenseId': typeof AuthenticatedExpensesExpenseIdRoute;
+  '/invoices/$invoiceId': typeof AuthenticatedInvoicesInvoiceIdRoute;
+  '/payments/$paymentId': typeof AuthenticatedPaymentsPaymentIdRoute;
   '/settings/account': typeof AuthenticatedSettingsAccountRoute;
   '/settings/misc': typeof AuthenticatedSettingsMiscRoute;
   '/budgets': typeof AuthenticatedBudgetsIndexRoute;
+  '/expenses': typeof AuthenticatedExpensesIndexRoute;
+  '/invoices': typeof AuthenticatedInvoicesIndexRoute;
+  '/payments': typeof AuthenticatedPaymentsIndexRoute;
   '/settings': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
 }
@@ -107,9 +155,15 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute;
   '/_authenticated/': typeof AuthenticatedIndexRoute;
   '/_authenticated/budgets/$budgetId': typeof AuthenticatedBudgetsBudgetIdRoute;
+  '/_authenticated/expenses/$expenseId': typeof AuthenticatedExpensesExpenseIdRoute;
+  '/_authenticated/invoices/$invoiceId': typeof AuthenticatedInvoicesInvoiceIdRoute;
+  '/_authenticated/payments/$paymentId': typeof AuthenticatedPaymentsPaymentIdRoute;
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute;
   '/_authenticated/settings/misc': typeof AuthenticatedSettingsMiscRoute;
   '/_authenticated/budgets/': typeof AuthenticatedBudgetsIndexRoute;
+  '/_authenticated/expenses/': typeof AuthenticatedExpensesIndexRoute;
+  '/_authenticated/invoices/': typeof AuthenticatedInvoicesIndexRoute;
+  '/_authenticated/payments/': typeof AuthenticatedPaymentsIndexRoute;
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute;
 }
@@ -121,9 +175,15 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/'
     | '/budgets/$budgetId'
+    | '/expenses/$expenseId'
+    | '/invoices/$invoiceId'
+    | '/payments/$paymentId'
     | '/settings/account'
     | '/settings/misc'
     | '/budgets'
+    | '/expenses'
+    | '/invoices'
+    | '/payments'
     | '/settings/'
     | '/staff';
   fileRoutesByTo: FileRoutesByTo;
@@ -132,9 +192,15 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/'
     | '/budgets/$budgetId'
+    | '/expenses/$expenseId'
+    | '/invoices/$invoiceId'
+    | '/payments/$paymentId'
     | '/settings/account'
     | '/settings/misc'
     | '/budgets'
+    | '/expenses'
+    | '/invoices'
+    | '/payments'
     | '/settings'
     | '/staff';
   id:
@@ -145,9 +211,15 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/_authenticated/'
     | '/_authenticated/budgets/$budgetId'
+    | '/_authenticated/expenses/$expenseId'
+    | '/_authenticated/invoices/$invoiceId'
+    | '/_authenticated/payments/$paymentId'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/misc'
     | '/_authenticated/budgets/'
+    | '/_authenticated/expenses/'
+    | '/_authenticated/invoices/'
+    | '/_authenticated/payments/'
     | '/_authenticated/settings/'
     | '/_authenticated/staff/';
   fileRoutesById: FileRoutesById;
@@ -208,6 +280,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport;
       parentRoute: typeof AuthenticatedSettingsRouteRoute;
     };
+    '/_authenticated/payments/': {
+      id: '/_authenticated/payments/';
+      path: '/payments';
+      fullPath: '/payments';
+      preLoaderRoute: typeof AuthenticatedPaymentsIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
+    '/_authenticated/invoices/': {
+      id: '/_authenticated/invoices/';
+      path: '/invoices';
+      fullPath: '/invoices';
+      preLoaderRoute: typeof AuthenticatedInvoicesIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
+    '/_authenticated/expenses/': {
+      id: '/_authenticated/expenses/';
+      path: '/expenses';
+      fullPath: '/expenses';
+      preLoaderRoute: typeof AuthenticatedExpensesIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
     '/_authenticated/budgets/': {
       id: '/_authenticated/budgets/';
       path: '/budgets';
@@ -228,6 +321,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/account';
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport;
       parentRoute: typeof AuthenticatedSettingsRouteRoute;
+    };
+    '/_authenticated/payments/$paymentId': {
+      id: '/_authenticated/payments/$paymentId';
+      path: '/payments/$paymentId';
+      fullPath: '/payments/$paymentId';
+      preLoaderRoute: typeof AuthenticatedPaymentsPaymentIdRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
+    '/_authenticated/invoices/$invoiceId': {
+      id: '/_authenticated/invoices/$invoiceId';
+      path: '/invoices/$invoiceId';
+      fullPath: '/invoices/$invoiceId';
+      preLoaderRoute: typeof AuthenticatedInvoicesInvoiceIdRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
+    '/_authenticated/expenses/$expenseId': {
+      id: '/_authenticated/expenses/$expenseId';
+      path: '/expenses/$expenseId';
+      fullPath: '/expenses/$expenseId';
+      preLoaderRoute: typeof AuthenticatedExpensesExpenseIdRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
     };
     '/_authenticated/budgets/$budgetId': {
       id: '/_authenticated/budgets/$budgetId';
@@ -258,7 +372,13 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren;
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute;
   AuthenticatedBudgetsBudgetIdRoute: typeof AuthenticatedBudgetsBudgetIdRoute;
+  AuthenticatedExpensesExpenseIdRoute: typeof AuthenticatedExpensesExpenseIdRoute;
+  AuthenticatedInvoicesInvoiceIdRoute: typeof AuthenticatedInvoicesInvoiceIdRoute;
+  AuthenticatedPaymentsPaymentIdRoute: typeof AuthenticatedPaymentsPaymentIdRoute;
   AuthenticatedBudgetsIndexRoute: typeof AuthenticatedBudgetsIndexRoute;
+  AuthenticatedExpensesIndexRoute: typeof AuthenticatedExpensesIndexRoute;
+  AuthenticatedInvoicesIndexRoute: typeof AuthenticatedInvoicesIndexRoute;
+  AuthenticatedPaymentsIndexRoute: typeof AuthenticatedPaymentsIndexRoute;
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute;
 }
 
@@ -266,7 +386,13 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedBudgetsBudgetIdRoute: AuthenticatedBudgetsBudgetIdRoute,
+  AuthenticatedExpensesExpenseIdRoute: AuthenticatedExpensesExpenseIdRoute,
+  AuthenticatedInvoicesInvoiceIdRoute: AuthenticatedInvoicesInvoiceIdRoute,
+  AuthenticatedPaymentsPaymentIdRoute: AuthenticatedPaymentsPaymentIdRoute,
   AuthenticatedBudgetsIndexRoute: AuthenticatedBudgetsIndexRoute,
+  AuthenticatedExpensesIndexRoute: AuthenticatedExpensesIndexRoute,
+  AuthenticatedInvoicesIndexRoute: AuthenticatedInvoicesIndexRoute,
+  AuthenticatedPaymentsIndexRoute: AuthenticatedPaymentsIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute
 };
 

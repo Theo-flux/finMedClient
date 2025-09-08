@@ -218,6 +218,8 @@ class AuthStore {
     } catch (error) {
       this.clearStore();
       toast.error(parseError(error) || 'Session expired, please login again');
+      console.log(error);
+      throw error;
     } finally {
       this.isLoading.refresh = false;
     }

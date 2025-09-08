@@ -7,16 +7,9 @@ import { Link } from '@tanstack/react-router';
 import UserBudgets from './UserBudgets';
 import AssignedBudgets from './AssignedBudgets';
 import { Route } from '@/routes/_authenticated/budgets/index';
-import { Button } from '@/components/ui/button';
-import { useStore } from '@/store';
-import { AppModals } from '@/store/AppConfig/appModalTypes';
-import { PlusIcon } from 'lucide-react';
 
 const Budget = () => {
   const { tab } = Route.useSearch();
-  const {
-    AppConfigStore: { toggleModals }
-  } = useStore();
 
   return (
     <Main>
@@ -26,21 +19,6 @@ const Budget = () => {
             <Header>Budget management</Header>
             <Paragraph>Create, update and manage budgets.</Paragraph>
           </div>
-        </div>
-
-        <div className="flex w-full items-center justify-end space-x-2">
-          <Button
-            onClick={() =>
-              toggleModals({
-                open: true,
-                name: AppModals.BUDGET_MODAL,
-                uid: ''
-              })
-            }
-          >
-            <PlusIcon />
-            Create budget
-          </Button>
         </div>
 
         <Tabs value={tab ?? EnumLabBudgetQueryType.SELF} className="flex w-full flex-col space-y-4">

@@ -42,6 +42,7 @@ class BudgetStore {
       isLoading: observable,
       errors: observable,
 
+      setQSearch: action.bound,
       setLimit: action.bound,
       setOffset: action.bound,
 
@@ -49,6 +50,10 @@ class BudgetStore {
       updateBudget: flow.bound
     });
     this.rootStore = _rootStore;
+  }
+
+  setQSearch(_q: string, dataType: EnumLabBudgetQueryType = EnumLabBudgetQueryType.SELF) {
+    this.queries[dataType].q = _q;
   }
 
   setOffset(_offset: number, dataType: EnumLabBudgetQueryType = EnumLabBudgetQueryType.SELF) {
