@@ -37,6 +37,7 @@ class AppConfigStore {
   dataModal = {
     uid: '',
     budget_uid: '',
+    invoice_uid: '',
     availability: '',
     budget_status: ''
   };
@@ -127,12 +128,33 @@ class AppConfigStore {
           this.dataModal.budget_uid = modal.budget_uid;
         }
         break;
+      case AppModals.INVOICE_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+        }
+        break;
+      case AppModals.PAYMENT_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+          this.dataModal.invoice_uid = modal.invoice_uid;
+        }
+        break;
       case AppModals.DELETE_BUDGET_MODAL:
         if (modal.open) {
           this.dataModal.uid = modal.uid;
         }
         break;
       case AppModals.DELETE_EXPENSE_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+        }
+        break;
+      case AppModals.DELETE_INVOICE_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
+        }
+        break;
+      case AppModals.DELETE_PAYMENT_MODAL:
         if (modal.open) {
           this.dataModal.uid = modal.uid;
         }

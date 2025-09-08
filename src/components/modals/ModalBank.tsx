@@ -27,6 +27,18 @@ const ModalsMap = {
   ),
   [AppModals.BUDGET_STATUS_MODAL]: lazy(
     () => import('@/features/budgets/components/modals/BudgetStatusModal')
+  ),
+  [AppModals.INVOICE_MODAL]: lazy(
+    () => import('@/features/invoice/components/modals/InvoiceModal')
+  ),
+  [AppModals.DELETE_INVOICE_MODAL]: lazy(
+    () => import('@/features/invoice/components/modals/DeleteModal')
+  ),
+  [AppModals.PAYMENT_MODAL]: lazy(
+    () => import('@/features/invoice/invoiceId/components/modals/PaymentModal')
+  ),
+  [AppModals.DELETE_PAYMENT_MODAL]: lazy(
+    () => import('@/features/invoice/invoiceId/components/modals/DeleteModal')
   )
 };
 

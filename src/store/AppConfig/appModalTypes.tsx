@@ -6,7 +6,11 @@ export enum AppModals {
   USER_MODAL = 'USER_MODAL',
   BUDGET_MODAL = 'BUDGET_MODAL',
   EXPENSE_MODAL = 'EXPENSE_MODAL',
+  INVOICE_MODAL = 'INVOICE_MODAL',
+  PAYMENT_MODAL = 'PAYMENT_MODAL',
   DELETE_BUDGET_MODAL = 'DELETE_BUDGET_MODAL',
+  DELETE_INVOICE_MODAL = 'DELETE_INVOICE_MODAL',
+  DELETE_PAYMENT_MODAL = 'DELETE_PAYMENT_MODAL',
   BUDGET_AVAILABILITY_MODAL = 'BUDGET_AVAILABILITY_MODAL',
   BUDGET_STATUS_MODAL = 'BUDGET_STATUS_MODAL',
   DELETE_EXPENSE_MODAL = 'DELETE_EXPENSE_MODAL'
@@ -55,7 +59,10 @@ export type TAppModalsAction =
         | AppModals.USER_MODAL
         | AppModals.BUDGET_MODAL
         | AppModals.DELETE_BUDGET_MODAL
-        | AppModals.DELETE_EXPENSE_MODAL;
+        | AppModals.DELETE_EXPENSE_MODAL
+        | AppModals.INVOICE_MODAL
+        | AppModals.DELETE_INVOICE_MODAL
+        | AppModals.DELETE_PAYMENT_MODAL;
     } & (
       | {
           open: true;
@@ -68,6 +75,14 @@ export type TAppModalsAction =
           open: true;
           uid: string;
           budget_uid: string;
+        }
+      | { open?: false }
+    ))
+  | ({ name: AppModals.PAYMENT_MODAL } & (
+      | {
+          open: true;
+          uid: string;
+          invoice_uid: string;
         }
       | { open?: false }
     ))

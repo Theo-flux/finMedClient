@@ -23,6 +23,7 @@ export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
         className="translate-y-[2px]"
       />
     ),
+
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}

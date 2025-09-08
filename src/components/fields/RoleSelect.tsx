@@ -19,6 +19,7 @@ import { useFetchRoles } from '@/hooks/misc/useFetchRoles';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle } from 'lucide-react';
 import { EnumStatus } from '@/constants/mangle';
+import _ from 'lodash';
 
 interface RoleSelectProps<T extends FieldValues> {
   control: Control<T>;
@@ -52,7 +53,7 @@ export function RoleSelect<T extends FieldValues>({
     }
 
     return filteredRoles.map((role) => ({
-      label: role.name,
+      label: _.capitalize(role.name),
       value: role.uid,
       role: role
     }));

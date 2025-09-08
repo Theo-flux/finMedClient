@@ -19,6 +19,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle } from 'lucide-react';
 import { EnumStatus } from '@/constants/mangle';
 import { useFetchExpCat } from '@/hooks/misc/useFetchExpCat';
+import _ from 'lodash';
 
 interface CategorySelectProps<T extends FieldValues> {
   control: Control<T>;
@@ -52,7 +53,7 @@ export function CategorySelect<T extends FieldValues>({
     }
 
     return filteredCategories.map((cat) => ({
-      label: cat.name,
+      label: _.capitalize(cat.name),
       value: cat.uid,
       category: cat
     }));

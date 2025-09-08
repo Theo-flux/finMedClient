@@ -30,7 +30,19 @@ export const BUDGET = {
 };
 
 export const EXPENSE = {
-  CREATE: '/expenses'
+  CREATE: '/expenses',
+  SINGLE: '/expenses/:uid'
+};
+
+export const INVOICE = {
+  CREATE: '/invoices',
+  SINGLE: '/invoices/:uid',
+  PAYMENTS: '/invoices/:uid/payments'
+};
+
+export const PAYMENT = {
+  CREATE: '/payments',
+  SINGLE: '/payments/:uid'
 };
 
 export const DEFAULT_LIMIT = 30;

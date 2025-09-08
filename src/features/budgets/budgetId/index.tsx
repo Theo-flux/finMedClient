@@ -17,7 +17,7 @@ import { ArrowLeftIcon } from 'lucide-react';
 const BudgetId = () => {
   const { budgetId } = Route.useParams();
   const { data, isLoading } = useFetchBudget(budgetId);
-  console.log({ data, isLoading });
+
   return (
     <Main>
       {isLoading ? (

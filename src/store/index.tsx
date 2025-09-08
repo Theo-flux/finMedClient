@@ -6,6 +6,8 @@ import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 import BudgetStore from './BudgetStore';
 import ExpenseStore from './ExpenseStore';
+import InvoiceStore from './InvoiceStore';
+import PaymentStore from './PaymentStore';
 
 configure({
   enforceActions: 'observed',
@@ -25,6 +27,8 @@ export class RootStore {
   UserStore: UserStore;
   BudgetStore: BudgetStore;
   ExpenseStore: ExpenseStore;
+  InvoiceStore: InvoiceStore;
+  PaymentStore: PaymentStore;
 
   constructor() {
     this.AppConfigStore = new AppConfigStore(this);
@@ -32,6 +36,8 @@ export class RootStore {
     this.UserStore = new UserStore(this);
     this.BudgetStore = new BudgetStore(this);
     this.ExpenseStore = new ExpenseStore(this);
+    this.InvoiceStore = new InvoiceStore(this);
+    this.PaymentStore = new PaymentStore(this);
   }
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import {
   ColumnFiltersState,
   SortingState,
@@ -25,6 +25,11 @@ import { useStore } from '@/store';
 import { ServerPagination } from '@/components/ServerPagination';
 import { observer } from 'mobx-react-lite';
 import TableLoader from '@/components/Loaders/TableLoader';
+import InputSearch from '@/components/fields/InputSearch';
+import { Button } from '@/components/ui/button';
+import { Funnel } from 'lucide-react';
+import { debounce } from '@/utils/debounce';
+import EmptyData from '@/components/EmptyData';
 
 interface DataTableProps {
   isLoading: boolean;
@@ -39,7 +44,7 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
 
   const {
     AppConfigStore: { appQueryLimit },
-    ExpenseStore: { expenseQuery, setLimit, setOffset }
+    ExpenseStore: { expenseQuery, setLimit, setOffset, setQSearch }
   } = useStore();
 
   const pagination: TPaginatedRes = {
@@ -48,6 +53,12 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
     total_pages: data.pagination.total_pages,
     limit: data.pagination.limit
   };
+
+  const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
+    setQSearch(event.target.value);
+  };
+
+  const debouncedHandleSearch = debounce(handleSearchQuery);
 
   const table = useReactTable({
     data: data.items,
@@ -77,7 +88,18 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
   });
 
   return (
-    <>
+    <div className="space-y-6">
+      <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-2">
+        <div className="flex flex-col justify-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
+          <div className="w-full md:w-[200px]">
+            <InputSearch placeholder="Search expenses" onChange={debouncedHandleSearch} />
+          </div>
+          <Button variant="secondary">
+            <Funnel />
+            Filter
+          </Button>
+        </div>
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -113,7 +135,10 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
                 ) : (
                   <TableRow>
                     <TableCell colSpan={columns.length} className="h-96 text-center">
-                      No results.
+                      <EmptyData
+                        title="No expenses found"
+                        desc="Start tracking your expenses by adding new entries to your budget"
+                      />
                     </TableCell>
                   </TableRow>
                 )}
@@ -129,7 +154,7 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
         limit={expenseQuery.limit}
         offset={expenseQuery.offset}
       />
-    </>
+    </div>
   );
 }
 

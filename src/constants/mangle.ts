@@ -41,3 +41,36 @@ export enum EnumBudgetAvailability {
   DEPLETED = 'DEPLETED',
   RESERVED = 'RESERVED'
 }
+
+export enum EnumInvoiceStatus {
+  PAID = 'PAID',
+  PARTIALLY_PAID = 'PARTIALLY_PAID',
+  UNPAID = 'UNPAID',
+  OVERPAID = 'OVERPAID'
+}
+
+export enum EnumInvoiceType {
+  SERVICE = 'SERVICE',
+  PRODUCT = 'PRODUCT',
+  SUBSCRIPTION = 'SUBSCRIPTION',
+  MAINTENANCE = 'MAINTENANCE',
+  PATIENT = 'PATIENT',
+  INSURANCE = 'INSURANCE',
+  GOVERMENT_GRANT = 'GOVERMENT_GRANT',
+  DONATION = 'DONATION',
+  OTHERS = 'OTHERS'
+}
+
+export enum EnumPaymentMethod {
+  CARD = 'CARD',
+  BANK_TRANSFER = 'BANK_TRANSFER',
+  CASH = 'CASH',
+  CHEQUE = 'CHEQUE',
+  MOBILE_MONEY = 'MOBILE_MONEY'
+}
+
+export enum EnumExpenseStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED'
+}

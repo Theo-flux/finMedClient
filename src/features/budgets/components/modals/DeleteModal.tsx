@@ -19,7 +19,7 @@ export default function DeletModal() {
   const { mutate, isPending } = useMutation({
     mutationFn: deleteBudget,
     onError: () => {
-      toast.error('Error delete Budget!');
+      toast.error('Error deleting Budget!');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

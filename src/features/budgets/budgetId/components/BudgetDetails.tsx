@@ -1,7 +1,8 @@
 import { Paragraph } from '@/components/typographys';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ccyFormatter } from '@/utils/money';
-import { BudgetProgressBar, EnumProgressType } from '../../BudgetProgressBar';
+import { BudgetProgressBar } from '../../BudgetProgressBar';
+import { EnumProgressType } from '@/components/Progress';
 
 interface IBudgetDetailsProps {
   data: TSingleBudgetResponse;

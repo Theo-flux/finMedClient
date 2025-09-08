@@ -3,11 +3,8 @@ import { RootStore } from '..';
 import initializer from '@/utils/initializer';
 import { TExpenseSchema } from '@/features/budgets/budgetId/components/modals/ExpenseModal';
 import { patchExpense, postCreateExpense } from '@/requests/expense';
-import { useStyledToast } from '@/hooks/app/useStyledToast';
 import { parseError } from '@/utils/errorHandler';
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const toast = useStyledToast();
+import { toast } from '@/constants/toast';
 
 const INIT_IS_LOADING = {
   createExpense: false
@@ -25,6 +22,7 @@ class ExpenseStore {
       isLoading: observable,
       errors: observable,
 
+      setQSearch: action.bound,
       setLimit: action.bound,
       setOffset: action.bound,
 
@@ -32,6 +30,10 @@ class ExpenseStore {
       updateExpense: flow.bound
     });
     this.rootStore = _rootStore;
+  }
+
+  setQSearch(_q: string) {
+    this.expenseQuery.q = _q;
   }
 
   setLimit(limit: number) {

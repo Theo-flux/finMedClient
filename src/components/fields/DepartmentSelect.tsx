@@ -19,6 +19,7 @@ import { useFetchDepts } from '@/hooks/misc/useFetchDepts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle } from 'lucide-react';
 import { EnumStatus } from '@/constants/mangle';
+import _ from 'lodash';
 
 interface DepartmentSelectProps<T extends FieldValues> {
   control: Control<T>;
@@ -52,7 +53,7 @@ export function DepartmentSelect<T extends FieldValues>({
     }
 
     return filteredDepartments.map((dept) => ({
-      label: dept.name,
+      label: _.capitalize(dept.name),
       value: dept.uid,
       department: dept
     }));

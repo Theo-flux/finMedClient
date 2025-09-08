@@ -3,17 +3,19 @@ import { useStore } from '@/store';
 import ExpenseTable from './ExpenseTable';
 import { useEffect, useState } from 'react';
 import { paginatedRes } from '@/constants/data';
-import { Header } from '@/features/components/typography';
 import { Button } from '@/components/ui/button';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
 import { PlusIcon } from 'lucide-react';
+import { SubHeader } from '@/features/components/typography';
 
 const BudgetExpenses = ({ budgetId }: { budgetId: string }) => {
   const {
     AppConfigStore: { toggleModals },
     ExpenseStore: { expenseQuery }
   } = useStore();
-  const [expenses, setBudgets] = useState<IFinMedServerPaginatedRes<TExpensesItem>['data']>({
+  const [budgetExpenses, setBudgetExpenses] = useState<
+    IFinMedServerPaginatedRes<TExpensesItem>['data']
+  >({
     items: [],
     pagination: paginatedRes
   });
@@ -21,14 +23,14 @@ const BudgetExpenses = ({ budgetId }: { budgetId: string }) => {
 
   useEffect(() => {
     if (!isLoading && data != undefined) {
-      setBudgets(data);
+      setBudgetExpenses(data);
     }
   }, [isLoading, data]);
 
   return (
     <div className="space-y-4">
       <div className="flex w-full items-center justify-between space-x-2">
-        <Header>All expenses</Header>
+        <SubHeader>All Expenses</SubHeader>
         <Button
           onClick={() =>
             toggleModals({
@@ -43,7 +45,7 @@ const BudgetExpenses = ({ budgetId }: { budgetId: string }) => {
           Add expense
         </Button>
       </div>
-      <ExpenseTable {...{ data: expenses, isLoading }} />
+      <ExpenseTable {...{ data: budgetExpenses, isLoading }} />
     </div>
   );
 };

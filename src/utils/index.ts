@@ -44,7 +44,7 @@ export function snakeCaseToSentenceCase(input: string): string {
 }
 
 export function trnformToOptions(arg: Array<string>) {
-  return arg.map((arg) => ({ label: arg, value: arg }));
+  return arg.map((arg) => ({ label: toTitleCase(arg), value: arg }));
 }
 
 export function getLabel(
