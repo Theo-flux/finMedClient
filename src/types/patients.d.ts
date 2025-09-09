@@ -11,5 +11,6 @@ type TPatientItem = {
   phone_number: string;
   hospital_id: string;
   patient_type: string;
+  user: TAbrigedUser;
 };
 type TPatientQuery = TFinMedServerQuery & { patient_type: string | null };

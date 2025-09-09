@@ -15,7 +15,7 @@ export const patchBudget = ({ uid, payload }: { uid: string; payload: Partial<TB
   if (newPayload.gross_amount) {
     newPayload.gross_amount = Number(payload.gross_amount);
   }
-  return finMedServer.patch<IFinMedServerRes<TLoginRes>>(`${BUDGET.CREATE}/${uid}`, {
+  return finMedServer.patch<IFinMedServerRes<boolean>>(`${BUDGET.CREATE}/${uid}`, {
     ...newPayload
   });
 };

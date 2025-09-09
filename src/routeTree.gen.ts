@@ -17,6 +17,7 @@ import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authen
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated/staff/index';
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index';
 import { Route as AuthenticatedPaymentsIndexRouteImport } from './routes/_authenticated/payments/index';
+import { Route as AuthenticatedPatientsIndexRouteImport } from './routes/_authenticated/patients/index';
 import { Route as AuthenticatedInvoicesIndexRouteImport } from './routes/_authenticated/invoices/index';
 import { Route as AuthenticatedExpensesIndexRouteImport } from './routes/_authenticated/expenses/index';
 import { Route as AuthenticatedBudgetsIndexRouteImport } from './routes/_authenticated/budgets/index';
@@ -64,6 +65,11 @@ const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexRouteImport.up
 const AuthenticatedPaymentsIndexRoute = AuthenticatedPaymentsIndexRouteImport.update({
   id: '/payments/',
   path: '/payments/',
+  getParentRoute: () => AuthenticatedRouteRoute
+} as any);
+const AuthenticatedPatientsIndexRoute = AuthenticatedPatientsIndexRouteImport.update({
+  id: '/patients/',
+  path: '/patients/',
   getParentRoute: () => AuthenticatedRouteRoute
 } as any);
 const AuthenticatedInvoicesIndexRoute = AuthenticatedInvoicesIndexRouteImport.update({
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/budgets': typeof AuthenticatedBudgetsIndexRoute;
   '/expenses': typeof AuthenticatedExpensesIndexRoute;
   '/invoices': typeof AuthenticatedInvoicesIndexRoute;
+  '/patients': typeof AuthenticatedPatientsIndexRoute;
   '/payments': typeof AuthenticatedPaymentsIndexRoute;
   '/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/budgets': typeof AuthenticatedBudgetsIndexRoute;
   '/expenses': typeof AuthenticatedExpensesIndexRoute;
   '/invoices': typeof AuthenticatedInvoicesIndexRoute;
+  '/patients': typeof AuthenticatedPatientsIndexRoute;
   '/payments': typeof AuthenticatedPaymentsIndexRoute;
   '/settings': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/_authenticated/budgets/': typeof AuthenticatedBudgetsIndexRoute;
   '/_authenticated/expenses/': typeof AuthenticatedExpensesIndexRoute;
   '/_authenticated/invoices/': typeof AuthenticatedInvoicesIndexRoute;
+  '/_authenticated/patients/': typeof AuthenticatedPatientsIndexRoute;
   '/_authenticated/payments/': typeof AuthenticatedPaymentsIndexRoute;
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute;
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/budgets'
     | '/expenses'
     | '/invoices'
+    | '/patients'
     | '/payments'
     | '/settings/'
     | '/staff';
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/budgets'
     | '/expenses'
     | '/invoices'
+    | '/patients'
     | '/payments'
     | '/settings'
     | '/staff';
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/_authenticated/budgets/'
     | '/_authenticated/expenses/'
     | '/_authenticated/invoices/'
+    | '/_authenticated/patients/'
     | '/_authenticated/payments/'
     | '/_authenticated/settings/'
     | '/_authenticated/staff/';
@@ -285,6 +297,13 @@ declare module '@tanstack/react-router' {
       path: '/payments';
       fullPath: '/payments';
       preLoaderRoute: typeof AuthenticatedPaymentsIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
+    '/_authenticated/patients/': {
+      id: '/_authenticated/patients/';
+      path: '/patients';
+      fullPath: '/patients';
+      preLoaderRoute: typeof AuthenticatedPatientsIndexRouteImport;
       parentRoute: typeof AuthenticatedRouteRoute;
     };
     '/_authenticated/invoices/': {
@@ -378,6 +397,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBudgetsIndexRoute: typeof AuthenticatedBudgetsIndexRoute;
   AuthenticatedExpensesIndexRoute: typeof AuthenticatedExpensesIndexRoute;
   AuthenticatedInvoicesIndexRoute: typeof AuthenticatedInvoicesIndexRoute;
+  AuthenticatedPatientsIndexRoute: typeof AuthenticatedPatientsIndexRoute;
   AuthenticatedPaymentsIndexRoute: typeof AuthenticatedPaymentsIndexRoute;
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute;
 }
@@ -392,6 +412,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBudgetsIndexRoute: AuthenticatedBudgetsIndexRoute,
   AuthenticatedExpensesIndexRoute: AuthenticatedExpensesIndexRoute,
   AuthenticatedInvoicesIndexRoute: AuthenticatedInvoicesIndexRoute,
+  AuthenticatedPatientsIndexRoute: AuthenticatedPatientsIndexRoute,
   AuthenticatedPaymentsIndexRoute: AuthenticatedPaymentsIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute
 };

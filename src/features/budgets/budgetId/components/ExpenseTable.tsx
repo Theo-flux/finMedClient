@@ -134,7 +134,7 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={columns.length} className="h-96 text-center">
+                    <TableCell colSpan={columns.length} className="w-full">
                       <EmptyData
                         title="No expenses found"
                         desc="Start tracking your expenses by adding new entries to your budget"

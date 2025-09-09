@@ -61,7 +61,8 @@ const Invoices = () => {
                 toggleModals({
                   open: true,
                   name: AppModals.INVOICE_MODAL,
-                  uid: ''
+                  uid: '',
+                  patient_uid: ''
                 })
               }
             >

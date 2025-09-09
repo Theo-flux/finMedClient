@@ -66,5 +66,4 @@ export const uninterceptedServer = axios.create({
 export default finMedServer;
 
 finMedServer.interceptors.request.use(resourceReqInterceptor);
-
 finMedServer.interceptors.response.use(resourceResInterceptor, resourceResErrorInterceptor);

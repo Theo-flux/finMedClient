@@ -37,6 +37,7 @@ class AppConfigStore {
   dataModal = {
     uid: '',
     budget_uid: '',
+    patient_uid: '',
     invoice_uid: '',
     availability: '',
     budget_status: ''
@@ -131,12 +132,18 @@ class AppConfigStore {
       case AppModals.INVOICE_MODAL:
         if (modal.open) {
           this.dataModal.uid = modal.uid;
+          this.dataModal.patient_uid = modal.patient_uid;
         }
         break;
       case AppModals.PAYMENT_MODAL:
         if (modal.open) {
           this.dataModal.uid = modal.uid;
           this.dataModal.invoice_uid = modal.invoice_uid;
+        }
+        break;
+      case AppModals.PATIENT_MODAL:
+        if (modal.open) {
+          this.dataModal.uid = modal.uid;
         }
         break;
       case AppModals.DELETE_BUDGET_MODAL:

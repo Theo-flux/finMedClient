@@ -18,10 +18,10 @@ type TInvoiceItem = {
   net_amount_due: string;
   department_uid: string;
   service_uid: string;
-  patient_uid: string;
+  patient_uid?: string;
   user_uid: string;
   user: TAbrigedUser;
   service: TResource;
   department: TResource;
-  patient: TPatientItem;
+  patient?: TPatientItem;
 };

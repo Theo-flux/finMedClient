@@ -45,5 +45,10 @@ export const PAYMENT = {
   SINGLE: '/payments/:uid'
 };
 
+export const PATIENT = {
+  CREATE: '/patients',
+  SINGLE: '/patients/:uid'
+};
+
 export const DEFAULT_LIMIT = 30;
 export const DEFAULT_OFFSET = 0;

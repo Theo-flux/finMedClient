@@ -2,15 +2,14 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import { DataTableRowActions } from './Actions';
 import { format } from 'date-fns';
-import { invoiceStatusTypes } from '@/constants/data';
-import { EnumInvoiceStatus } from '@/constants/mangle';
+import { patientTypeBadge } from '@/constants/data';
+import { EnumPatientType } from '@/constants/mangle';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toTitleCase } from '@/utils';
-import { calculatedAmount, ccyFormatter } from '@/utils/money';
-import { InvoiceProgressBar } from './InvoiceProgressBar';
+import _ from 'lodash';
 
-export const columns: Array<ColumnDef<TInvoiceItem>> = [
+export const columns: Array<ColumnDef<TPatientItem>> = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -39,64 +38,44 @@ export const columns: Array<ColumnDef<TInvoiceItem>> = [
     accessorKey: 'id',
     header: () => 'ID',
     cell: ({ row }) => {
-      return <p className="text-muted-foreground">{row.original.serial_no}</p>;
+      return <p className="text-muted-foreground">{row.original.hospital_id}</p>;
     }
   },
 
   {
-    accessorKey: 'title',
-    header: () => 'Title',
+    accessorKey: 'first_name',
+    header: () => 'Full Name',
     cell: ({ row }) => {
-      return <p className="text-muted-foreground">{row.original.title}</p>;
-    }
-  },
-
-  {
-    accessorKey: 'department',
-    header: () => 'Dept.',
-    cell: ({ row }) => {
-      return <div className="text-muted-foreground">{row.original.department.name}</div>;
-    }
-  },
-
-  {
-    accessorKey: 'gross_amount',
-    header: () => 'Amount',
-    cell: ({ row }) => {
-      return <div className="text-muted-foreground">{ccyFormatter(row.original.gross_amount)}</div>;
-    }
-  },
-
-  {
-    accessorKey: 'amount_remaining',
-    header: () => 'Progress',
-    cell: ({ row }) => {
-      const totalAmount = calculatedAmount(
-        Number(row.original.gross_amount),
-        Number(row.original.tax_percent),
-        Number(row.original.discount_percent)
-      );
       return (
-        <InvoiceProgressBar
-          totalAmount={totalAmount}
-          paidAmount={totalAmount - Number(row.original.net_amount_due)}
-        />
+        <div className="flex items-center justify-start space-x-1">
+          <p className="text-muted-foreground">{_.capitalize(row.original.first_name)}</p>
+          <p className="text-muted-foreground">{_.capitalize(row.original.other_name)[0]}.</p>
+          <p className="text-muted-foreground">{_.capitalize(row.original.last_name)}</p>
+        </div>
       );
     }
   },
 
   {
-    accessorKey: 'status',
-    header: () => 'Status',
+    accessorKey: 'gender',
+    header: () => 'Gender',
     cell: ({ row }) => {
-      const badgeColor = invoiceStatusTypes.get(row.original.status as EnumInvoiceStatus);
-      return <Badge className={cn(badgeColor)}>{toTitleCase(row.original.status)}</Badge>;
+      return <div className="text-muted-foreground">{_.capitalize(row.original.gender)[0]}</div>;
+    }
+  },
+
+  {
+    accessorKey: 'patient_type',
+    header: () => 'Patient Type',
+    cell: ({ row }) => {
+      const badgeColor = patientTypeBadge.get(row.original.patient_type as EnumPatientType);
+      return <Badge className={cn(badgeColor)}>{toTitleCase(row.original.patient_type)}</Badge>;
     }
   },
 
   {
     accessorKey: 'user_uid',
-    header: () => 'Created by',
+    header: () => 'Added by',
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-start space-x-1">

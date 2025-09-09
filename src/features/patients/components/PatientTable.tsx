@@ -25,26 +25,27 @@ import { useStore } from '@/store';
 import { ServerPagination } from '@/components/ServerPagination';
 import { observer } from 'mobx-react-lite';
 import TableLoader from '@/components/Loaders/TableLoader';
+import EmptyData from '@/components/EmptyData';
 import InputSearch from '@/components/fields/InputSearch';
 import { Button } from '@/components/ui/button';
-import { Funnel } from 'lucide-react';
+import { Funnel, PlusIcon } from 'lucide-react';
 import { debounce } from '@/utils/debounce';
-import EmptyData from '@/components/EmptyData';
+import { AppModals } from '@/store/AppConfig/appModalTypes';
 
 interface DataTableProps {
   isLoading: boolean;
-  data: IFinMedServerPaginatedRes<TPaymentItem>['data'];
+  data: IFinMedServerPaginatedRes<TPatientItem>['data'];
 }
 
-function ExpenseTable({ isLoading, data }: DataTableProps) {
+function PatientTable({ isLoading, data }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const {
-    AppConfigStore: { appQueryLimit },
-    ExpenseStore: { expenseQuery, setLimit, setOffset, setQSearch }
+    AppConfigStore: { appQueryLimit, toggleModals },
+    PatientStore: { queries, setLimit, setOffset, setQSearch }
   } = useStore();
 
   const pagination: TPaginatedRes = {
@@ -57,7 +58,6 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
   const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
     setQSearch(event.target.value);
   };
-
   const debouncedHandleSearch = debounce(handleSearchQuery);
 
   const table = useReactTable({
@@ -92,13 +92,26 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
       <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-2">
         <div className="flex flex-col justify-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
           <div className="w-full md:w-[200px]">
-            <InputSearch placeholder="Search payment" onChange={debouncedHandleSearch} />
+            <InputSearch placeholder="Search patients" onChange={debouncedHandleSearch} />
           </div>
           <Button variant="secondary">
             <Funnel />
             Filter
           </Button>
         </div>
+
+        <Button
+          onClick={() =>
+            toggleModals({
+              open: true,
+              name: AppModals.PATIENT_MODAL,
+              uid: ''
+            })
+          }
+        >
+          <PlusIcon />
+          Add patient
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -136,8 +149,8 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
                   <TableRow>
                     <TableCell colSpan={columns.length} className="w-full">
                       <EmptyData
-                        title="No payment found"
-                        desc="Start tracking your payments by updating your invoices."
+                        title="No patients found"
+                        desc="Try adjusting your search or filter to find what you're looking for."
                       />
                     </TableCell>
                   </TableRow>
@@ -151,11 +164,11 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
         pagination={pagination}
         setLimit={setLimit}
         setOffset={setOffset}
-        limit={expenseQuery.limit}
-        offset={expenseQuery.offset}
+        limit={queries.limit}
+        offset={queries.offset}
       />
     </div>
   );
 }
 
-export default observer(ExpenseTable);
+export default observer(PatientTable);

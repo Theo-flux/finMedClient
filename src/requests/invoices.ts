@@ -21,7 +21,7 @@ export const patchInvoice = ({
   if (newPayload.gross_amount) {
     newPayload.gross_amount = Number(payload.gross_amount);
   }
-  return finMedServer.patch<IFinMedServerRes<TLoginRes>>(`${INVOICE.CREATE}/${uid}`, {
+  return finMedServer.patch<IFinMedServerRes<boolean>>(`${INVOICE.CREATE}/${uid}`, {
     ...newPayload
   });
 };

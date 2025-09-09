@@ -88,9 +88,9 @@ const InvoiceModal = () => {
       title: '',
       tax_percent: 0,
       discount_percent: 0,
-      invoice_type: '',
+      invoice_type: dataModal.patient_uid ? EnumInvoiceType.PATIENT : '',
       service_uid: '',
-      patient_uid: '',
+      patient_uid: dataModal.patient_uid,
       department_uid: ''
     };
   }, [isEditMode, isLoading, data]);
@@ -149,9 +149,9 @@ const InvoiceModal = () => {
         title: '',
         tax_percent: 0,
         discount_percent: 0,
-        invoice_type: '',
+        invoice_type: dataModal.patient_uid ? EnumInvoiceType.PATIENT : '',
         service_uid: '',
-        patient_uid: '',
+        patient_uid: dataModal.patient_uid,
         department_uid: user?.department?.uid ?? ''
       });
       invoiceData.current = {};
@@ -195,6 +195,7 @@ const InvoiceModal = () => {
                       field.onChange(value);
                     }}
                     required
+                    disabled={Boolean(dataModal.patient_uid)}
                   />
                 )}
               />

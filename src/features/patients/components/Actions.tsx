@@ -16,12 +16,11 @@ import { AppModals } from '@/store/AppConfig/appModalTypes';
 import { Link } from '@tanstack/react-router';
 
 interface DataTableRowActionsProps {
-  row: Row<TInvoiceItem>;
+  row: Row<TPatientItem>;
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const {
-    AuthStore: { user },
     AppConfigStore: { toggleModals }
   } = useStore();
 
@@ -38,50 +37,35 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           onClick={() =>
             toggleModals({
               open: true,
-              name: AppModals.INVOICE_MODAL,
-              uid: row.original.uid,
-              patient_uid: row.original.patient_uid ?? ''
+              name: AppModals.PATIENT_MODAL,
+              uid: row.original.uid
             })
           }
         >
           Edit
         </DropdownMenuItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Payments</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>Invoices</DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-fit">
             <DropdownMenuItem>
               <Link to={Route.fullPath.toString().replace('$invoiceId', row.original.uid)}>
-                All Payments
+                All Invoices
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
                 toggleModals({
                   open: true,
-                  name: AppModals.PAYMENT_MODAL,
+                  name: AppModals.INVOICE_MODAL,
                   uid: '',
-                  invoice_uid: row.original.uid
+                  patient_uid: row.original.uid
                 })
               }
             >
-              Add payment
+              create invoice
             </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
-        {row.original.user.uid === user.uid && (
-          <DropdownMenuItem
-            variant="destructive"
-            onClick={() =>
-              toggleModals({
-                open: true,
-                name: AppModals.DELETE_INVOICE_MODAL,
-                uid: row.original.uid
-              })
-            }
-          >
-            Delete
-          </DropdownMenuItem>
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

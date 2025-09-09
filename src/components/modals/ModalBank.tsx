@@ -37,6 +37,9 @@ const ModalsMap = {
   [AppModals.PAYMENT_MODAL]: lazy(
     () => import('@/features/invoice/invoiceId/components/modals/PaymentModal')
   ),
+  [AppModals.PATIENT_MODAL]: lazy(
+    () => import('@/features/patients/components/modal/PatientModal')
+  ),
   [AppModals.DELETE_PAYMENT_MODAL]: lazy(
     () => import('@/features/invoice/invoiceId/components/modals/DeleteModal')
   )

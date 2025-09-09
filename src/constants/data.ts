@@ -1,4 +1,10 @@
-import { EnumBudgetAvailability, EnumBudgetStatus, EnumStatus } from '@/constants/mangle';
+import {
+  EnumBudgetAvailability,
+  EnumBudgetStatus,
+  EnumInvoiceStatus,
+  EnumPatientType,
+  EnumStatus
+} from '@/constants/mangle';
 import { DEFAULT_LIMIT } from './api';
 
 export const paginatedRes: TPaginatedRes = {
@@ -47,5 +53,26 @@ export const budgetAvailabilityTypes = new Map<EnumBudgetAvailability, string>([
   [
     EnumBudgetAvailability.RESERVED,
     'bg-indigo-100/40 text-indigo-800 dark:text-indigo-200 border-indigo-300'
+  ]
+]);
+
+export const invoiceStatusTypes = new Map<EnumInvoiceStatus, string>([
+  [EnumInvoiceStatus.PAID, 'bg-green-100/40 text-green-800 dark:text-green-200 border-green-300'],
+  [EnumInvoiceStatus.UNPAID, 'bg-red-100/40 text-red-800 dark:text-red-200 border-red-300'],
+  [
+    EnumInvoiceStatus.PARTIALLY_PAID,
+    'bg-amber-100/40 text-amber-800 dark:text-amber-200 border-amber-300'
+  ],
+  [
+    EnumInvoiceStatus.OVERPAID,
+    'bg-violet-100/40 text-violet-800 dark:text-violet-200 border-violet-300'
+  ]
+]);
+
+export const patientTypeBadge = new Map<EnumPatientType, string>([
+  [EnumPatientType.IN_PATIENT, 'bg-lime-100/40 text-lime-800 dark:text-lime-200 border-lime-300'],
+  [
+    EnumPatientType.OUT_PATIENT,
+    'bg-violet-100/40 text-violet-800 dark:text-violet-200 border-violet-300'
   ]
 ]);

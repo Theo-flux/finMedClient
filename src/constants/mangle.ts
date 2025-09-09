@@ -74,3 +74,13 @@ export enum EnumExpenseStatus {
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED'
 }
+
+export enum EnumGender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE'
+}
+
+export enum EnumPatientType {
+  IN_PATIENT = 'IN_PATIENT',
+  OUT_PATIENT = 'OUT_PATIENT'
+}

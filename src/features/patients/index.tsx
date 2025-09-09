@@ -4,22 +4,22 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '@/store';
 import { useEffect, useState } from 'react';
 import { paginatedRes } from '@/constants/data';
-import { useFetchAllPayments } from '@/hooks/payments/useFetchAllPayments';
-import PaymentsTable from '../invoice/invoiceId/components/PaymentsTable';
+import PatientTable from './components/PatientTable';
+import { useFetchAllPatients } from '@/hooks/patients/useFetchAllPatients';
 
-const Payments = () => {
+const Patients = () => {
   const {
-    ExpenseStore: { expenseQuery }
+    PatientStore: { queries }
   } = useStore();
-  const [allPayments, setAllPayments] = useState<IFinMedServerPaginatedRes<TPaymentItem>['data']>({
+  const [allPatients, setAllPatients] = useState<IFinMedServerPaginatedRes<TPatientItem>['data']>({
     items: [],
     pagination: paginatedRes
   });
-  const { data, isLoading } = useFetchAllPayments(expenseQuery);
+  const { data, isLoading } = useFetchAllPatients(queries);
 
   useEffect(() => {
     if (!isLoading && data != undefined) {
-      setAllPayments(data);
+      setAllPatients(data);
     }
   }, [isLoading, data]);
   return (
@@ -27,15 +27,15 @@ const Payments = () => {
       <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between space-y-2">
           <div>
-            <Header>Payments management</Header>
-            <Paragraph>Create, update and manage payments.</Paragraph>
+            <Header>Patients management</Header>
+            <Paragraph>Create, update and manage patients.</Paragraph>
           </div>
         </div>
 
-        <PaymentsTable {...{ data: allPayments, isLoading }} />
+        <PatientTable {...{ data: allPatients, isLoading }} />
       </div>
     </Main>
   );
 };
 
-export default observer(Payments);
+export default observer(Patients);

@@ -6,7 +6,7 @@ export const postCreatePayment = (payload: TPaymentSchema) =>
   finMedServer.post<IFinMedServerRes<boolean>>(PAYMENT.CREATE, payload);
 
 export const patchPayment = ({ uid, payload }: { uid: string; payload: Partial<TPaymentSchema> }) =>
-  finMedServer.patch<IFinMedServerRes<TLoginRes>>(PAYMENT.SINGLE.replace(':uid', uid), payload);
+  finMedServer.patch<IFinMedServerRes<boolean>>(PAYMENT.SINGLE.replace(':uid', uid), payload);
 
 export const deletePayment = (uid: string) =>
   finMedServer.delete<IFinMedServerRes<boolean>>(PAYMENT.SINGLE.replace(':uid', uid));

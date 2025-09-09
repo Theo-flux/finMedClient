@@ -8,6 +8,7 @@ import BudgetStore from './BudgetStore';
 import ExpenseStore from './ExpenseStore';
 import InvoiceStore from './InvoiceStore';
 import PaymentStore from './PaymentStore';
+import PatientStore from './PatientStore';
 
 configure({
   enforceActions: 'observed',
@@ -29,6 +30,7 @@ export class RootStore {
   ExpenseStore: ExpenseStore;
   InvoiceStore: InvoiceStore;
   PaymentStore: PaymentStore;
+  PatientStore: PatientStore;
 
   constructor() {
     this.AppConfigStore = new AppConfigStore(this);
@@ -38,6 +40,7 @@ export class RootStore {
     this.ExpenseStore = new ExpenseStore(this);
     this.InvoiceStore = new InvoiceStore(this);
     this.PaymentStore = new PaymentStore(this);
+    this.PatientStore = new PatientStore(this);
   }
 }
 

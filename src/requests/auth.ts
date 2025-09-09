@@ -21,7 +21,8 @@ export const getNewToken = () =>
   finMedServer.get<IFinMedServerRes<TLoginRes>>(AUTH.NEW_TOKEN, {
     headers: {
       Authorization: 'Bearer ' + Stores.AuthStore.refreshToken
-    }
+    },
+    withCredentials: true
   });
 
 export const postPwdReset = (payload: Omit<TPwdResetSchema, 'confirm_password'>) =>

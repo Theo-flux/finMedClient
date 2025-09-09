@@ -26,6 +26,7 @@ import { ServerPagination } from '@/components/ServerPagination';
 import { observer } from 'mobx-react-lite';
 import TableLoader from '@/components/Loaders/TableLoader';
 import { EnumLabBudgetQueryType } from '@/store/BudgetStore';
+import EmptyData from '@/components/EmptyData';
 
 interface DataTableProps {
   type: EnumLabBudgetQueryType;
@@ -114,8 +115,11 @@ function BudgetTable({ type, isLoading, data }: DataTableProps) {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={columns.length} className="h-96 text-center">
-                      No results.
+                    <TableCell colSpan={columns.length} className="">
+                      <EmptyData
+                        title="No budgets found"
+                        desc="Try adjusting your search or filter to find what you're looking for."
+                      />
                     </TableCell>
                   </TableRow>
                 )}
