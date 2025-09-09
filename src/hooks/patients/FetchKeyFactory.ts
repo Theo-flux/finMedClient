@@ -1,6 +1,14 @@
-import { PATIENT } from '@/constants/api';
+import { INVOICE, PATIENT } from '@/constants/api';
 
 export const patient = {
+  getAllPatients(query: Partial<TPatientQuery>) {
+    return {
+      path: PATIENT.CREATE,
+      keys: () => [PATIENT.CREATE, query] as const,
+      params: query
+    };
+  },
+
   getPatient(uid: string) {
     return {
       path: PATIENT.SINGLE.replace(':uid', uid),
@@ -8,10 +16,10 @@ export const patient = {
     };
   },
 
-  getAllPatients(query: Partial<TPatientQuery>) {
+  getPatientInvoices(uid: string, query: Partial<TInvoiceQuery>) {
     return {
-      path: PATIENT.CREATE,
-      keys: () => [PATIENT.CREATE, query] as const,
+      path: PATIENT.INVOICES.replace(':uid', uid),
+      keys: () => [INVOICE.CREATE, PATIENT.INVOICES, uid, query] as const,
       params: query
     };
   }

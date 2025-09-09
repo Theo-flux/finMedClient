@@ -8,6 +8,7 @@ import { toTitleCase } from '@/utils';
 import { statusTypes } from '@/constants/data';
 import { EnumStatus, EnumResourceType } from '@/constants/mangle';
 import { cn } from '@/lib/utils';
+import _ from 'lodash';
 
 export function getColumns(resourceType: EnumResourceType): Array<ColumnDef<TResource>> {
   return [
@@ -39,7 +40,7 @@ export function getColumns(resourceType: EnumResourceType): Array<ColumnDef<TRes
     {
       accessorKey: 'name',
       header: () => 'Name',
-      cell: ({ row }) => <p className="text-muted-foreground">{row.original.name}</p>
+      cell: ({ row }) => <p className="text-muted-foreground">{_.capitalize(row.original.name)}</p>
     },
 
     {

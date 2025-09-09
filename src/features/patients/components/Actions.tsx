@@ -10,7 +10,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Route } from '@/routes/_authenticated/invoices/$invoiceId';
+import { Route } from '@/routes/_authenticated/patients/$patientId/invoices';
 import { useStore } from '@/store';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
 import { Link } from '@tanstack/react-router';
@@ -48,7 +48,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           <DropdownMenuSubTrigger>Invoices</DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-fit">
             <DropdownMenuItem>
-              <Link to={Route.fullPath.toString().replace('$invoiceId', row.original.uid)}>
+              <Link to={Route.fullPath.toString().replace('$patientId', row.original.uid)}>
                 All Invoices
               </Link>
             </DropdownMenuItem>

@@ -61,7 +61,7 @@ export const sidebarData: SidebarData = {
           title: 'Patients',
           url: '/patients',
           icon: UsersIcon,
-          rba: []
+          rba: [EnumRoles.ADMIN, EnumRoles.MANAGER]
         }
       ]
     },
@@ -89,7 +89,7 @@ export const sidebarData: SidebarData = {
               title: 'Misc',
               url: '/settings/misc',
               icon: MonitorCogIcon,
-              rba: [EnumRoles.ADMIN, EnumRoles.IT]
+              rba: [EnumRoles.ADMIN]
             }
           ]
         }

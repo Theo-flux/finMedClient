@@ -13,7 +13,12 @@ export enum EnumRoles {
   ADMIN = 'admin',
   SUB_ADMIN = 'subadmin',
   MANAGER = 'manager',
-  IT = 'technician'
+  IT = 'technician',
+  ACCOUNTANT = 'accountant',
+  RECEPTIONIST = 'receptionist',
+  DOCTOR = 'doctor',
+  NURSE = 'nurse',
+  PHARMACIST = 'pharmacist'
 }
 
 export enum EnumStatus {
@@ -46,7 +51,7 @@ export enum EnumInvoiceStatus {
   PAID = 'PAID',
   PARTIALLY_PAID = 'PARTIALLY_PAID',
   UNPAID = 'UNPAID',
-  OVERPAID = 'OVERPAID'
+  OVER_PAID = 'OVER_PAID'
 }
 
 export enum EnumInvoiceType {

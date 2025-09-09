@@ -1,5 +1,5 @@
 import { Main } from '@/components/layout/main';
-import { Paragraph, Header } from '../components/typography';
+import { Paragraph, Header, SubHeader } from '../components/typography';
 import { Button } from '@/components/ui/button';
 import { Funnel, UserPlusIcon } from 'lucide-react';
 import StaffTable from './components/StaffTable';
@@ -61,7 +61,7 @@ const Staff = () => {
 
         <div className="flex flex-col space-y-4">
           <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0">
-            <h3>Staff Accounts</h3>
+            <SubHeader>Staff Accounts</SubHeader>
             <div className="w-full md:w-[200px]">
               <InputSearch placeholder="Search staff" />
             </div>

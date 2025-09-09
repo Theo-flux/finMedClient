@@ -37,7 +37,8 @@ export const EXPENSE = {
 export const INVOICE = {
   CREATE: '/invoices',
   SINGLE: '/invoices/:uid',
-  PAYMENTS: '/invoices/:uid/payments'
+  PAYMENTS: '/invoices/:uid/payments',
+  PATIENTS: '/invoices/:uid/patients'
 };
 
 export const PAYMENT = {
@@ -47,7 +48,9 @@ export const PAYMENT = {
 
 export const PATIENT = {
   CREATE: '/patients',
-  SINGLE: '/patients/:uid'
+  SINGLE: '/patients/:uid',
+  INVOICES: '/patients/:uid/invoices',
+  PAYMENTS: '/patients/:uid/payments'
 };
 
 export const DEFAULT_LIMIT = 30;

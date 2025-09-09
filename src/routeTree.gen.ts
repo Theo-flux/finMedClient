@@ -27,6 +27,8 @@ import { Route as AuthenticatedPaymentsPaymentIdRouteImport } from './routes/_au
 import { Route as AuthenticatedInvoicesInvoiceIdRouteImport } from './routes/_authenticated/invoices/$invoiceId';
 import { Route as AuthenticatedExpensesExpenseIdRouteImport } from './routes/_authenticated/expenses/$expenseId';
 import { Route as AuthenticatedBudgetsBudgetIdRouteImport } from './routes/_authenticated/budgets/$budgetId';
+import { Route as AuthenticatedPatientsPatientIdInvoicesIndexRouteImport } from './routes/_authenticated/patients/$patientId/invoices/index';
+import { Route as AuthenticatedPatientsPatientIdInvoicesInvoiceIdRouteImport } from './routes/_authenticated/patients/$patientId/invoices/$invoiceId';
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
   id: '/auth',
@@ -117,6 +119,18 @@ const AuthenticatedBudgetsBudgetIdRoute = AuthenticatedBudgetsBudgetIdRouteImpor
   path: '/budgets/$budgetId',
   getParentRoute: () => AuthenticatedRouteRoute
 } as any);
+const AuthenticatedPatientsPatientIdInvoicesIndexRoute =
+  AuthenticatedPatientsPatientIdInvoicesIndexRouteImport.update({
+    id: '/patients/$patientId/invoices/',
+    path: '/patients/$patientId/invoices/',
+    getParentRoute: () => AuthenticatedRouteRoute
+  } as any);
+const AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute =
+  AuthenticatedPatientsPatientIdInvoicesInvoiceIdRouteImport.update({
+    id: '/patients/$patientId/invoices/$invoiceId',
+    path: '/patients/$patientId/invoices/$invoiceId',
+    getParentRoute: () => AuthenticatedRouteRoute
+  } as any);
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthRouteRouteWithChildren;
@@ -136,6 +150,8 @@ export interface FileRoutesByFullPath {
   '/payments': typeof AuthenticatedPaymentsIndexRoute;
   '/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
+  '/patients/$patientId/invoices/$invoiceId': typeof AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute;
+  '/patients/$patientId/invoices': typeof AuthenticatedPatientsPatientIdInvoicesIndexRoute;
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRouteRouteWithChildren;
@@ -154,6 +170,8 @@ export interface FileRoutesByTo {
   '/payments': typeof AuthenticatedPaymentsIndexRoute;
   '/settings': typeof AuthenticatedSettingsIndexRoute;
   '/staff': typeof AuthenticatedStaffIndexRoute;
+  '/patients/$patientId/invoices/$invoiceId': typeof AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute;
+  '/patients/$patientId/invoices': typeof AuthenticatedPatientsPatientIdInvoicesIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -175,6 +193,8 @@ export interface FileRoutesById {
   '/_authenticated/payments/': typeof AuthenticatedPaymentsIndexRoute;
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute;
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute;
+  '/_authenticated/patients/$patientId/invoices/$invoiceId': typeof AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute;
+  '/_authenticated/patients/$patientId/invoices/': typeof AuthenticatedPatientsPatientIdInvoicesIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
@@ -195,7 +215,9 @@ export interface FileRouteTypes {
     | '/patients'
     | '/payments'
     | '/settings/'
-    | '/staff';
+    | '/staff'
+    | '/patients/$patientId/invoices/$invoiceId'
+    | '/patients/$patientId/invoices';
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/auth'
@@ -213,7 +235,9 @@ export interface FileRouteTypes {
     | '/patients'
     | '/payments'
     | '/settings'
-    | '/staff';
+    | '/staff'
+    | '/patients/$patientId/invoices/$invoiceId'
+    | '/patients/$patientId/invoices';
   id:
     | '__root__'
     | '/_authenticated'
@@ -233,7 +257,9 @@ export interface FileRouteTypes {
     | '/_authenticated/patients/'
     | '/_authenticated/payments/'
     | '/_authenticated/settings/'
-    | '/_authenticated/staff/';
+    | '/_authenticated/staff/'
+    | '/_authenticated/patients/$patientId/invoices/$invoiceId'
+    | '/_authenticated/patients/$patientId/invoices/';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -369,6 +395,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBudgetsBudgetIdRouteImport;
       parentRoute: typeof AuthenticatedRouteRoute;
     };
+    '/_authenticated/patients/$patientId/invoices/': {
+      id: '/_authenticated/patients/$patientId/invoices/';
+      path: '/patients/$patientId/invoices';
+      fullPath: '/patients/$patientId/invoices';
+      preLoaderRoute: typeof AuthenticatedPatientsPatientIdInvoicesIndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
+    '/_authenticated/patients/$patientId/invoices/$invoiceId': {
+      id: '/_authenticated/patients/$patientId/invoices/$invoiceId';
+      path: '/patients/$patientId/invoices/$invoiceId';
+      fullPath: '/patients/$patientId/invoices/$invoiceId';
+      preLoaderRoute: typeof AuthenticatedPatientsPatientIdInvoicesInvoiceIdRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
   }
 }
 
@@ -400,6 +440,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPatientsIndexRoute: typeof AuthenticatedPatientsIndexRoute;
   AuthenticatedPaymentsIndexRoute: typeof AuthenticatedPaymentsIndexRoute;
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute;
+  AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute: typeof AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute;
+  AuthenticatedPatientsPatientIdInvoicesIndexRoute: typeof AuthenticatedPatientsPatientIdInvoicesIndexRoute;
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -414,7 +456,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedInvoicesIndexRoute: AuthenticatedInvoicesIndexRoute,
   AuthenticatedPatientsIndexRoute: AuthenticatedPatientsIndexRoute,
   AuthenticatedPaymentsIndexRoute: AuthenticatedPaymentsIndexRoute,
-  AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute
+  AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute,
+  AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute:
+    AuthenticatedPatientsPatientIdInvoicesInvoiceIdRoute,
+  AuthenticatedPatientsPatientIdInvoicesIndexRoute: AuthenticatedPatientsPatientIdInvoicesIndexRoute
 };
 
 const AuthenticatedRouteRouteWithChildren = AuthenticatedRouteRoute._addFileChildren(

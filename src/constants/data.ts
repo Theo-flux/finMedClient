@@ -64,7 +64,7 @@ export const invoiceStatusTypes = new Map<EnumInvoiceStatus, string>([
     'bg-amber-100/40 text-amber-800 dark:text-amber-200 border-amber-300'
   ],
   [
-    EnumInvoiceStatus.OVERPAID,
+    EnumInvoiceStatus.OVER_PAID,
     'bg-violet-100/40 text-violet-800 dark:text-violet-200 border-violet-300'
   ]
 ]);
