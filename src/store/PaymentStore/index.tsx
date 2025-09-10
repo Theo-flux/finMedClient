@@ -5,6 +5,7 @@ import { parseError } from '@/utils/errorHandler';
 import { toast } from '@/constants/toast';
 import { patchPayment, postCreatePayment } from '@/requests/payment';
 import { TPaymentSchema } from '@/features/invoice/invoiceId/components/modals/PaymentModal';
+import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/api';
 
 const INIT_IS_LOADING = {
   createPayment: false
@@ -13,8 +14,8 @@ const INIT_IS_LOADING = {
 class PaymanetStore {
   rootStore: RootStore;
   paymanetQuery: TPaymentQuery = {
-    limit: 30,
-    offset: 0,
+    limit: DEFAULT_LIMIT,
+    offset: DEFAULT_OFFSET,
     payment_method: null,
     reference_number: null,
     q: null

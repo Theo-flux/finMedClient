@@ -26,7 +26,9 @@ export const BUDGET = {
   ASSIGNED_BUDGETS: '/budgets/user_assigned_budgets',
   EXPENSES: '/budgets/:uid/expenses',
   AVAILABILITY: '/budgets/:uid/availability',
-  STATUS: '/budgets/:uid/status'
+  STATUS: '/budgets/:uid/status',
+  ASSIGN: '/budgets/:uid/assign',
+  UNASSIGN: '/budgets/:uid/unassign'
 };
 
 export const EXPENSE = {
@@ -53,5 +55,5 @@ export const PATIENT = {
   PAYMENTS: '/patients/:uid/payments'
 };
 
-export const DEFAULT_LIMIT = 30;
+export const DEFAULT_LIMIT = 10;
 export const DEFAULT_OFFSET = 0;

@@ -4,11 +4,8 @@ import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/api';
 import { TBudgetSchema } from '@/features/budgets/components/modals/BudgetModal';
 import initializer from '@/utils/initializer';
 import { patchBudget, postCreateBudget } from '@/requests/budget';
-import { useStyledToast } from '@/hooks/app/useStyledToast';
 import { parseError } from '@/utils/errorHandler';
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const toast = useStyledToast();
+import { toast } from '@/constants/toast';
 
 const INIT_IS_LOADING = {
   createBudget: false
@@ -33,6 +30,15 @@ class BudgetStore {
     [EnumLabBudgetQueryType.SELF]: { ...defaultQuery },
     [EnumLabBudgetQueryType.ASSIGNED]: { ...defaultQuery }
   };
+  selectedBudgetStatus: Record<EnumLabBudgetQueryType, Set<string>> = {
+    [EnumLabBudgetQueryType.SELF]: new Set(),
+    [EnumLabBudgetQueryType.ASSIGNED]: new Set()
+  };
+  selectedBudgetAvailability: Record<EnumLabBudgetQueryType, Set<string>> = {
+    [EnumLabBudgetQueryType.SELF]: new Set(),
+    [EnumLabBudgetQueryType.ASSIGNED]: new Set()
+  };
+
   isLoading = { ...INIT_IS_LOADING };
   errors = initializer(this.isLoading, '');
 
@@ -41,7 +47,12 @@ class BudgetStore {
       queries: observable,
       isLoading: observable,
       errors: observable,
+      selectedBudgetAvailability: observable,
+      selectedBudgetStatus: observable,
 
+      setBudgetStatusFilter: action.bound,
+      setBudgetAvailabilityFilter: action.bound,
+      resetFilters: action.bound,
       setQSearch: action.bound,
       setLimit: action.bound,
       setOffset: action.bound,
@@ -49,7 +60,44 @@ class BudgetStore {
       createBudget: flow.bound,
       updateBudget: flow.bound
     });
+
     this.rootStore = _rootStore;
+  }
+
+  setBudgetStatusFilter(
+    _status: string[] | null,
+    dataType: EnumLabBudgetQueryType = EnumLabBudgetQueryType.SELF
+  ) {
+    this.selectedBudgetStatus[dataType] = new Set(_status || []);
+
+    const statusArray = Array.from(this.selectedBudgetStatus[dataType]);
+    const statusString = statusArray.length > 0 ? statusArray.join(',') : null;
+
+    this.queries[dataType] = {
+      ...this.queries[dataType],
+      budget_status: statusString
+    };
+  }
+
+  setBudgetAvailabilityFilter(
+    _availability: string[] | null,
+    dataType: EnumLabBudgetQueryType = EnumLabBudgetQueryType.SELF
+  ) {
+    this.selectedBudgetAvailability[dataType] = new Set(_availability || []);
+
+    const availbilityArray = Array.from(this.selectedBudgetAvailability[dataType]);
+    const availabilityString = availbilityArray.length > 0 ? availbilityArray.join(',') : null;
+
+    this.queries[dataType] = {
+      ...this.queries[dataType],
+      budget_availability: availabilityString
+    };
+  }
+
+  resetFilters(dataType: EnumLabBudgetQueryType = EnumLabBudgetQueryType.SELF) {
+    this.selectedBudgetStatus[dataType].clear();
+    this.selectedBudgetAvailability[dataType].clear();
+    this.queries[dataType] = { ...defaultQuery };
   }
 
   setQSearch(_q: string, dataType: EnumLabBudgetQueryType = EnumLabBudgetQueryType.SELF) {

@@ -27,6 +27,7 @@ import { observer } from 'mobx-react-lite';
 import TableLoader from '@/components/Loaders/TableLoader';
 import { EnumLabBudgetQueryType } from '@/store/BudgetStore';
 import EmptyData from '@/components/EmptyData';
+import DataTableToolbar from './Toolbar';
 
 interface DataTableProps {
   type: EnumLabBudgetQueryType;
@@ -41,7 +42,6 @@ function BudgetTable({ type, isLoading, data }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const {
-    AppConfigStore: { appQueryLimit },
     BudgetStore: { queries, setLimit, setOffset }
   } = useStore();
 
@@ -74,13 +74,14 @@ function BudgetTable({ type, isLoading, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     initialState: {
       pagination: {
-        pageSize: appQueryLimit
+        pageSize: queries[type].limit as number
       }
     }
   });
 
   return (
     <>
+      <DataTableToolbar type={type} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -134,6 +135,7 @@ function BudgetTable({ type, isLoading, data }: DataTableProps) {
         setOffset={(arg: number) => setOffset(arg, type)}
         limit={queries[type].limit as number}
         offset={queries[type].offset as number}
+        table={table}
       />
     </>
   );

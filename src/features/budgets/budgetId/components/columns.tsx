@@ -4,6 +4,7 @@ import { DataTableRowActions } from './Actions';
 import { format } from 'date-fns';
 import { ccyFormatter } from '@/utils/money';
 import { Stores } from '@/store';
+import _ from 'lodash';
 
 export const columns: Array<ColumnDef<TExpensesItem>> = [
   {
@@ -32,9 +33,17 @@ export const columns: Array<ColumnDef<TExpensesItem>> = [
 
   {
     accessorKey: 'id',
-    header: () => 'ID',
+    header: () => 'Expense No.',
     cell: ({ row }) => {
       return <p className="text-muted-foreground">{row.original.serial_no}</p>;
+    }
+  },
+
+  {
+    accessorKey: 'budget_uid',
+    header: () => 'Budget No.',
+    cell: ({ row }) => {
+      return <p className="text-muted-foreground">{row.original.budget.serial_no}</p>;
     }
   },
 
@@ -42,7 +51,7 @@ export const columns: Array<ColumnDef<TExpensesItem>> = [
     accessorKey: 'title',
     header: () => 'Title',
     cell: ({ row }) => {
-      return <p className="text-muted-foreground">{row.original.title}</p>;
+      return <p className="text-muted-foreground">{_.capitalize(row.original.title)}</p>;
     }
   },
 
@@ -58,7 +67,11 @@ export const columns: Array<ColumnDef<TExpensesItem>> = [
     accessorKey: 'expenses_category_uid',
     header: () => 'Category',
     cell: ({ row }) => {
-      return <div className="text-muted-foreground">{row.original.expenses_category.name}</div>;
+      return (
+        <div className="text-muted-foreground">
+          {_.capitalize(row.original.expenses_category.name)}
+        </div>
+      );
     }
   },
 
@@ -70,7 +83,7 @@ export const columns: Array<ColumnDef<TExpensesItem>> = [
         <p className="text-muted-foreground">
           {row.original.user.uid === Stores.AuthStore.user.uid
             ? 'You'
-            : `${row.original.user.first_name} ${row.original.user.last_name}`}
+            : `${_.capitalize(row.original.user.first_name)} ${_.capitalize(row.original.user.last_name)}`}
         </p>
       );
     }

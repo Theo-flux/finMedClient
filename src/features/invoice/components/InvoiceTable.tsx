@@ -39,7 +39,6 @@ function InvoiceTable({ isLoading, data }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const {
-    AppConfigStore: { appQueryLimit },
     InvoiceStore: { queries, setLimit, setOffset }
   } = useStore();
 
@@ -72,7 +71,7 @@ function InvoiceTable({ isLoading, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     initialState: {
       pagination: {
-        pageSize: appQueryLimit
+        pageSize: queries.limit
       }
     }
   });
@@ -132,6 +131,7 @@ function InvoiceTable({ isLoading, data }: DataTableProps) {
         setOffset={setOffset}
         limit={queries.limit}
         offset={queries.offset}
+        table={table}
       />
     </>
   );

@@ -1,3 +1,4 @@
+import { Route } from '@/routes/_authenticated/budgets/$budgetId';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useStore } from '@/store';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
+import { Link } from '@tanstack/react-router';
 
 interface DataTableRowActionsProps {
   row: Row<TExpensesItem>;
@@ -29,6 +31,11 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-fit">
+        <DropdownMenuItem>
+          <Link to={Route.fullPath.toString().replace('$budgetId', row.original.budget_uid)}>
+            See budget
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() =>
             toggleModals({
@@ -42,7 +49,9 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           Edit
         </DropdownMenuItem>
 
-        {row.original.user.uid === user.uid && (
+        {(row.original.user.uid === user.uid ||
+          user.role?.name === 'admin' ||
+          user.role?.name === 'subadmin') && (
           <DropdownMenuItem
             variant="destructive"
             onClick={() =>

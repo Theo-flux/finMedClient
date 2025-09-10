@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils';
 import { toTitleCase } from '@/utils';
 import { ccyFormatter } from '@/utils/money';
 import { BudgetProgressBar } from '../BudgetProgressBar';
+import _ from 'lodash';
+import { Stores } from '@/store';
 
 export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
   {
@@ -48,7 +50,7 @@ export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
     accessorKey: 'title',
     header: () => 'Title',
     cell: ({ row }) => {
-      return <p className="text-muted-foreground">{row.original.title}</p>;
+      return <p className="text-muted-foreground">{_.capitalize(row.original.title)}</p>;
     }
   },
 
@@ -56,7 +58,9 @@ export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
     accessorKey: 'department',
     header: () => 'Dept.',
     cell: ({ row }) => {
-      return <div className="text-muted-foreground">{row.original.department.name}</div>;
+      return (
+        <div className="text-muted-foreground">{_.capitalize(row.original.department.name)}</div>
+      );
     }
   },
 
@@ -108,10 +112,11 @@ export const columns: Array<ColumnDef<TSingleBudgetResponse>> = [
     header: () => 'Created by',
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-start space-x-2">
-          <p className="text-muted-foreground">{row.original.user.first_name}</p>
-          <p className="text-muted-foreground">{row.original.user.last_name}</p>
-        </div>
+        <p className="text-muted-foreground">
+          {row.original.user.uid === Stores.AuthStore.user.uid
+            ? 'You'
+            : `${_.capitalize(row.original.user.first_name)} ${_.capitalize(row.original.user.last_name)}`}
+        </p>
       );
     }
   },

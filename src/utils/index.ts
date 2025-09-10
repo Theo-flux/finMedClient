@@ -64,3 +64,14 @@ export function hasCommonRole(roles: Array<number>, array2: Array<number>) {
     return roles.some((element) => array2.includes(element));
   }
 }
+
+export function buildLimitArray(total: number, limit: number) {
+  const arr = [];
+  for (let i = limit; i <= total; i += limit) {
+    arr.push(i);
+  }
+  if (arr[arr.length - 1] !== total) {
+    arr.push(total);
+  }
+  return arr;
+}

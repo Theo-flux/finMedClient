@@ -38,7 +38,6 @@ function StaffTable({ isLoading, data }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const {
-    AppConfigStore: { appQueryLimit },
     UserStore: { userQuery, setLimit, setOffset }
   } = useStore();
 
@@ -71,7 +70,7 @@ function StaffTable({ isLoading, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     initialState: {
       pagination: {
-        pageSize: appQueryLimit
+        pageSize: userQuery.limit
       }
     }
   });
@@ -123,7 +122,14 @@ function StaffTable({ isLoading, data }: DataTableProps) {
         </Table>
       </div>
       <ServerPagination
-        {...{ pagination, setLimit, setOffset, limit: userQuery.limit, offset: userQuery.offset }}
+        {...{
+          pagination,
+          setLimit,
+          setOffset,
+          limit: userQuery.limit,
+          offset: userQuery.offset,
+          table
+        }}
       />
     </>
   );

@@ -4,13 +4,12 @@ import { DialogHeader, DialogFooter } from '@/components/ui/dialog';
 import { XModal } from '@/components/modals';
 import { useStore } from '@/store';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchBudgetStatus } from '@/requests/budget';
+import { patchBudgetUnassign } from '@/requests/budget';
 import { BUDGET } from '@/constants/api';
 import { useStyledToast } from '@/hooks/app/useStyledToast';
-import { EnumBudgetStatus } from '@/constants/mangle';
 import { parseError } from '@/utils/errorHandler';
 
-export default function BudgetStatusModal() {
+export default function BudgetUnAssignModal() {
   const toast = useStyledToast();
   const {
     AppConfigStore: { toggleModals, isOpen, dataModal }
@@ -19,7 +18,7 @@ export default function BudgetStatusModal() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: patchBudgetStatus,
+    mutationFn: patchBudgetUnassign,
     onError: (error) => {
       toast.error(parseError(error));
     },
@@ -27,28 +26,19 @@ export default function BudgetStatusModal() {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] == BUDGET.CREATE
       });
-      toast.success('Budget status updated!');
+      toast.success('User removed from the budget!');
       toggleModals({});
     }
   });
 
   return (
-    <XModal isOpen={isOpen.BUDGET_STATUS_MODAL} closeModal={() => isPending || toggleModals({})}>
+    <XModal isOpen={isOpen.BUDGET_UNASSIGN_MODAL} closeModal={() => isPending || toggleModals({})}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader className="mb-6">
-          <DialogTitle>
-            Ready to{' '}
-            {dataModal.budget_status === EnumBudgetStatus.APPROVED
-              ? 'Approve Budget'
-              : 'Reject Budget'}
-            ?
-          </DialogTitle>
+          <DialogTitle>Ready to unassign this budget?</DialogTitle>
           <DialogDescription>
-            Are you sure you want to{' '}
-            {dataModal.budget_status === EnumBudgetStatus.APPROVED ? 'approve' : 'reject'} this
-            budget? This action will{' '}
-            {dataModal.budget_status === EnumBudgetStatus.PENDING ? 'confirm' : 'deny'} the budget
-            proposal.
+            Are you sure you want to unassign this budget? Don't worry, you can always reassign it
+            later.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-end">
@@ -61,14 +51,10 @@ export default function BudgetStatusModal() {
             disabled={isPending}
             isLoading={isPending}
             type="button"
-            variant={
-              dataModal.budget_status === EnumBudgetStatus.APPROVED ? 'default' : 'destructive'
-            }
-            onClick={() => mutate({ uid: dataModal.uid, budget_status: dataModal.budget_status })}
+            variant={'destructive'}
+            onClick={() => mutate(dataModal.budget_uid!)}
           >
-            {dataModal.budget_status === EnumBudgetStatus.APPROVED
-              ? 'Approve Budget'
-              : 'Reject Budget'}
+            Unassign Budget
           </Button>
         </DialogFooter>
       </DialogContent>

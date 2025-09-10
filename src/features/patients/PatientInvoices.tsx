@@ -4,7 +4,7 @@ import { Route as patientRoute } from '@/routes/_authenticated/patients';
 import { observer } from 'mobx-react-lite';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftIcon, Funnel, PlusIcon } from 'lucide-react';
+import { ArrowLeftIcon, PlusIcon } from 'lucide-react';
 import { useStore } from '@/store';
 import InputSearch from '@/components/fields/InputSearch';
 import { paginatedRes } from '@/constants/data';
@@ -82,16 +82,12 @@ const PatientInvoices = () => {
           )
         )}
 
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-3">
           <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-2">
             <div className="flex flex-col justify-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
               <div className="w-full md:w-[200px]">
                 <InputSearch placeholder="Search budgets" onChange={debouncedHandleSearch} />
               </div>
-              <Button variant="secondary">
-                <Funnel />
-                Filter
-              </Button>
             </div>
 
             <Button

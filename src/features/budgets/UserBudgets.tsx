@@ -1,32 +1,20 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '@/store';
 import { observer } from 'mobx-react-lite';
-import InputSearch from '@/components/fields/InputSearch';
 import { paginatedRes } from '@/constants/data';
 import { useFetchUserBudgets } from '@/hooks/budgets/useFetchUserBudgets';
 import BudgetTable from './components/BudgetTable';
 import { EnumLabBudgetQueryType } from '@/store/BudgetStore';
-import { Button } from '@/components/ui/button';
-import { Funnel, PlusIcon } from 'lucide-react';
-import { AppModals } from '@/store/AppConfig/appModalTypes';
-import { debounce } from '@/utils/debounce';
 
 const UserBudget = () => {
   const {
-    AppConfigStore: { toggleModals },
-    BudgetStore: { queries, setQSearch }
+    BudgetStore: { queries }
   } = useStore();
   const [budgets, setBudgets] = useState<IFinMedServerPaginatedRes<TSingleBudgetResponse>['data']>({
     items: [],
     pagination: paginatedRes
   });
   const { data, isLoading } = useFetchUserBudgets(queries.self);
-
-  const handleSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    setQSearch(event.target.value);
-  };
-
-  const debouncedHandleSearch = debounce(handleSearchQuery);
 
   useEffect(() => {
     if (!isLoading && data != undefined) {
@@ -36,31 +24,6 @@ const UserBudget = () => {
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-        <div className="flex flex-col justify-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-          <div className="w-full md:w-[200px]">
-            <InputSearch placeholder="Search budgets" onChange={debouncedHandleSearch} />
-          </div>
-          <Button variant="secondary">
-            <Funnel />
-            Filter
-          </Button>
-        </div>
-
-        <Button
-          onClick={() =>
-            toggleModals({
-              open: true,
-              name: AppModals.BUDGET_MODAL,
-              uid: ''
-            })
-          }
-        >
-          <PlusIcon />
-          Create budget
-        </Button>
-      </div>
-
       <BudgetTable {...{ type: EnumLabBudgetQueryType.SELF, isLoading, data: budgets }} />
     </div>
   );

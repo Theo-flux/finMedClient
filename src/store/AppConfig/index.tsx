@@ -2,12 +2,13 @@ import { makeObservable, observable, action } from 'mobx';
 import { RootStore } from '@/store';
 import initializer from '@/utils/initializer';
 import { AppModals, TAppModalsAction } from './appModalTypes';
+import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/api';
 
 const INIT_IS_OPEN = initializer(AppModals, false);
 
 class AppConfigStore {
-  appQueryLimit = 30;
-  appQueryOffset = 0;
+  appQueryLimit = DEFAULT_LIMIT;
+  appQueryOffset = DEFAULT_OFFSET;
   isSideNavOpen = false;
 
   isActivityOpen = false;
@@ -40,7 +41,8 @@ class AppConfigStore {
     patient_uid: '',
     invoice_uid: '',
     availability: '',
-    budget_status: ''
+    budget_status: '',
+    assignee_uid: ''
   };
 
   isOpen = { ...INIT_IS_OPEN };
@@ -176,6 +178,17 @@ class AppConfigStore {
         if (modal.open) {
           this.dataModal.uid = modal.uid;
           this.dataModal.budget_status = modal.budget_status;
+        }
+        break;
+      case AppModals.BUDGET_ASSIGN_MODAL:
+        if (modal.open) {
+          this.dataModal.assignee_uid = modal.assignee_uid;
+          this.dataModal.budget_uid = modal.budget_uid;
+        }
+        break;
+      case AppModals.BUDGET_UNASSIGN_MODAL:
+        if (modal.open) {
+          this.dataModal.budget_uid = modal.budget_uid;
         }
         break;
       default:

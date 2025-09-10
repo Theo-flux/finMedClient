@@ -42,6 +42,12 @@ const ModalsMap = {
   ),
   [AppModals.DELETE_PAYMENT_MODAL]: lazy(
     () => import('@/features/invoice/invoiceId/components/modals/DeleteModal')
+  ),
+  [AppModals.BUDGET_UNASSIGN_MODAL]: lazy(
+    () => import('@/features/budgets/components/modals/BudgetUnAssignModal')
+  ),
+  [AppModals.BUDGET_ASSIGN_MODAL]: lazy(
+    () => import('@/features/budgets/components/modals/BudgetAssignModal')
   )
 };
 

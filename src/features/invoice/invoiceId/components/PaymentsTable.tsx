@@ -26,8 +26,6 @@ import { ServerPagination } from '@/components/ServerPagination';
 import { observer } from 'mobx-react-lite';
 import TableLoader from '@/components/Loaders/TableLoader';
 import InputSearch from '@/components/fields/InputSearch';
-import { Button } from '@/components/ui/button';
-import { Funnel } from 'lucide-react';
 import { debounce } from '@/utils/debounce';
 import EmptyData from '@/components/EmptyData';
 
@@ -43,7 +41,6 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const {
-    AppConfigStore: { appQueryLimit },
     ExpenseStore: { expenseQuery, setLimit, setOffset, setQSearch }
   } = useStore();
 
@@ -82,22 +79,18 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     initialState: {
       pagination: {
-        pageSize: appQueryLimit
+        pageSize: expenseQuery.limit
       }
     }
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-2">
         <div className="flex flex-col justify-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
           <div className="w-full md:w-[200px]">
             <InputSearch placeholder="Search payment" onChange={debouncedHandleSearch} />
           </div>
-          <Button variant="secondary">
-            <Funnel />
-            Filter
-          </Button>
         </div>
       </div>
       <div className="rounded-md border">
@@ -153,6 +146,7 @@ function ExpenseTable({ isLoading, data }: DataTableProps) {
         setOffset={setOffset}
         limit={expenseQuery.limit}
         offset={expenseQuery.offset}
+        table={table}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import { TExpenseSchema } from '@/features/budgets/budgetId/components/modals/Ex
 import { patchExpense, postCreateExpense } from '@/requests/expense';
 import { parseError } from '@/utils/errorHandler';
 import { toast } from '@/constants/toast';
+import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/api';
 
 const INIT_IS_LOADING = {
   createExpense: false
@@ -12,7 +13,12 @@ const INIT_IS_LOADING = {
 
 class ExpenseStore {
   rootStore: RootStore;
-  expenseQuery: TExpensesQuery = { limit: 30, offset: 0, expenses_category_uid: null, q: null };
+  expenseQuery: TExpensesQuery = {
+    limit: DEFAULT_LIMIT,
+    offset: DEFAULT_OFFSET,
+    expenses_category_uid: null,
+    q: null
+  };
   isLoading = { ...INIT_IS_LOADING };
   errors = initializer(this.isLoading, '');
 

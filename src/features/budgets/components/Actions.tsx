@@ -68,6 +68,36 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
+        {user.uid === row.original.user_uid && (
+          <DropdownMenuItem
+            variant="default"
+            onClick={() =>
+              toggleModals({
+                open: true,
+                name: AppModals.BUDGET_ASSIGN_MODAL,
+                budget_uid: row.original.uid,
+                assignee_uid: ''
+              })
+            }
+          >
+            Assign to
+          </DropdownMenuItem>
+        )}
+        {user.uid === row.original.user_uid && row.original?.assignee_uid && (
+          <DropdownMenuItem
+            variant="default"
+            onClick={() =>
+              toggleModals({
+                open: true,
+                name: AppModals.BUDGET_UNASSIGN_MODAL,
+                budget_uid: row.original.uid,
+                assignee_uid: row.original.assignee_uid
+              })
+            }
+          >
+            Unassign
+          </DropdownMenuItem>
+        )}
         {(user.role?.name === 'admin' || user.role?.name === 'subadmin') && (
           <DropdownMenuItem
             variant="default"
@@ -107,7 +137,9 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             {row.original.availability === EnumBudgetAvailability.AVAILABLE ? 'Freeze' : 'Unfreeze'}
           </DropdownMenuItem>
         )}
-        {row.original.user.uid === user.uid && (
+        {(row.original.user.uid === user.uid ||
+          user.role?.name === 'admin' ||
+          user.role?.name === 'subadmin') && (
           <DropdownMenuItem
             variant="destructive"
             onClick={() =>

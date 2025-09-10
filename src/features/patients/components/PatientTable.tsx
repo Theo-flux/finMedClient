@@ -28,7 +28,7 @@ import TableLoader from '@/components/Loaders/TableLoader';
 import EmptyData from '@/components/EmptyData';
 import InputSearch from '@/components/fields/InputSearch';
 import { Button } from '@/components/ui/button';
-import { Funnel, PlusIcon } from 'lucide-react';
+import { PlusIcon } from 'lucide-react';
 import { debounce } from '@/utils/debounce';
 import { AppModals } from '@/store/AppConfig/appModalTypes';
 
@@ -44,7 +44,7 @@ function PatientTable({ isLoading, data }: DataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const {
-    AppConfigStore: { appQueryLimit, toggleModals },
+    AppConfigStore: { toggleModals },
     PatientStore: { queries, setLimit, setOffset, setQSearch }
   } = useStore();
 
@@ -82,22 +82,18 @@ function PatientTable({ isLoading, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     initialState: {
       pagination: {
-        pageSize: appQueryLimit
+        pageSize: queries.limit
       }
     }
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div className="flex flex-col justify-between space-y-2 md:flex-row md:space-y-0 md:space-x-2">
         <div className="flex flex-col justify-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
           <div className="w-full md:w-[200px]">
             <InputSearch placeholder="Search patients" onChange={debouncedHandleSearch} />
           </div>
-          <Button variant="secondary">
-            <Funnel />
-            Filter
-          </Button>
         </div>
 
         <Button
@@ -166,6 +162,7 @@ function PatientTable({ isLoading, data }: DataTableProps) {
         setOffset={setOffset}
         limit={queries.limit}
         offset={queries.offset}
+        table={table}
       />
     </div>
   );
